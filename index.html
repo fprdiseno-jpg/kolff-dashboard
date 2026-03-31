@@ -1481,10 +1481,16 @@ function checkPassword() {
   const input = document.getElementById('passwordInput').value;
   const errorMsg = document.getElementById('loginError');
 
+  console.log('Contraseña ingresada:', input);
+  console.log('Contraseña correcta:', CORRECT_PASSWORD);
+  console.log('¿Coinciden?:', input === CORRECT_PASSWORD);
+
   if (input === CORRECT_PASSWORD) {
+    console.log('✓ Acceso permitido');
     localStorage.setItem('kolffAuth', 'true');
     document.getElementById('loginScreen').classList.add('hidden');
   } else {
+    console.log('✗ Contraseña incorrecta');
     errorMsg.classList.add('show');
     document.getElementById('passwordInput').value = '';
     setTimeout(() => errorMsg.classList.remove('show'), 3000);
