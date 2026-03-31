@@ -597,9 +597,114 @@
   /* ─── SMOOTH SCROLL ─── */
   html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
   .flow-map { -webkit-overflow-scrolling: touch; }
+
+  /* ─── LOGIN SCREEN ─── */
+  #loginScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  #loginScreen.hidden {
+    display: none;
+  }
+  .login-modal {
+    background: var(--white);
+    padding: 48px 32px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    max-width: 340px;
+    width: 100%;
+  }
+  .login-modal .logo {
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+  .login-modal h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+  .login-modal p {
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin-bottom: 24px;
+  }
+  .login-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  .login-input:focus {
+    outline: none;
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 2px rgba(245, 168, 0, 0.2);
+  }
+  .login-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: 1px;
+  }
+  .login-btn:hover {
+    background: #FFB819;
+    transform: translateY(-2px);
+  }
+  .login-error {
+    color: var(--red);
+    font-size: 12px;
+    margin-top: 12px;
+    display: none;
+  }
+  .login-error.show {
+    display: block;
+  }
 </style>
 </head>
 <body>
+
+<!-- ═══ LOGIN SCREEN ═══ -->
+<div id="loginScreen">
+  <div class="login-modal">
+    <div class="logo">KOLFF</div>
+    <h2>Dashboard Privado</h2>
+    <p>Ingresa la contraseña para continuar</p>
+    <input type="password" id="passwordInput" class="login-input" placeholder="Contraseña" autocomplete="off">
+    <button class="login-btn" onclick="checkPassword()">Acceder</button>
+    <div class="login-error" id="loginError">Contraseña incorrecta</div>
+  </div>
+</div>
 
 <!-- ═══ HEADER ═══ -->
 <div class="header">
@@ -1367,6 +1472,34 @@ function renderVisual() {
       </div>
     </div>
   `).join('');
+}
+
+// ═══ AUTHENTICATION ═══
+const CORRECT_PASSWORD = '0125';
+
+function checkPassword() {
+  const input = document.getElementById('passwordInput').value;
+  const errorMsg = document.getElementById('loginError');
+
+  if (input === CORRECT_PASSWORD) {
+    localStorage.setItem('kolffAuth', 'true');
+    document.getElementById('loginScreen').classList.add('hidden');
+  } else {
+    errorMsg.classList.add('show');
+    document.getElementById('passwordInput').value = '';
+    setTimeout(() => errorMsg.classList.remove('show'), 3000);
+  }
+}
+
+document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Check if already authenticated
+if (localStorage.getItem('kolffAuth') === 'true') {
+  document.getElementById('loginScreen').classList.add('hidden');
+} else {
+  document.getElementById('passwordInput').focus();
 }
 
 // ═══ INIT ═══
