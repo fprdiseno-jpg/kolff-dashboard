@@ -283,23 +283,11 @@
       padding: 16px 12px 110px;
       max-width: 100%;
     }
-    #tabDropdownWrapper {
-      display: flex !important;
-    }
-    .bottom-nav {
-      display: none !important;
-    }
   }
 
   @media (max-width: 480px) {
     .main {
       padding: 12px 8px 120px;
-    }
-    #tabDropdownWrapper {
-      display: flex !important;
-    }
-    .bottom-nav {
-      display: none !important;
     }
   }
 
@@ -359,7 +347,7 @@
   .flow-step {
     min-width: 160px;
     min-height: 140px;
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.8) 100%);
+    background: var(--white);
     border: 2px solid var(--border);
     border-radius: 14px;
     padding: 16px;
@@ -372,7 +360,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
   }
 
   @media (max-width: 768px) {
@@ -391,14 +379,13 @@
   .flow-step:hover {
     border-color: var(--yellow);
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(245, 168, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
-    background: linear-gradient(135deg, rgba(255, 250, 240, 1) 0%, rgba(255, 243, 204, 0.3) 100%);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, rgba(245, 168, 0, 0.02) 0%, rgba(255, 184, 77, 0.02) 100%);
   }
 
   .flow-step.done {
     border-color: var(--green);
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(220, 252, 231, 0.6) 100%);
-    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.06);
+    background: linear-gradient(135deg, var(--green-light) 0%, rgba(220, 252, 231, 0.5) 100%);
   }
 
   .flow-step .step-num {
@@ -470,20 +457,19 @@
   .checklist { display: flex; flex-direction: column; gap: 8px; }
 
   .check-item {
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.6) 100%);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
     transition: all var(--transition-base);
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-xs);
   }
 
   .check-item:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-md);
     border-color: var(--yellow);
     transform: translateY(-2px);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 243, 204, 0.2) 100%);
   }
 
   .check-item.completed .check-header { opacity: 0.75; }
@@ -620,7 +606,7 @@
     padding: 10px 16px;
     border-radius: 20px;
     border: 2px solid var(--border);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.8) 100%);
+    background: var(--white);
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 11px;
@@ -632,7 +618,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-xs);
   }
 
   @media (max-width: 480px) {
@@ -642,8 +628,8 @@
 
   .filter-pill:hover {
     border-color: var(--yellow);
-    background: linear-gradient(135deg, rgba(255, 250, 240, 1) 0%, rgba(255, 243, 204, 0.2) 100%);
-    box-shadow: 0 6px 12px rgba(245, 168, 0, 0.12);
+    background: linear-gradient(135deg, rgba(245, 168, 0, 0.08) 0%, rgba(255, 184, 77, 0.04) 100%);
+    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
   }
 
@@ -651,7 +637,7 @@
     background: var(--yellow-gradient);
     color: var(--black);
     border-color: var(--yellow);
-    box-shadow: 0 8px 16px rgba(245, 168, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(245, 168, 0, 0.3);
   }
 
   /* ═══ PROJECT VIEW ═══ */
@@ -663,7 +649,7 @@
   }
 
   .project-card {
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.7) 100%);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 16px;
@@ -672,7 +658,7 @@
     min-height: 200px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
   }
 
   @media (max-width: 768px) {
@@ -686,10 +672,10 @@
   }
 
   .project-card:hover {
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-xl);
     transform: translateY(-6px);
     border-color: var(--yellow);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 243, 204, 0.25) 100%);
+    background: linear-gradient(135deg, rgba(245, 168, 0, 0.02) 0%, var(--white) 100%);
   }
 
   .project-header {
@@ -716,20 +702,19 @@
   }
 
   .cat-card {
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.6) 100%);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-base);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
   }
 
   .cat-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
     transform: translateY(-4px);
     border-color: var(--yellow);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 243, 204, 0.15) 100%);
   }
 
   .cat-card-head {
@@ -826,19 +811,18 @@
   .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
 
   .info-card {
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.7) 100%);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 22px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
     transition: all var(--transition-base);
   }
 
   .info-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-md);
     border-color: var(--yellow);
     transform: translateY(-2px);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 243, 204, 0.1) 100%);
   }
 
   .info-card h3 {
@@ -869,7 +853,7 @@
 
   .gallery-item {
     aspect-ratio: 1;
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.8) 100%);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
     display: flex;
@@ -878,14 +862,13 @@
     cursor: pointer;
     transition: all var(--transition-base);
     font-size: 48px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
   }
 
   .gallery-item:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
     border-color: var(--yellow);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 243, 204, 0.2) 100%);
   }
 
   /* ─── BOTTOM NAV (Desktop only - 768px+) ─── */
@@ -1022,31 +1005,12 @@
     box-shadow: 0 8px 24px rgba(245, 168, 0, 0.4);
   }
 
-  .login-error {
-    color: var(--red);
-    font-size: 13px;
-    margin-top: 12px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    min-height: 18px;
-  }
-
-  .login-error.show {
-    opacity: 1;
-  }
-
   #loginScreen {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
   }
 
   #loginScreen.hidden {
@@ -1110,20 +1074,12 @@
   .portfolio-stat {
     flex: 1;
     min-width: 140px;
-    background: linear-gradient(135deg, var(--white) 0%, rgba(248, 250, 252, 0.7) 100%);
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all var(--transition-base);
-  }
-
-  .portfolio-stat:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-    border-color: var(--yellow);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 243, 204, 0.1) 100%);
+    box-shadow: var(--shadow-sm);
   }
 
   .portfolio-stat-num {
@@ -1264,6 +1220,18 @@
 </head>
 <body>
 
+<!-- ═══ LOGIN SCREEN ═══ -->
+<div id="loginScreen">
+  <div class="login-modal">
+    <div class="logo">KOLFF</div>
+    <h2>Dashboard Privado</h2>
+    <p>Ingresa la contraseña para continuar</p>
+    <input type="password" id="passwordInput" class="login-input" placeholder="Ingresa la contraseña" autocomplete="off" maxlength="20">
+    <button class="login-btn" onclick="checkPassword()">Acceder</button>
+    <div class="login-error" id="loginError">Contraseña incorrecta</div>
+  </div>
+</div>
+
 <!-- ═══ HEADER ═══ -->
 <div class="header">
   <div class="logo">KOLFF</div>
@@ -1289,6 +1257,7 @@
     </div>
   </div>
 
+  <button id="logoutBtn" class="logout-btn" onclick="logout()" aria-label="Cerrar sesión" style="display:none">Cerrar sesión</button>
 </div>
 
 <!-- ═══ MAIN ═══ -->
@@ -2051,10 +2020,7 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-
-  // Close dropdown after selection
-  document.getElementById('tabDropdownBtn').classList.remove('active');
+  btn.classList.add('active');
 
   // Trigger renders for new tabs
   if (tab === 'proyectos') renderProjects();
@@ -2278,10 +2244,91 @@ function renderVisual() {
   `).join('');
 }
 
-// ═══ UTILITIES ═══
-function toggleTabDropdown() {
-  const btn = document.getElementById('tabDropdownBtn');
-  if (btn) btn.classList.toggle('active');
+// ═══ AUTHENTICATION ═══
+// Updated: 2026-03-31 v2
+const CORRECT_PASSWORD = 'kolff2026';
+window.loginAttempts = 0;
+window.lockoutTime = null;
+
+function checkPassword() {
+  const input = document.getElementById('passwordInput').value;
+  const errorMsg = document.getElementById('loginError');
+  const loginBtn = document.querySelector('.login-btn');
+  const passwordInput = document.getElementById('passwordInput');
+
+  if (!input.length) return;
+
+  // Check if locked out due to failed attempts
+  if (window.loginAttempts >= 3) {
+    const now = Date.now();
+    if (!window.lockoutTime) window.lockoutTime = now;
+    const elapsed = (now - window.lockoutTime) / 1000;
+
+    if (elapsed < 300) { // 5 minutos = 300 segundos
+      const remaining = Math.ceil(300 - elapsed);
+      errorMsg.textContent = `Intenta en ${remaining} segundos`;
+      errorMsg.classList.add('show');
+      passwordInput.disabled = true;
+      loginBtn.disabled = true;
+      return;
+    } else {
+      // Lockout period expired, reset
+      window.loginAttempts = 0;
+      window.lockoutTime = null;
+    }
+  }
+
+  loginBtn.textContent = 'Accediendo...';
+  loginBtn.disabled = true;
+  passwordInput.disabled = true;
+
+  setTimeout(() => {
+    if (input === CORRECT_PASSWORD) {
+      sessionStorage.setItem('kolffAuth', 'authenticated-session');
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('logoutBtn').style.display = 'block';
+      window.loginAttempts = 0;
+      window.lockoutTime = null;
+    } else {
+      window.loginAttempts++;
+      errorMsg.textContent = window.loginAttempts >= 3
+        ? 'Demasiados intentos. Intenta más tarde.'
+        : 'Contraseña incorrecta';
+      errorMsg.classList.add('show');
+      passwordInput.value = '';
+      loginBtn.textContent = 'Acceder';
+      loginBtn.disabled = false;
+      passwordInput.disabled = false;
+      setTimeout(() => errorMsg.classList.remove('show'), 3000);
+    }
+  }, 500);
+}
+
+function logout() {
+  sessionStorage.removeItem('kolffAuth');
+  window.loginAttempts = 0;
+  window.lockoutTime = null;
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('passwordInput').value = '';
+  document.getElementById('passwordInput').disabled = false;
+  document.querySelector('.login-btn').textContent = 'Acceder';
+  document.querySelector('.login-btn').disabled = false;
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('loginError').classList.remove('show');
+  document.getElementById('passwordInput').focus();
+}
+
+document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Check if already authenticated
+const authToken = sessionStorage.getItem('kolffAuth');
+if (authToken === 'authenticated-session') {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('logoutBtn').style.display = 'block';
+} else {
+  document.getElementById('passwordInput').focus();
 }
 
 // ═══ INIT ═══
