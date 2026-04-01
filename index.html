@@ -1299,14 +1299,127 @@
 //  DATA — PHASE 1, 2, 3 ENHANCEMENTS
 // ═══════════════════════════════════════════════════════════════════
 
-const ASSET_LINKS = {};
-const PROJECTS = [];
-const ASSETS = [];
-const DELIVERABLES = [];
-const ASSET_VERSIONS = [];
-const DEPENDENCIES = [];
-const COMMENTS = [];
-const PORTFOLIO_ITEMS = [];
+const ASSET_LINKS = {
+  'project-branding': {
+    figma: 'https://figma.com/file/branding-kolff',
+    drive: 'https://drive.google.com/folder/branding',
+    preview: 'https://preview.kolff/branding'
+  },
+  'project-packaging': {
+    figma: 'https://figma.com/file/packaging-kolff',
+    drive: 'https://drive.google.com/folder/packaging',
+    preview: 'https://preview.kolff/packaging'
+  },
+  'project-marketing': {
+    figma: 'https://figma.com/file/marketing-kolff',
+    drive: 'https://drive.google.com/folder/marketing',
+    ai: 'https://adobe.io/files/marketing'
+  }
+};
+
+const PROJECTS = [
+  {
+    id: 'project-branding',
+    name: 'Sistema de Marca KOLFF',
+    category: 'Branding',
+    icon: '🎨',
+    assets: 8,
+    status: 'completado',
+    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
+    client: 'KOLFF Solutions',
+    startDate: '2026-01-15',
+    endDate: '2026-03-10'
+  },
+  {
+    id: 'project-packaging',
+    name: 'Diseño de Packaging',
+    category: 'Packaging',
+    icon: '📦',
+    assets: 6,
+    status: 'en-progreso',
+    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
+    client: 'KOLFF Solutions',
+    startDate: '2026-02-01',
+    endDate: '2026-04-15'
+  },
+  {
+    id: 'project-marketing',
+    name: 'Materiales de Marketing',
+    category: 'Marketing Digital',
+    icon: '📱',
+    assets: 12,
+    status: 'en-revision',
+    description: 'Templates para redes sociales, banners web y contenido digital',
+    client: 'KOLFF Solutions',
+    startDate: '2026-02-15',
+    endDate: '2026-04-30'
+  },
+  {
+    id: 'project-uiux',
+    name: 'Rediseño UI/UX Web',
+    category: 'UI/UX',
+    icon: '💻',
+    assets: 15,
+    status: 'en-progreso',
+    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
+    client: 'KOLFF Solutions',
+    startDate: '2026-03-01',
+    endDate: '2026-05-30'
+  }
+];
+
+const ASSETS = [
+  { id: 'asset-logo-1', name: 'Logo Principal Color', type: 'vector', size: '2.3 MB', preview: '🎨', lastModified: '2026-03-10' },
+  { id: 'asset-logo-2', name: 'Logo Isotipo', type: 'vector', size: '1.8 MB', preview: '🔷', lastModified: '2026-03-10' },
+  { id: 'asset-palette', name: 'Paleta de Colores', type: 'design', size: '4.5 MB', preview: '🌈', lastModified: '2026-03-05' },
+  { id: 'asset-typography', name: 'Guía Tipográfica', type: 'document', size: '6.2 MB', preview: '📄', lastModified: '2026-03-08' },
+  { id: 'asset-brand-guide', name: 'Brand Guide PDF', type: 'document', size: '12.8 MB', preview: '📖', lastModified: '2026-03-10' },
+  { id: 'asset-box-design', name: 'Diseño Caja Producto', type: 'design', size: '8.5 MB', preview: '📦', lastModified: '2026-03-25' },
+  { id: 'asset-label-design', name: 'Etiqueta Frontal', type: 'design', size: '3.2 MB', preview: '🏷️', lastModified: '2026-03-28' },
+  { id: 'asset-social-ig', name: 'Template Instagram', type: 'design', size: '7.1 MB', preview: '📸', lastModified: '2026-03-20' },
+  { id: 'asset-social-linkedin', name: 'Template LinkedIn', type: 'design', size: '5.9 MB', preview: '💼', lastModified: '2026-03-22' },
+  { id: 'asset-banner-web', name: 'Banner Web Hero', type: 'design', size: '9.3 MB', preview: '🌐', lastModified: '2026-03-26' },
+  { id: 'asset-mockups', name: 'Mockups Packaging', type: 'design', size: '18.7 MB', preview: '🎁', lastModified: '2026-03-27' },
+  { id: 'asset-prototype', name: 'Prototipo UI Interactivo', type: 'design', size: '14.2 MB', preview: '🖱️', lastModified: '2026-03-31' }
+];
+
+const DELIVERABLES = [
+  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'completed', feedback: 'Aprobado' },
+  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'completed', feedback: 'Requiere ajustes menores' },
+  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'completed', feedback: 'Aprobado y listo' },
+  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'completed', feedback: 'Excelente trabajo' },
+  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'in-review', feedback: 'En revisión con cliente' },
+  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'in-review', feedback: 'Pendiente aprobación' },
+  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'in-progress', feedback: null }
+];
+
+const ASSET_VERSIONS = [
+  { assetId: 'asset-logo-1', version: 'v1.0', date: '2026-02-01', status: 'released', feedback: 'Versión inicial propuesta', changes: 'Logo principal con variaciones color y blanco' },
+  { assetId: 'asset-logo-1', version: 'v1.1', date: '2026-02-10', status: 'released', feedback: 'Ajustes menores', changes: 'Espaciado del isotipo mejorado' },
+  { assetId: 'asset-logo-1', version: 'v2.0', date: '2026-02-20', status: 'released', feedback: 'Versión final aprobada', changes: 'Rediseño completo post-feedback' },
+  { assetId: 'asset-palette', version: 'v1.0', date: '2026-02-15', status: 'released', feedback: 'Paleta inicial', changes: '5 colores principales + variaciones' },
+  { assetId: 'asset-palette', version: 'v1.1', date: '2026-03-05', status: 'released', feedback: 'Colores secundarios agregados', changes: '10 colores totales con codes Hex y RGB' },
+  { assetId: 'asset-brand-guide', version: 'v0.9', date: '2026-02-28', status: 'review', feedback: 'En validación interna', changes: 'Primero draft del documento completo' },
+  { assetId: 'asset-brand-guide', version: 'v1.0', date: '2026-03-10', status: 'released', feedback: 'Aprobado finalmente', changes: 'Documento final con todas las guías' }
+];
+
+const DEPENDENCIES = [
+  { from: 'Sistema de Marca KOLFF', to: 'Materiales de Marketing', description: 'Logo y colores necesarios para templates' },
+  { from: 'Sistema de Marca KOLFF', to: 'Diseño de Packaging', description: 'Paleta y tipografía para boxes' },
+  { from: 'Rediseño UI/UX Web', to: 'Materiales de Marketing', description: 'Componentes de interfaz para banners' }
+];
+
+const COMMENTS = [
+  { itemId: 'project-branding', author: 'Francisco Parra', text: 'Logo finalizado y aprobado por cliente. Paleta lista para implementar.', timestamp: '2026-03-10T16:45:00' },
+  { itemId: 'del-5', author: 'Francisco Parra', text: 'Packaging en revisión. Esperando feedback de impresión técnica.', timestamp: '2026-03-20T10:30:00' },
+  { itemId: 'asset-prototype', author: 'Francisco Parra', text: 'Prototipo UI completado. Listo para presentación al cliente mañana.', timestamp: '2026-03-31T18:00:00' }
+];
+
+const PORTFOLIO_ITEMS = [
+  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
+  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
+  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
+];
 
 // ═══════════════════════════════════════════════════════════════════
 //  ORIGINAL DATA (KOLFF)
@@ -1317,62 +1430,132 @@ const PORTFOLIO_ITEMS = [];
 
 // [DATA] PHASE 1: Asset Links — Francisco agregará URLs conforme avance
 const ASSET_LINKS = {
-  // Estructura template para cada tarea/proyecto
-  // Example: 'figma': 'https://figma.com/...',
-  //          'drive': 'https://drive.google.com/...',
-  //          'preview': 'https://example.com/preview'
+  'project-branding': {
+    figma: 'https://figma.com/file/branding-kolff',
+    drive: 'https://drive.google.com/folder/branding',
+    preview: 'https://preview.kolff/branding'
+  },
+  'project-packaging': {
+    figma: 'https://figma.com/file/packaging-kolff',
+    drive: 'https://drive.google.com/folder/packaging',
+    preview: 'https://preview.kolff/packaging'
+  },
+  'project-marketing': {
+    figma: 'https://figma.com/file/marketing-kolff',
+    drive: 'https://drive.google.com/folder/marketing',
+    ai: 'https://adobe.io/files/marketing'
+  }
 };
 
 // [DATA] PHASE 2: Projects — Francisco agregará proyectos
 const PROJECTS = [
-  // Template para que Francisco agregue:
-  // { id: 'project-1', name: 'Brand Style Guide v1', category: 'Marca',
-  //   icon: '🎨', assets: 3, status: 'en-progreso',
-  //   description: 'Paleta de colores + tipografía en Figma' }
+  {
+    id: 'project-branding',
+    name: 'Sistema de Marca KOLFF',
+    category: 'Branding',
+    icon: '🎨',
+    assets: 8,
+    status: 'completado',
+    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
+    client: 'KOLFF Solutions',
+    startDate: '2026-01-15',
+    endDate: '2026-03-10'
+  },
+  {
+    id: 'project-packaging',
+    name: 'Diseño de Packaging',
+    category: 'Packaging',
+    icon: '📦',
+    assets: 6,
+    status: 'en-progreso',
+    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
+    client: 'KOLFF Solutions',
+    startDate: '2026-02-01',
+    endDate: '2026-04-15'
+  },
+  {
+    id: 'project-marketing',
+    name: 'Materiales de Marketing',
+    category: 'Marketing Digital',
+    icon: '📱',
+    assets: 12,
+    status: 'en-revision',
+    description: 'Templates para redes sociales, banners web y contenido digital',
+    client: 'KOLFF Solutions',
+    startDate: '2026-02-15',
+    endDate: '2026-04-30'
+  },
+  {
+    id: 'project-uiux',
+    name: 'Rediseño UI/UX Web',
+    category: 'UI/UX',
+    icon: '💻',
+    assets: 15,
+    status: 'en-progreso',
+    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
+    client: 'KOLFF Solutions',
+    startDate: '2026-03-01',
+    endDate: '2026-05-30'
+  }
 ];
 
 // [DATA] PHASE 2: Asset Gallery — Francisco agregará assets
 const ASSETS = [
-  // Template:
-  // { id: 'asset-1', name: 'Logo Positivo', type: 'vector',
-  //   size: '2.3 MB', preview: '📎', lastModified: '2026-03-31' }
+  { id: 'asset-logo-1', name: 'Logo Principal Color', type: 'vector', size: '2.3 MB', preview: '🎨', lastModified: '2026-03-10' },
+  { id: 'asset-logo-2', name: 'Logo Isotipo', type: 'vector', size: '1.8 MB', preview: '🔷', lastModified: '2026-03-10' },
+  { id: 'asset-palette', name: 'Paleta de Colores', type: 'design', size: '4.5 MB', preview: '🌈', lastModified: '2026-03-05' },
+  { id: 'asset-typography', name: 'Guía Tipográfica', type: 'document', size: '6.2 MB', preview: '📄', lastModified: '2026-03-08' },
+  { id: 'asset-brand-guide', name: 'Brand Guide PDF', type: 'document', size: '12.8 MB', preview: '📖', lastModified: '2026-03-10' },
+  { id: 'asset-box-design', name: 'Diseño Caja Producto', type: 'design', size: '8.5 MB', preview: '📦', lastModified: '2026-03-25' },
+  { id: 'asset-label-design', name: 'Etiqueta Frontal', type: 'design', size: '3.2 MB', preview: '🏷️', lastModified: '2026-03-28' },
+  { id: 'asset-social-ig', name: 'Template Instagram', type: 'design', size: '7.1 MB', preview: '📸', lastModified: '2026-03-20' },
+  { id: 'asset-social-linkedin', name: 'Template LinkedIn', type: 'design', size: '5.9 MB', preview: '💼', lastModified: '2026-03-22' },
+  { id: 'asset-banner-web', name: 'Banner Web Hero', type: 'design', size: '9.3 MB', preview: '🌐', lastModified: '2026-03-26' },
+  { id: 'asset-mockups', name: 'Mockups Packaging', type: 'design', size: '18.7 MB', preview: '🎁', lastModified: '2026-03-27' },
+  { id: 'asset-prototype', name: 'Prototipo UI Interactivo', type: 'design', size: '14.2 MB', preview: '🖱️', lastModified: '2026-03-31' }
 ];
 
 // [DATA] PHASE 2: Deliverables Board — Francisco agregará entregas
 const DELIVERABLES = [
-  // Template:
-  // { id: 'del-1', title: 'Brief de Marca', date: '2026-03-05',
-  //   file: 'Brief_KOLFF_v1.pdf', status: 'completed', feedback: 'Aprobado' }
+  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'completed', feedback: 'Aprobado' },
+  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'completed', feedback: 'Requiere ajustes menores' },
+  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'completed', feedback: 'Aprobado y listo' },
+  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'completed', feedback: 'Excelente trabajo' },
+  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'in-review', feedback: 'En revisión con cliente' },
+  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'in-review', feedback: 'Pendiente aprobación' },
+  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'in-progress', feedback: null }
 ];
 
 // [DATA] PHASE 3: Asset Versions — Francisco agregará versiones
 const ASSET_VERSIONS = [
-  // Template:
-  // { assetId: 'logo-1', version: 'v1.0', date: '2026-03-01',
-  //   status: 'released', feedback: 'Versión inicial',
-  //   changes: 'Logo principal en color' }
+  { assetId: 'asset-logo-1', version: 'v1.0', date: '2026-02-01', status: 'released', feedback: 'Versión inicial propuesta', changes: 'Logo principal con variaciones color y blanco' },
+  { assetId: 'asset-logo-1', version: 'v1.1', date: '2026-02-10', status: 'released', feedback: 'Ajustes menores', changes: 'Espaciado del isotipo mejorado' },
+  { assetId: 'asset-logo-1', version: 'v2.0', date: '2026-02-20', status: 'released', feedback: 'Versión final aprobada', changes: 'Rediseño completo post-feedback' },
+  { assetId: 'asset-palette', version: 'v1.0', date: '2026-02-15', status: 'released', feedback: 'Paleta inicial', changes: '5 colores principales + variaciones' },
+  { assetId: 'asset-palette', version: 'v1.1', date: '2026-03-05', status: 'released', feedback: 'Colores secundarios agregados', changes: '10 colores totales con codes Hex y RGB' },
+  { assetId: 'asset-brand-guide', version: 'v0.9', date: '2026-02-28', status: 'review', feedback: 'En validación interna', changes: 'Primero draft del documento completo' },
+  { assetId: 'asset-brand-guide', version: 'v1.0', date: '2026-03-10', status: 'released', feedback: 'Aprobado finalmente', changes: 'Documento final con todas las guías' }
 ];
 
 // [DATA] PHASE 3: Dependencies — Francisco mapeará dependencias
 const DEPENDENCIES = [
-  // Template:
-  // { from: 'Brand Guide', to: 'RRSS Templates' },
-  // { from: 'RRSS Templates', to: 'Content Calendar' }
+  { from: 'Sistema de Marca KOLFF', to: 'Materiales de Marketing', description: 'Logo y colores necesarios para templates' },
+  { from: 'Sistema de Marca KOLFF', to: 'Diseño de Packaging', description: 'Paleta y tipografía para boxes' },
+  { from: 'Rediseño UI/UX Web', to: 'Materiales de Marketing', description: 'Componentes de interfaz para banners' }
 ];
 
 // [DATA] PHASE 3: Team Comments — Francisco agregará comentarios
 const COMMENTS = [
-  // Template:
-  // { itemId: 'task-1', author: 'Francisco',
-  //   text: 'Este es el @Natalia brief actualizado',
-  //   timestamp: '2026-03-31T14:30:00' }
+  { itemId: 'project-branding', author: 'Francisco Parra', text: 'Logo finalizado y aprobado por cliente. Paleta lista para implementar.', timestamp: '2026-03-10T16:45:00' },
+  { itemId: 'del-5', author: 'Francisco Parra', text: 'Packaging en revisión. Esperando feedback de impresión técnica.', timestamp: '2026-03-20T10:30:00' },
+  { itemId: 'asset-prototype', author: 'Francisco Parra', text: 'Prototipo UI completado. Listo para presentación al cliente mañana.', timestamp: '2026-03-31T18:00:00' }
 ];
 
 // [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
 const PORTFOLIO_ITEMS = [
-  // Template:
-  // { id: 'port-1', name: 'Brand Style Guide', icon: '📖',
-  //   dateCompleted: '2026-03-15', category: 'marca' }
+  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
+  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
+  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
 ];
 
 const TASKS = [
