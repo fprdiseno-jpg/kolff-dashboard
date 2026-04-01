@@ -2332,6 +2332,10 @@ if (authToken === 'authenticated-session') {
 }
 
 // ═══ INIT ═══
+// Auto-skip login screen
+document.getElementById('loginScreen').style.display = 'none';
+document.getElementById('logoutBtn').style.display = 'none';
+
 renderChecklist();
 renderCategories();
 renderInfo();
