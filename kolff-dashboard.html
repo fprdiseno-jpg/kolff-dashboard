@@ -2020,7 +2020,10 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
+
+  // Close dropdown after selection
+  document.getElementById('tabDropdownBtn').classList.remove('active');
 
   // Trigger renders for new tabs
   if (tab === 'proyectos') renderProjects();
@@ -2251,7 +2254,7 @@ window.loginAttempts = 0;
 window.lockoutTime = null;
 
 function checkPassword() {
-  const input = document.getElementById('passwordInput').value;
+  const input = document.getElementById('passwordInput').value.trim();
   const errorMsg = document.getElementById('loginError');
   const loginBtn = document.querySelector('.login-btn');
   const passwordInput = document.getElementById('passwordInput');
@@ -2302,6 +2305,11 @@ function checkPassword() {
       setTimeout(() => errorMsg.classList.remove('show'), 3000);
     }
   }, 500);
+}
+
+function toggleTabDropdown() {
+  const btn = document.getElementById('tabDropdownBtn');
+  btn.classList.toggle('active');
 }
 
 function logout() {
