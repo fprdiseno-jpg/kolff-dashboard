@@ -241,6 +241,20 @@
     font-size: 16px;
   }
 
+  /* Hide dropdown on desktop, show on tablet/mobile */
+  .tab-dropdown-wrapper {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .tab-dropdown-wrapper {
+      display: block;
+    }
+    .bottom-nav {
+      display: none !important;
+    }
+  }
+
   /* ─── MAIN CONTENT ─── */
   .main {
     flex: 1;
@@ -1116,7 +1130,7 @@
   <div class="user-info"><strong>Francisco Parra</strong> · Diseñador Gráfico</div>
 
   <!-- Tab Dropdown for Mobile/Tablet -->
-  <div class="tab-dropdown-wrapper" style="display: none;" id="tabDropdownWrapper">
+  <div class="tab-dropdown-wrapper" id="tabDropdownWrapper">
     <button class="tab-dropdown-btn" id="tabDropdownBtn" onclick="toggleTabDropdown()">
       <span id="currentTabLabel">📋 Flujo</span>
     </button>
@@ -2080,7 +2094,7 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 
   // Trigger renders for new tabs
   if (tab === 'proyectos') renderProjects();
@@ -2304,6 +2318,76 @@ function renderVisual() {
   `).join('');
 }
 
+// ═══ TAB DROPDOWN (Mobile) ═══
+function toggleTabDropdown() {
+  const btn = document.getElementById('tabDropdownBtn');
+  if (btn) {
+    btn.classList.toggle('active');
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  const wrapper = document.getElementById('tabDropdownWrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    const btn = document.getElementById('tabDropdownBtn');
+    if (btn) btn.classList.remove('active');
+  }
+});
+
+// ═══ ROBUST TAB CLICK HANDLERS ═══
+// Function to attach event listeners to buttons
+function attachTabListeners() {
+  // Handle bottom nav buttons
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Extract tab name from text content
+      const text = btn.textContent.toLowerCase();
+      let tabName = '';
+      if (text.includes('flujo')) tabName = 'flujo';
+      else if (text.includes('categoría')) tabName = 'categorias';
+      else if (text.includes('proyecto')) tabName = 'proyectos';
+      else if (text.includes('galería')) tabName = 'galeria';
+      else if (text.includes('entrega')) tabName = 'entregas';
+      else if (text.includes('timeline')) tabName = 'timeline';
+      else if (text.includes('dep')) tabName = 'dependencias';
+      else if (text.includes('portfolio')) tabName = 'portafolio';
+      else if (text.includes('info')) tabName = 'info';
+      else if (text.includes('visual')) tabName = 'visual';
+
+      if (tabName) switchTab(tabName, btn);
+    });
+  });
+
+  // Handle dropdown buttons
+  document.querySelectorAll('.tab-dropdown-menu button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Extract tab name from onclick or text
+      const text = btn.textContent.toLowerCase();
+      let tabName = '';
+      if (text.includes('flujo')) tabName = 'flujo';
+      else if (text.includes('categoría')) tabName = 'categorias';
+      else if (text.includes('proyecto')) tabName = 'proyectos';
+      else if (text.includes('galería')) tabName = 'galeria';
+      else if (text.includes('entrega')) tabName = 'entregas';
+      else if (text.includes('timeline')) tabName = 'timeline';
+      else if (text.includes('dep')) tabName = 'dependencias';
+      else if (text.includes('portfolio')) tabName = 'portafolio';
+      else if (text.includes('info')) tabName = 'info';
+      else if (text.includes('visual')) tabName = 'visual';
+
+      if (tabName) {
+        switchTab(tabName, null);
+        // Close dropdown after selection
+        const dropdownBtn = document.getElementById('tabDropdownBtn');
+        if (dropdownBtn) dropdownBtn.classList.remove('active');
+      }
+    });
+  });
+}
+
 // ═══ INIT ═══
 
 renderChecklist();
@@ -2313,6 +2397,9 @@ renderVisual();
 // PHASE 1, 2, 3: Initialize new features
 renderQuickFilters(); // PHASE 1
 // PHASE 2 and 3 will render on tab switch via switchTab()
+
+// Attach tab click handlers
+attachTabListeners();
 
 </script>
 
