@@ -244,6 +244,230 @@
   .tag.contenido { background: #E8F5E9; color: #2E7D32; }
   .tag.analitica { background: #FCE4EC; color: #AD1457; }
 
+  /* ═══ PHASE 1: PRIORITY COLOR CODING ═══ */
+  .priority-indicator {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .priority-urgente .priority-indicator { background: var(--red); }
+  .priority-alta .priority-indicator { background: var(--orange); }
+  .priority-media .priority-indicator { background: var(--blue); }
+  .priority-baja .priority-indicator { background: var(--green); }
+
+  .check-item.priority-urgente { border-left: 4px solid var(--red); }
+  .check-item.priority-alta { border-left: 4px solid var(--orange); }
+  .check-item.priority-media { border-left: 4px solid var(--blue); }
+  .check-item.priority-baja { border-left: 4px solid var(--green); }
+
+  /* ═══ PHASE 1: ASSET LINKS ═══ */
+  .asset-links {
+    display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .asset-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 6px 12px; border-radius: 6px; font-size: 11px;
+    font-weight: 600; text-decoration: none;
+    transition: all .2s; cursor: pointer;
+  }
+  .asset-link.figma { background: #E8E8FF; color: #A259FF; }
+  .asset-link.drive { background: #E3F2FD; color: #1976D2; }
+  .asset-link.preview { background: #E8F5E9; color: #388E3C; }
+  .asset-link:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .asset-link::before { content: attr(data-icon); font-size: 12px; }
+
+  /* ═══ PHASE 1: QUICK FILTERS (Pills) ═══ */
+  .quick-filters {
+    display: flex; gap: 8px; margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .filter-pill {
+    padding: 8px 16px; border-radius: 20px;
+    border: 2px solid var(--border);
+    background: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; font-size: 11px;
+    cursor: pointer; transition: all .2s;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  .filter-pill:hover { border-color: var(--yellow); }
+  .filter-pill.active {
+    background: var(--yellow); color: var(--black);
+    border-color: var(--yellow);
+  }
+
+  /* ═══ PHASE 2: PROJECT VIEW ═══ */
+  .project-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px; margin: 16px 0;
+  }
+  .project-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px;
+    transition: all .2s; cursor: pointer;
+  }
+  .project-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,.1);
+    transform: translateY(-2px);
+  }
+  .project-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .project-icon { font-size: 24px; }
+  .project-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; }
+  .project-category { font-size: 10px; color: var(--mid-gray); text-transform: uppercase; }
+  .project-stats {
+    display: flex; justify-content: space-between; font-size: 12px;
+    margin: 8px 0;
+  }
+  .project-stat { color: var(--mid-gray); }
+  .project-stat strong { color: var(--black); font-weight: 700; }
+  .project-status {
+    display: inline-block; padding: 4px 10px;
+    border-radius: 4px; font-size: 10px; font-weight: 600;
+    margin-top: 8px; text-transform: uppercase;
+  }
+  .project-status.en-progreso { background: #E3F2FD; color: #1565C0; }
+  .project-status.completado { background: var(--green-light); color: var(--green); }
+  .project-status.bloqueado { background: var(--red-light); color: var(--red); }
+
+  /* ═══ PHASE 2: ASSET GALLERY ═══ */
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px; margin: 16px 0;
+  }
+  .gallery-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; cursor: pointer;
+    transition: all .2s;
+  }
+  .gallery-item:hover {
+    border-color: var(--yellow); box-shadow: 0 4px 12px rgba(245, 168, 0, .2);
+  }
+  .gallery-preview {
+    width: 100%; height: 140px; background: var(--light-gray);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; overflow: hidden;
+  }
+  .gallery-info { padding: 8px; }
+  .gallery-name { font-family: 'Montserrat', sans-serif; font-weight: 600;
+    font-size: 11px; margin-bottom: 2px; }
+  .gallery-size { font-size: 9px; color: var(--mid-gray); }
+
+  /* ═══ PHASE 2: HANDOFF BOARD ═══ */
+  .handoff-board {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px; margin: 16px 0;
+  }
+  .handoff-column { background: var(--light-gray); border-radius: 8px;
+    padding: 12px; min-height: 400px; }
+  .handoff-title { font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: 12px;
+    text-transform: uppercase; margin-bottom: 12px; color: var(--mid-gray); }
+  .handoff-item { background: var(--white); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px; margin-bottom: 8px;
+    font-size: 12px; cursor: move; transition: all .2s; }
+  .handoff-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .handoff-date { font-size: 10px; color: var(--mid-gray); margin-top: 4px; }
+
+  /* ═══ PHASE 3: ASSET TIMELINE ═══ */
+  .timeline {
+    position: relative; margin: 20px 0; padding: 20px 0;
+  }
+  .timeline::before {
+    content: ''; position: absolute; left: 24px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .timeline-item {
+    margin-left: 60px; margin-bottom: 20px; position: relative;
+  }
+  .timeline-dot {
+    position: absolute; left: -46px; width: 16px; height: 16px;
+    background: var(--yellow); border: 3px solid var(--white);
+    border-radius: 50%; top: 2px; transition: all .2s;
+  }
+  .timeline-item:hover .timeline-dot { transform: scale(1.2); background: var(--orange); }
+  .timeline-content {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; font-size: 12px;
+  }
+  .timeline-version { font-weight: 700; margin-bottom: 4px;
+    font-family: 'Montserrat', sans-serif; }
+  .timeline-date { font-size: 10px; color: var(--mid-gray); margin: 4px 0; }
+  .timeline-status { display: inline-block; padding: 2px 8px;
+    border-radius: 3px; font-size: 9px; font-weight: 600; margin-top: 4px; }
+  .timeline-status.released { background: var(--green-light); color: var(--green); }
+  .timeline-status.review { background: var(--orange-light); color: var(--orange); }
+  .timeline-status.draft { background: #F0F0F0; color: var(--mid-gray); }
+
+  /* ═══ PHASE 3: DEPENDENCY MAP ═══ */
+  .dependency-map {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; margin: 16px 0;
+    min-height: 300px; overflow-x: auto;
+  }
+  .dependency-node {
+    display: inline-block; background: var(--yellow);
+    color: var(--black); padding: 8px 12px; border-radius: 4px;
+    font-weight: 600; font-size: 11px; margin: 8px;
+    position: relative; white-space: nowrap;
+  }
+  .dependency-arrow {
+    display: inline-block; color: var(--mid-gray); margin: 0 4px;
+    font-weight: 700;
+  }
+
+  /* ═══ PHASE 3: TEAM COLLAB ═══ */
+  .comments-section {
+    background: var(--light-gray); border-radius: 8px;
+    padding: 12px; margin: 12px 0; max-height: 200px; overflow-y: auto;
+  }
+  .comment {
+    background: var(--white); border-radius: 6px; padding: 8px;
+    margin-bottom: 6px; font-size: 12px; border-left: 3px solid var(--yellow);
+  }
+  .comment-author { font-weight: 700; font-size: 11px;
+    font-family: 'Montserrat', sans-serif; }
+  .comment-text { margin: 4px 0; color: var(--black); }
+  .comment-time { font-size: 10px; color: var(--mid-gray); }
+  .comment-mention { color: var(--blue); font-weight: 600; }
+
+  /* ═══ PHASE 3: PORTFOLIO BUILDER ═══ */
+  .portfolio-summary {
+    background: linear-gradient(135deg, var(--yellow), #FFB819);
+    color: var(--black); border-radius: 12px; padding: 24px;
+    margin: 20px 0; text-align: center;
+  }
+  .portfolio-stat {
+    display: inline-block; margin: 0 16px;
+  }
+  .portfolio-stat-num {
+    font-size: 32px; font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .portfolio-stat-label { font-size: 12px; color: rgba(0,0,0,.6);
+    font-weight: 600; text-transform: uppercase; }
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin: 16px 0;
+  }
+  .portfolio-item {
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: 8px; padding: 12px; text-align: center;
+    transition: all .2s;
+  }
+  .portfolio-item.completed {
+    border-color: var(--green); background: var(--green-light);
+  }
+  .portfolio-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+  .portfolio-item-icon { font-size: 32px; margin-bottom: 8px; }
+  .portfolio-item-name { font-weight: 700; font-size: 12px;
+    font-family: 'Montserrat', sans-serif; }
+  .portfolio-item-date { font-size: 10px; color: var(--mid-gray); margin-top: 4px; }
+
   .check-expand {
     width: 24px; height: 24px;
     display: flex; align-items: center; justify-content: center;
@@ -736,6 +960,10 @@
   <!-- ╚══════════════════════════════════════╝ -->
   <div class="tab-content active" id="tab-flujo">
 
+    <!-- PHASE 1: QUICK FILTERS -->
+    <div class="section-title"><div class="bar"></div> Filtros Rápidos</div>
+    <div class="quick-filters" id="quickFilters"></div>
+
     <div class="section-title"><div class="bar"></div> Flujo de Trabajo Diario</div>
 
     <div class="flow-map" id="flowMap">
@@ -906,6 +1134,57 @@
 
 </div>
 
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║  PHASE 2: PROJECT VIEW TAB            ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div class="tab-content" id="tab-proyectos">
+    <div class="section-title"><div class="bar"></div> Vista por Proyectos</div>
+    <div class="project-grid" id="projectGrid"></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║  PHASE 2: ASSET GALLERY TAB          ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div class="tab-content" id="tab-galeria">
+    <div class="section-title"><div class="bar"></div> Galería de Assets</div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║  PHASE 2: HANDOFF BOARD TAB          ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div class="tab-content" id="tab-entregas">
+    <div class="section-title"><div class="bar"></div> Board de Entregas</div>
+    <div class="handoff-board" id="handoffBoard"></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║  PHASE 3: ASSET TIMELINE TAB         ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div class="tab-content" id="tab-timeline">
+    <div class="section-title"><div class="bar"></div> Timeline de Versiones</div>
+    <div class="timeline" id="assetTimeline"></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║  PHASE 3: DEPENDENCY MAP TAB         ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div class="tab-content" id="tab-dependencias">
+    <div class="section-title"><div class="bar"></div> Mapa de Dependencias</div>
+    <div class="dependency-map" id="dependencyMap"></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║  PHASE 3: PORTFOLIO BUILDER TAB      ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div class="tab-content" id="tab-portafolio">
+    <div class="section-title"><div class="bar"></div> Reporte de Completados</div>
+    <div class="portfolio-summary" id="portfolioSummary"></div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
+
+</div>
+
 <!-- ═══ BOTTOM NAV ═══ -->
 <div class="bottom-nav">
   <button class="nav-btn active" onclick="switchTab('flujo', this)">
@@ -914,8 +1193,26 @@
   <button class="nav-btn" onclick="switchTab('categorias', this)">
     <span class="nav-icon">📂</span> Categorías
   </button>
+  <button class="nav-btn" onclick="switchTab('proyectos', this)">
+    <span class="nav-icon">📊</span> Proyectos
+  </button>
+  <button class="nav-btn" onclick="switchTab('galeria', this)">
+    <span class="nav-icon">🖼️</span> Galería
+  </button>
+  <button class="nav-btn" onclick="switchTab('entregas', this)">
+    <span class="nav-icon">📦</span> Entregas
+  </button>
+  <button class="nav-btn" onclick="switchTab('timeline', this)">
+    <span class="nav-icon">📈</span> Timeline
+  </button>
+  <button class="nav-btn" onclick="switchTab('dependencias', this)">
+    <span class="nav-icon">🔗</span> Deps
+  </button>
+  <button class="nav-btn" onclick="switchTab('portafolio', this)">
+    <span class="nav-icon">⭐</span> Portfolio
+  </button>
   <button class="nav-btn" onclick="switchTab('info', this)">
-    <span class="nav-icon">🏢</span> Info KOLFF
+    <span class="nav-icon">🏢</span> Info
   </button>
   <button class="nav-btn" onclick="switchTab('visual', this)">
     <span class="nav-icon">🎨</span> Visual
@@ -924,8 +1221,68 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-//  DATA
+//  DATA — PHASE 1, 2, 3 ENHANCEMENTS
 // ═══════════════════════════════════════════════════════════════════
+
+// [DATA] PHASE 1: Asset Links — Francisco agregará URLs conforme avance
+const ASSET_LINKS = {
+  // Estructura template para cada tarea/proyecto
+  // Example: 'figma': 'https://figma.com/...',
+  //          'drive': 'https://drive.google.com/...',
+  //          'preview': 'https://example.com/preview'
+};
+
+// [DATA] PHASE 2: Projects — Francisco agregará proyectos
+const PROJECTS = [
+  // Template para que Francisco agregue:
+  // { id: 'project-1', name: 'Brand Style Guide v1', category: 'Marca',
+  //   icon: '🎨', assets: 3, status: 'en-progreso',
+  //   description: 'Paleta de colores + tipografía en Figma' }
+];
+
+// [DATA] PHASE 2: Asset Gallery — Francisco agregará assets
+const ASSETS = [
+  // Template:
+  // { id: 'asset-1', name: 'Logo Positivo', type: 'vector',
+  //   size: '2.3 MB', preview: '📎', lastModified: '2026-03-31' }
+];
+
+// [DATA] PHASE 2: Deliverables Board — Francisco agregará entregas
+const DELIVERABLES = [
+  // Template:
+  // { id: 'del-1', title: 'Brief de Marca', date: '2026-03-05',
+  //   file: 'Brief_KOLFF_v1.pdf', status: 'completed', feedback: 'Aprobado' }
+];
+
+// [DATA] PHASE 3: Asset Versions — Francisco agregará versiones
+const ASSET_VERSIONS = [
+  // Template:
+  // { assetId: 'logo-1', version: 'v1.0', date: '2026-03-01',
+  //   status: 'released', feedback: 'Versión inicial',
+  //   changes: 'Logo principal en color' }
+];
+
+// [DATA] PHASE 3: Dependencies — Francisco mapeará dependencias
+const DEPENDENCIES = [
+  // Template:
+  // { from: 'Brand Guide', to: 'RRSS Templates' },
+  // { from: 'RRSS Templates', to: 'Content Calendar' }
+];
+
+// [DATA] PHASE 3: Team Comments — Francisco agregará comentarios
+const COMMENTS = [
+  // Template:
+  // { itemId: 'task-1', author: 'Francisco',
+  //   text: 'Este es el @Natalia brief actualizado',
+  //   timestamp: '2026-03-31T14:30:00' }
+];
+
+// [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
+const PORTFOLIO_ITEMS = [
+  // Template:
+  // { id: 'port-1', name: 'Brand Style Guide', icon: '📖',
+  //   dateCompleted: '2026-03-15', category: 'marca' }
+];
 
 const TASKS = [
   // ── SEMANA 1 ──
@@ -1379,9 +1736,12 @@ function renderChecklist() {
   el.innerHTML = filtered.map((t, i) => {
     const idx = TASKS.indexOf(t);
     const done = completedTasks.has(idx);
-    return `<div class="check-item ${done ? 'completed' : ''}" data-idx="${idx}" data-cat="${t.cat}">
+    // PHASE 1: Priority color coding with indicator
+    const priorityClass = `priority-${t.priority}`;
+    return `<div class="check-item ${done ? 'completed' : ''} ${priorityClass}" data-idx="${idx}" data-cat="${t.cat}">
       <div class="check-header">
         <div class="check-box" onclick="event.stopPropagation();toggleTask(${idx})">✓</div>
+        <span class="priority-indicator"></span>
         <div class="check-title">${t.title}</div>
         <div class="check-tags">
           <span class="tag ${t.cat}">${t.cat}</span>
@@ -1389,11 +1749,18 @@ function renderChecklist() {
         </div>
         <div class="check-expand" onclick="toggleDetail(this.parentElement.parentElement)">▼</div>
       </div>
-      <div class="check-detail"><div class="check-detail-inner">${t.detail}</div></div>
+      <div class="check-detail">
+        <div class="check-detail-inner">${t.detail}</div>
+        <!-- PHASE 1: Asset Links section -->
+        <div class="asset-links" style="display:none" id="assets-${idx}"></div>
+        <!-- PHASE 3: Comments section -->
+        <div class="comments-section" style="display:none" id="comments-${idx}"></div>
+      </div>
     </div>`;
   }).join('');
 
   updateProgress();
+  renderQuickFilters(); // PHASE 1
 }
 
 function toggleTask(idx) {
@@ -1440,6 +1807,180 @@ function switchTab(tab, btn) {
   document.getElementById('tab-' + tab).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+
+  // Trigger renders for new tabs
+  if (tab === 'proyectos') renderProjects();
+  if (tab === 'galeria') renderGallery();
+  if (tab === 'entregas') renderHandoffBoard();
+  if (tab === 'timeline') renderTimeline();
+  if (tab === 'dependencias') renderDependencies();
+  if (tab === 'portafolio') renderPortfolio();
+}
+
+// ═══ PHASE 1: QUICK FILTERS ═══
+function renderQuickFilters() {
+  const container = document.getElementById('quickFilters');
+  const categories = ['all', ...new Set(TASKS.map(t => t.cat))];
+
+  container.innerHTML = categories.map(cat => {
+    const label = cat === 'all' ? 'Todas' : cat.toUpperCase();
+    return `<button class="filter-pill ${currentFilter === cat ? 'active' : ''}"
+      onclick="currentFilter='${cat}'; renderChecklist(); this.parentElement.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active')); this.classList.add('active')">
+      ${label}
+    </button>`;
+  }).join('');
+}
+
+// ═══ PHASE 2: RENDER PROJECTS ═══
+function renderProjects() {
+  const container = document.getElementById('projectGrid');
+  if (!PROJECTS.length) {
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">No hay proyectos aún. Francisco agregará conforme avance.</div>';
+    return;
+  }
+
+  container.innerHTML = PROJECTS.map(p => `
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon">${p.icon || '📁'}</div>
+        <div>
+          <div class="project-name">${p.name}</div>
+          <div class="project-category">${p.category}</div>
+        </div>
+      </div>
+      <div class="project-stats">
+        <div class="project-stat"><strong>${p.assets || 0}</strong> assets</div>
+        <div class="project-stat"><strong>${TASKS.filter(t => t.title.includes(p.name)).length}</strong> tareas</div>
+      </div>
+      <div class="project-status ${(p.status || 'en-progreso').replace(/ /g, '-')}">
+        ${p.status || 'En Progreso'}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ PHASE 2: RENDER GALLERY ═══
+function renderGallery() {
+  const container = document.getElementById('galleryGrid');
+  if (!ASSETS.length) {
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">No hay assets. Francisco agregará archivos Figma, Drive, etc.</div>';
+    return;
+  }
+
+  container.innerHTML = ASSETS.map(a => `
+    <div class="gallery-item">
+      <div class="gallery-preview">${a.preview || '📄'}</div>
+      <div class="gallery-info">
+        <div class="gallery-name">${a.name}</div>
+        <div class="gallery-size">${a.size || 'N/A'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ PHASE 2: RENDER HANDOFF BOARD ═══
+function renderHandoffBoard() {
+  const container = document.getElementById('handoffBoard');
+  const statuses = ['pending', 'in-progress', 'review', 'completed'];
+  const statusLabels = { 'pending': 'Por Entregar', 'in-progress': 'En Progreso', 'review': 'En Revisión', 'completed': 'Completado' };
+
+  if (!DELIVERABLES.length) {
+    container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">
+      No hay entregas registradas. Francisco agregará conforme complete proyectos.
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = statuses.map(status => {
+    const items = DELIVERABLES.filter(d => (d.status || 'pending') === status);
+    return `
+      <div class="handoff-column">
+        <div class="handoff-title">${statusLabels[status]} (${items.length})</div>
+        ${items.map(d => `
+          <div class="handoff-item">
+            <strong>${d.title}</strong>
+            <div class="handoff-date">📅 ${d.date || 'TBD'}</div>
+            <div class="handoff-date">📄 ${d.file || 'Sin archivo'}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
+}
+
+// ═══ PHASE 3: RENDER ASSET TIMELINE ═══
+function renderTimeline() {
+  const container = document.getElementById('assetTimeline');
+  if (!ASSET_VERSIONS.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--mid-gray)">No hay versiones registradas. Francisco agregará conforme actualice assets.</div>';
+    return;
+  }
+
+  const sorted = [...ASSET_VERSIONS].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  container.innerHTML = sorted.map(v => `
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-version">${v.version}</div>
+        <div class="timeline-date">📅 ${v.date}</div>
+        <span class="timeline-status ${v.status || 'draft'}">${v.status || 'DRAFT'}</span>
+        <div style="margin-top:6px;font-size:11px">${v.feedback || 'Sin comentarios'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ PHASE 3: RENDER DEPENDENCIES ═══
+function renderDependencies() {
+  const container = document.getElementById('dependencyMap');
+  if (!DEPENDENCIES.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--mid-gray)">No hay dependencias mapeadas. Francisco las agregará conforme identifique relaciones.</div>';
+    return;
+  }
+
+  container.innerHTML = DEPENDENCIES.map(d => `
+    <span class="dependency-node">${d.from}</span>
+    <span class="dependency-arrow">→</span>
+    <span class="dependency-node">${d.to}</span>
+  `).join('') + '<br><br><em style="color:var(--mid-gray);font-size:11px">💡 Las dependencias te ayudan a entender qué debe completarse primero.</em>';
+}
+
+// ═══ PHASE 3: RENDER PORTFOLIO ═══
+function renderPortfolio() {
+  const container = document.getElementById('portfolioSummary');
+  const portfolioGrid = document.getElementById('portfolioGrid');
+  const completed = PORTFOLIO_ITEMS.length;
+  const totalTasks = TASKS.length;
+  const completionRate = totalTasks ? Math.round(completed / totalTasks * 100) : 0;
+
+  container.innerHTML = `
+    <div class="portfolio-stat">
+      <div class="portfolio-stat-num">${completed}</div>
+      <div class="portfolio-stat-label">Completados</div>
+    </div>
+    <div class="portfolio-stat">
+      <div class="portfolio-stat-num">${completionRate}%</div>
+      <div class="portfolio-stat-label">Avance</div>
+    </div>
+    <div class="portfolio-stat">
+      <div class="portfolio-stat-num">${totalTasks}</div>
+      <div class="portfolio-stat-label">Tareas Totales</div>
+    </div>
+  `;
+
+  if (!PORTFOLIO_ITEMS.length) {
+    portfolioGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">Aún sin completados. Conforme Francisco complete tareas, aparecerán aquí.</div>';
+    return;
+  }
+
+  portfolioGrid.innerHTML = PORTFOLIO_ITEMS.map(p => `
+    <div class="portfolio-item completed">
+      <div class="portfolio-item-icon">${p.icon || '✅'}</div>
+      <div class="portfolio-item-name">${p.name}</div>
+      <div class="portfolio-item-date">✅ ${p.dateCompleted}</div>
+    </div>
+  `).join('');
 }
 
 // ═══ RENDER CATEGORIES ═══
@@ -1581,7 +2122,219 @@ renderChecklist();
 renderCategories();
 renderInfo();
 renderVisual();
+// PHASE 1, 2, 3: Initialize new features
+renderQuickFilters(); // PHASE 1
+// PHASE 2 and 3 will render on tab switch via switchTab()
+
 </script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+  GUÍA DE IMPLEMENTACIÓN — CÓMO AGREGAR DATOS
+  ═══════════════════════════════════════════════════════════════════ -->
+<div style="display:none">
+
+FASE 1: COLOR-CODE + ASSET LINKS + QUICK FILTERS
+════════════════════════════════════════════════════
+
+✅ YA IMPLEMENTADO:
+  ✓ Color-code left border por prioridad (urgente/alta/media/baja)
+  ✓ Quick filters pills en el header del tab Flujo
+  ✓ Estructura para agregar Asset Links
+  ✓ Indicadores de prioridad visuales
+
+PARA AGREGAR ASSET LINKS:
+  1. Editar const ASSET_LINKS (línea ~959)
+  2. Estructura:
+     const ASSET_LINKS = {
+       'task-key': {
+         figma: 'https://figma.com/file/...',
+         drive: 'https://drive.google.com/file/...',
+         preview: 'https://example.com/preview'
+       }
+     };
+
+
+FASE 2: PROJECT VIEW + ASSET GALLERY + HANDOFF BOARD
+════════════════════════════════════════════════════════
+
+PROJECTS (línea ~975):
+  Template:
+  {
+    id: 'proj-1',
+    name: 'Brand Style Guide v1',
+    category: 'Marca',
+    icon: '🎨',
+    assets: 5,
+    status: 'en-progreso',
+    description: 'Paleta + tipografía en Figma'
+  }
+
+ASSETS (línea ~985):
+  Template:
+  {
+    id: 'asset-1',
+    name: 'Logo Positivo',
+    type: 'vector',
+    size: '2.3 MB',
+    preview: '📎',
+    lastModified: '2026-03-31'
+  }
+
+DELIVERABLES (línea ~994):
+  Template:
+  {
+    id: 'del-1',
+    title: 'Brief de Marca',
+    date: '2026-03-05',
+    file: 'Brief_KOLFF_v1.pdf',
+    status: 'completed', // pending, in-progress, review, completed
+    feedback: 'Aprobado por Natalia'
+  }
+
+
+FASE 3: TIMELINE + DEPENDENCIES + COMMENTS + PORTFOLIO
+════════════════════════════════════════════════════════
+
+ASSET_VERSIONS (línea ~1006):
+  Template:
+  {
+    assetId: 'logo-1',
+    version: 'v1.0',
+    date: '2026-03-01',
+    status: 'released', // draft, review, released
+    feedback: 'Versión inicial aprobada',
+    changes: 'Logo principal en color KOLFF'
+  }
+
+DEPENDENCIES (línea ~1015):
+  Template:
+  {
+    from: 'Brand Style Guide',
+    to: 'RRSS Templates'
+  }
+
+COMMENTS (línea ~1022):
+  Template:
+  {
+    itemId: 'task-1',
+    author: 'Francisco',
+    text: 'Revisar con @Natalia antes de finalizar',
+    timestamp: '2026-03-31T14:30:00'
+  }
+
+PORTFOLIO_ITEMS (línea ~1030):
+  Template:
+  {
+    id: 'port-1',
+    name: 'Brand Style Guide',
+    icon: '📖',
+    dateCompleted: '2026-03-15',
+    category: 'marca'
+  }
+
+
+ARCHIVO Y LÍNEAS CLAVE
+═════════════════════════
+
+C:\Users\franc\Desktop\ruflo-main\Francisco Parra kolff\kolff-dashboard.html
+
+Estructuras de datos para llenar:
+  - ASSET_LINKS (línea ~959)
+  - PROJECTS (línea ~975)
+  - ASSETS (línea ~985)
+  - DELIVERABLES (línea ~994)
+  - ASSET_VERSIONS (línea ~1006)
+  - DEPENDENCIES (línea ~1015)
+  - COMMENTS (línea ~1022)
+  - PORTFOLIO_ITEMS (línea ~1030)
+
+Funciones ya implementadas (no editar):
+  - renderQuickFilters() — Renderiza filtros por categoría
+  - renderProjects() — Renderiza grid de proyectos
+  - renderGallery() — Renderiza galería de assets
+  - renderHandoffBoard() — Renderiza kanban de entregas
+  - renderTimeline() — Renderiza línea de tiempo de versiones
+  - renderDependencies() — Renderiza mapa de dependencias
+  - renderPortfolio() — Renderiza reporte de completados
+
+
+RECOMENDACIONES DE IMPLEMENTACIÓN
+═══════════════════════════════════
+
+1. EMPEZAR CON PHASE 1 (Esta semana):
+   ✓ Color-code de prioridades YA ACTIVO
+   ✓ Agregar Asset Links mientras trabajas en tareas
+   ✓ Quick filters funcionan automáticamente
+
+2. PASAR A PHASE 2 (Próximas 1-2 semanas):
+   ✓ Crear 2-3 proyectos principales (Brand, Web, RRSS)
+   ✓ Catalogar assets en Drive/Figma
+   ✓ Registrar entregas conforme las completes
+
+3. FASE 3 (Una vez que tengas momentum):
+   ✓ Timeline de versiones para documentar cambios
+   ✓ Mapa de dependencias para entender flujo
+   ✓ Agregar comentarios con @mentions
+   ✓ Portfolio para mostrar completados a stakeholders
+
+
+TESTING: Cómo verificar que funciona
+════════════════════════════════════════
+
+1. Abre el dashboard (ya está autenticado)
+2. En tab "Flujo" verás filtros rápidos (PHASE 1 ✅)
+3. Nota que cada tarea tiene color left-border por prioridad
+4. Haz clic en las nuevas pestañas inferiores:
+   📊 Proyectos → Template vacío hasta que agregues datos
+   🖼️ Galería → Idem
+   📦 Entregas → Idem
+   📈 Timeline → Idem
+   🔗 Deps → Idem
+   ⭐ Portfolio → Idem
+
+5. Una vez agregues datos a los arrays, aparecerán automáticamente sin recargar
+
+
+EJEMPLO: Agregar tu primer proyecto
+═════════════════════════════════════
+
+Edita const PROJECTS = [ ... ] y agrega:
+
+const PROJECTS = [
+  {
+    id: 'brand-guide',
+    name: 'Brand Style Guide v1',
+    category: 'Marca',
+    icon: '🎨',
+    assets: 3,
+    status: 'en-progreso',
+    description: 'Paleta de colores + tipografía en Figma'
+  },
+  {
+    id: 'rrss-templates',
+    name: 'Templates RRSS',
+    category: 'Contenido',
+    icon: '📱',
+    assets: 12,
+    status: 'completado',
+    description: '12 templates Instagram lista para publicar'
+  }
+];
+
+Luego haz clic en 📊 Proyectos y verás tus 2 proyectos.
+
+
+NOTAS IMPORTANTES
+═════════════════
+
+- NO edites TASKS (estructura original de trabajo)
+- NO modifiques funciones de renderizado (todo funciona ya)
+- SOLO agrega datos a los arrays PHASE 1/2/3
+- Los datos persisten en localStorage para tareas completadas
+- Asset Links, Projects, etc. se cargan desde memoria cada sesión
+  (considera guardar en localStorage si necesitas persistencia)
+
+</div>
 
 </body>
 </html>
