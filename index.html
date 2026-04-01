@@ -71,6 +71,20 @@
     font-size: 12px;
   }
   .header .user-info strong { color: var(--white); }
+  .logout-btn {
+    background: transparent;
+    border: 1px solid #666;
+    color: #999;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    margin-left: 12px;
+  }
+  .logout-btn:hover { border-color: var(--yellow); color: var(--yellow); }
 
   /* ─── MAIN CONTENT ─── */
   .main { flex:1; padding: 20px 24px 100px; max-width: 1200px; margin: 0 auto; width: 100%; }
@@ -700,7 +714,7 @@
     <div class="logo">KOLFF</div>
     <h2>Dashboard Privado</h2>
     <p>Ingresa la contraseña para continuar</p>
-    <input type="password" id="passwordInput" class="login-input" placeholder="Contraseña" autocomplete="off">
+    <input type="password" id="passwordInput" class="login-input" placeholder="Ingresa la contraseña" autocomplete="off" maxlength="20">
     <button class="login-btn" onclick="checkPassword()">Acceder</button>
     <div class="login-error" id="loginError">Contraseña incorrecta</div>
   </div>
@@ -711,6 +725,7 @@
   <div class="logo">KOLFF</div>
   <div class="subtitle">energy.quality — Dashboard Operativo</div>
   <div class="user-info"><strong>Francisco Parra</strong> · Diseñador Gráfico</div>
+  <button id="logoutBtn" class="logout-btn" onclick="logout()" style="display:none">Cerrar sesión</button>
 </div>
 
 <!-- ═══ MAIN ═══ -->
@@ -1475,26 +1490,77 @@ function renderVisual() {
 }
 
 // ═══ AUTHENTICATION ═══
-const CORRECT_PASSWORD = '0125';
+// Updated: 2026-03-31
+const CORRECT_PASSWORD = 'KolffSecure2026!';
+window.loginAttempts = 0;
+window.lockoutTime = null;
 
 function checkPassword() {
   const input = document.getElementById('passwordInput').value;
   const errorMsg = document.getElementById('loginError');
+  const loginBtn = document.querySelector('.login-btn');
+  const passwordInput = document.getElementById('passwordInput');
 
-  console.log('Contraseña ingresada:', input);
-  console.log('Contraseña correcta:', CORRECT_PASSWORD);
-  console.log('¿Coinciden?:', input === CORRECT_PASSWORD);
+  if (!input.length) return;
 
-  if (input === CORRECT_PASSWORD) {
-    console.log('✓ Acceso permitido');
-    localStorage.setItem('kolffAuth', 'true');
-    document.getElementById('loginScreen').classList.add('hidden');
-  } else {
-    console.log('✗ Contraseña incorrecta');
-    errorMsg.classList.add('show');
-    document.getElementById('passwordInput').value = '';
-    setTimeout(() => errorMsg.classList.remove('show'), 3000);
+  // Check if locked out due to failed attempts
+  if (window.loginAttempts >= 3) {
+    const now = Date.now();
+    if (!window.lockoutTime) window.lockoutTime = now;
+    const elapsed = (now - window.lockoutTime) / 1000;
+
+    if (elapsed < 300) { // 5 minutos = 300 segundos
+      const remaining = Math.ceil(300 - elapsed);
+      errorMsg.textContent = `Intenta en ${remaining} segundos`;
+      errorMsg.classList.add('show');
+      passwordInput.disabled = true;
+      loginBtn.disabled = true;
+      return;
+    } else {
+      // Lockout period expired, reset
+      window.loginAttempts = 0;
+      window.lockoutTime = null;
+    }
   }
+
+  loginBtn.textContent = 'Accediendo...';
+  loginBtn.disabled = true;
+  passwordInput.disabled = true;
+
+  setTimeout(() => {
+    if (input === CORRECT_PASSWORD) {
+      sessionStorage.setItem('kolffAuth', 'authenticated-session');
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('logoutBtn').style.display = 'block';
+      window.loginAttempts = 0;
+      window.lockoutTime = null;
+    } else {
+      window.loginAttempts++;
+      errorMsg.textContent = window.loginAttempts >= 3
+        ? 'Demasiados intentos. Intenta más tarde.'
+        : 'Contraseña incorrecta';
+      errorMsg.classList.add('show');
+      passwordInput.value = '';
+      loginBtn.textContent = 'Acceder';
+      loginBtn.disabled = false;
+      passwordInput.disabled = false;
+      setTimeout(() => errorMsg.classList.remove('show'), 3000);
+    }
+  }, 500);
+}
+
+function logout() {
+  sessionStorage.removeItem('kolffAuth');
+  window.loginAttempts = 0;
+  window.lockoutTime = null;
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('passwordInput').value = '';
+  document.getElementById('passwordInput').disabled = false;
+  document.querySelector('.login-btn').textContent = 'Acceder';
+  document.querySelector('.login-btn').disabled = false;
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('loginError').classList.remove('show');
+  document.getElementById('passwordInput').focus();
 }
 
 document.getElementById('passwordInput').addEventListener('keypress', (e) => {
@@ -1502,8 +1568,10 @@ document.getElementById('passwordInput').addEventListener('keypress', (e) => {
 });
 
 // Check if already authenticated
-if (localStorage.getItem('kolffAuth') === 'true') {
+const authToken = sessionStorage.getItem('kolffAuth');
+if (authToken === 'authenticated-session') {
   document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('logoutBtn').style.display = 'block';
 } else {
   document.getElementById('passwordInput').focus();
 }
