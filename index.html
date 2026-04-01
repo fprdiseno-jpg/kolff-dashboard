@@ -1135,16 +1135,16 @@
       <span id="currentTabLabel">📋 Flujo</span>
     </button>
     <div class="tab-dropdown-menu" id="tabDropdownMenu">
-      <button onclick="switchTab('flujo', null)"><span class="tab-icon">📋</span> Flujo</button>
-      <button onclick="switchTab('categorias', null)"><span class="tab-icon">📂</span> Categorías</button>
-      <button onclick="switchTab('proyectos', null)"><span class="tab-icon">📊</span> Proyectos</button>
-      <button onclick="switchTab('galeria', null)"><span class="tab-icon">🖼️</span> Galería</button>
-      <button onclick="switchTab('entregas', null)"><span class="tab-icon">📦</span> Entregas</button>
-      <button onclick="switchTab('timeline', null)"><span class="tab-icon">📈</span> Timeline</button>
-      <button onclick="switchTab('dependencias', null)"><span class="tab-icon">🔗</span> Deps</button>
-      <button onclick="switchTab('portafolio', null)"><span class="tab-icon">⭐</span> Portfolio</button>
-      <button onclick="switchTab('info', null)"><span class="tab-icon">🏢</span> Info</button>
-      <button onclick="switchTab('visual', null)"><span class="tab-icon">🎨</span> Visual</button>
+      <button><span class="tab-icon">📋</span> Flujo</button>
+      <button><span class="tab-icon">📂</span> Categorías</button>
+      <button><span class="tab-icon">📊</span> Proyectos</button>
+      <button><span class="tab-icon">🖼️</span> Galería</button>
+      <button><span class="tab-icon">📦</span> Entregas</button>
+      <button><span class="tab-icon">📈</span> Timeline</button>
+      <button><span class="tab-icon">🔗</span> Deps</button>
+      <button><span class="tab-icon">⭐</span> Portfolio</button>
+      <button><span class="tab-icon">🏢</span> Info</button>
+      <button><span class="tab-icon">🎨</span> Visual</button>
     </div>
   </div>
 
@@ -1276,34 +1276,34 @@
 
 <!-- ═══ BOTTOM NAV (Desktop 768px+) ═══ -->
 <div class="bottom-nav">
-  <button class="nav-btn active" onclick="switchTab('flujo', this)">
+  <button class="nav-btn active">
     <span class="nav-icon">📋</span> Flujo
   </button>
-  <button class="nav-btn" onclick="switchTab('categorias', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📂</span> Categorías
   </button>
-  <button class="nav-btn" onclick="switchTab('proyectos', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📊</span> Proyectos
   </button>
-  <button class="nav-btn" onclick="switchTab('galeria', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🖼️</span> Galería
   </button>
-  <button class="nav-btn" onclick="switchTab('entregas', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📦</span> Entregas
   </button>
-  <button class="nav-btn" onclick="switchTab('timeline', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📈</span> Timeline
   </button>
-  <button class="nav-btn" onclick="switchTab('dependencias', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🔗</span> Deps
   </button>
-  <button class="nav-btn" onclick="switchTab('portafolio', this)">
+  <button class="nav-btn">
     <span class="nav-icon">⭐</span> Portfolio
   </button>
-  <button class="nav-btn" onclick="switchTab('info', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🏢</span> Info
   </button>
-  <button class="nav-btn" onclick="switchTab('visual', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🎨</span> Visual
   </button>
 </div>
@@ -1313,133 +1313,8 @@
 //  DATA — PHASE 1, 2, 3 ENHANCEMENTS
 // ═══════════════════════════════════════════════════════════════════
 
-const ASSET_LINKS = {
-  'project-branding': {
-    figma: 'https://figma.com/file/branding-kolff',
-    drive: 'https://drive.google.com/folder/branding',
-    preview: 'https://preview.kolff/branding'
-  },
-  'project-packaging': {
-    figma: 'https://figma.com/file/packaging-kolff',
-    drive: 'https://drive.google.com/folder/packaging',
-    preview: 'https://preview.kolff/packaging'
-  },
-  'project-marketing': {
-    figma: 'https://figma.com/file/marketing-kolff',
-    drive: 'https://drive.google.com/folder/marketing',
-    ai: 'https://adobe.io/files/marketing'
-  }
-};
-
-const PROJECTS = [
-  {
-    id: 'project-branding',
-    name: 'Sistema de Marca KOLFF',
-    category: 'Branding',
-    icon: '🎨',
-    assets: 8,
-    status: 'completado',
-    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
-    client: 'KOLFF Solutions',
-    startDate: '2026-01-15',
-    endDate: '2026-03-10'
-  },
-  {
-    id: 'project-packaging',
-    name: 'Diseño de Packaging',
-    category: 'Packaging',
-    icon: '📦',
-    assets: 6,
-    status: 'en-progreso',
-    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-01',
-    endDate: '2026-04-15'
-  },
-  {
-    id: 'project-marketing',
-    name: 'Materiales de Marketing',
-    category: 'Marketing Digital',
-    icon: '📱',
-    assets: 12,
-    status: 'en-revision',
-    description: 'Templates para redes sociales, banners web y contenido digital',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-15',
-    endDate: '2026-04-30'
-  },
-  {
-    id: 'project-uiux',
-    name: 'Rediseño UI/UX Web',
-    category: 'UI/UX',
-    icon: '💻',
-    assets: 15,
-    status: 'en-progreso',
-    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
-    client: 'KOLFF Solutions',
-    startDate: '2026-03-01',
-    endDate: '2026-05-30'
-  }
-];
-
-const ASSETS = [
-  { id: 'asset-logo-1', name: 'Logo Principal Color', type: 'vector', size: '2.3 MB', preview: '🎨', lastModified: '2026-03-10' },
-  { id: 'asset-logo-2', name: 'Logo Isotipo', type: 'vector', size: '1.8 MB', preview: '🔷', lastModified: '2026-03-10' },
-  { id: 'asset-palette', name: 'Paleta de Colores', type: 'design', size: '4.5 MB', preview: '🌈', lastModified: '2026-03-05' },
-  { id: 'asset-typography', name: 'Guía Tipográfica', type: 'document', size: '6.2 MB', preview: '📄', lastModified: '2026-03-08' },
-  { id: 'asset-brand-guide', name: 'Brand Guide PDF', type: 'document', size: '12.8 MB', preview: '📖', lastModified: '2026-03-10' },
-  { id: 'asset-box-design', name: 'Diseño Caja Producto', type: 'design', size: '8.5 MB', preview: '📦', lastModified: '2026-03-25' },
-  { id: 'asset-label-design', name: 'Etiqueta Frontal', type: 'design', size: '3.2 MB', preview: '🏷️', lastModified: '2026-03-28' },
-  { id: 'asset-social-ig', name: 'Template Instagram', type: 'design', size: '7.1 MB', preview: '📸', lastModified: '2026-03-20' },
-  { id: 'asset-social-linkedin', name: 'Template LinkedIn', type: 'design', size: '5.9 MB', preview: '💼', lastModified: '2026-03-22' },
-  { id: 'asset-banner-web', name: 'Banner Web Hero', type: 'design', size: '9.3 MB', preview: '🌐', lastModified: '2026-03-26' },
-  { id: 'asset-mockups', name: 'Mockups Packaging', type: 'design', size: '18.7 MB', preview: '🎁', lastModified: '2026-03-27' },
-  { id: 'asset-prototype', name: 'Prototipo UI Interactivo', type: 'design', size: '14.2 MB', preview: '🖱️', lastModified: '2026-03-31' }
-];
-
-const DELIVERABLES = [
-  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'completed', feedback: 'Aprobado' },
-  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'completed', feedback: 'Requiere ajustes menores' },
-  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'completed', feedback: 'Aprobado y listo' },
-  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'completed', feedback: 'Excelente trabajo' },
-  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'in-review', feedback: 'En revisión con cliente' },
-  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'in-review', feedback: 'Pendiente aprobación' },
-  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'in-progress', feedback: null }
-];
-
-const ASSET_VERSIONS = [
-  { assetId: 'asset-logo-1', version: 'v1.0', date: '2026-02-01', status: 'released', feedback: 'Versión inicial propuesta', changes: 'Logo principal con variaciones color y blanco' },
-  { assetId: 'asset-logo-1', version: 'v1.1', date: '2026-02-10', status: 'released', feedback: 'Ajustes menores', changes: 'Espaciado del isotipo mejorado' },
-  { assetId: 'asset-logo-1', version: 'v2.0', date: '2026-02-20', status: 'released', feedback: 'Versión final aprobada', changes: 'Rediseño completo post-feedback' },
-  { assetId: 'asset-palette', version: 'v1.0', date: '2026-02-15', status: 'released', feedback: 'Paleta inicial', changes: '5 colores principales + variaciones' },
-  { assetId: 'asset-palette', version: 'v1.1', date: '2026-03-05', status: 'released', feedback: 'Colores secundarios agregados', changes: '10 colores totales con codes Hex y RGB' },
-  { assetId: 'asset-brand-guide', version: 'v0.9', date: '2026-02-28', status: 'review', feedback: 'En validación interna', changes: 'Primero draft del documento completo' },
-  { assetId: 'asset-brand-guide', version: 'v1.0', date: '2026-03-10', status: 'released', feedback: 'Aprobado finalmente', changes: 'Documento final con todas las guías' }
-];
-
-const DEPENDENCIES = [
-  { from: 'Sistema de Marca KOLFF', to: 'Materiales de Marketing', description: 'Logo y colores necesarios para templates' },
-  { from: 'Sistema de Marca KOLFF', to: 'Diseño de Packaging', description: 'Paleta y tipografía para boxes' },
-  { from: 'Rediseño UI/UX Web', to: 'Materiales de Marketing', description: 'Componentes de interfaz para banners' }
-];
-
-const COMMENTS = [
-  { itemId: 'project-branding', author: 'Francisco Parra', text: 'Logo finalizado y aprobado por cliente. Paleta lista para implementar.', timestamp: '2026-03-10T16:45:00' },
-  { itemId: 'del-5', author: 'Francisco Parra', text: 'Packaging en revisión. Esperando feedback de impresión técnica.', timestamp: '2026-03-20T10:30:00' },
-  { itemId: 'asset-prototype', author: 'Francisco Parra', text: 'Prototipo UI completado. Listo para presentación al cliente mañana.', timestamp: '2026-03-31T18:00:00' }
-];
-
-const PORTFOLIO_ITEMS = [
-  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
-  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
-  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
-];
-
 // ═══════════════════════════════════════════════════════════════════
-//  ORIGINAL DATA (KOLFF)
-// ═══════════════════════════════════════════════════════════════════
-// ═══════════════════════════════════════════════════════════════════
-//  DATA — PHASE 1, 2, 3 ENHANCEMENTS
+//  DATA — MAIN DEFINITIONS
 // ═══════════════════════════════════════════════════════════════════
 
 // [DATA] PHASE 1: Asset Links — Francisco agregará URLs conforme avance
@@ -2071,9 +1946,8 @@ function updateProgress() {
   const done = weekTasks.filter((t,i) => completedTasks.has(TASKS.indexOf(t))).length;
   const total = weekTasks.length;
   const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = `${done} de ${total} tareas completadas`;
-  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('dailyProgress').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '%';
 }
 
 function selectWeek(w, btn) {
