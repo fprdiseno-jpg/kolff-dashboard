@@ -241,7 +241,7 @@
     font-size: 16px;
   }
 
-  /* Hide dropdown on desktop, show on tablet/mobile */
+  /* Hide header dropdown on desktop, show on mobile */
   .tab-dropdown-wrapper {
     display: none;
   }
@@ -249,9 +249,6 @@
   @media (max-width: 768px) {
     .tab-dropdown-wrapper {
       display: block;
-    }
-    .bottom-nav {
-      display: none !important;
     }
   }
 
@@ -857,67 +854,186 @@
     border-color: var(--yellow);
   }
 
-  /* ─── BOTTOM NAV (Desktop only - 768px+) ─── */
-  .bottom-nav {
+  /* ─── VISUAL TEMPLATES ─── */
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    margin: 14px 0;
+  }
+
+  .visual-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+  }
+
+  .visual-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--yellow);
+    transform: translateY(-3px);
+  }
+
+  .visual-preview {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    padding: 24px 16px;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+  }
+
+  .visual-card-body {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .visual-card-body h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .visual-card-body p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .dims {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--black);
+    border: 3px solid var(--yellow);
+    color: var(--yellow);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger-btn:hover {
+    background: var(--yellow);
+    color: var(--black);
+    transform: scale(1.1);
+  }
+
+  .hamburger-btn.open {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms ease;
+  }
+
+  .nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--black);
-    display: none;
-    justify-content: center;
-    gap: 0;
-    z-index: 100;
-    border-top: 3px solid var(--yellow);
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    z-index: 180;
+    transform: translateY(100%);
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 12px 0 24px;
   }
 
-  @media (min-width: 768px) {
-    .bottom-nav {
-      display: flex;
-    }
+  .nav-menu.open {
+    transform: translateY(0);
   }
 
-  @media (max-width: 480px) {
-    .bottom-nav {
-      display: none;
-    }
+  .nav-menu-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    margin: 0 auto 12px;
+  }
+
+  .nav-menu-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 20px 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
   }
 
   .nav-btn {
-    flex: 1;
-    max-width: 160px;
-    padding: 12px 10px 10px;
+    width: 100%;
+    padding: 14px 20px;
     background: none;
     border: none;
-    color: #888;
+    color: var(--text-primary);
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 14px;
     transition: all var(--transition-base);
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    text-align: left;
+    border-left: 4px solid transparent;
   }
 
-  .nav-btn:hover { color: var(--yellow); }
+  .nav-btn:hover {
+    background: var(--yellow-light);
+    border-left-color: var(--yellow);
+  }
 
-  .nav-btn.active { color: var(--yellow); }
-
-  .nav-btn.active::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: 15%;
-    right: 15%;
-    height: 3px;
-    background: var(--yellow-gradient);
-    border-radius: 0 0 4px 4px;
+  .nav-btn.active {
+    color: var(--black);
+    background: var(--yellow-light);
+    border-left-color: var(--yellow);
+    font-weight: 700;
   }
 
   .nav-btn .nav-icon { font-size: 20px; }
@@ -1269,13 +1385,17 @@
   <!-- TAB 10: VISUAL -->
   <div class="tab-content" id="tab-visual">
     <div class="section-title"><div class="bar"></div> Plantillas Visuales</div>
-    <div class="gallery-grid" id="visualGrid"></div>
+    <div class="visual-grid" id="visualGrid"></div>
   </div>
 
 </div>
 
-<!-- ═══ BOTTOM NAV (Desktop 768px+) ═══ -->
-<div class="bottom-nav">
+<!-- ═══ HAMBURGER NAV ═══ -->
+<button class="hamburger-btn" id="hamburgerBtn" onclick="toggleNavMenu()">☰</button>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNavMenu()"></div>
+<div class="nav-menu" id="navMenu">
+  <div class="nav-menu-handle"></div>
+  <div class="nav-menu-title">Navegación</div>
   <button class="nav-btn active">
     <span class="nav-icon">📋</span> Flujo
   </button>
@@ -1295,7 +1415,7 @@
     <span class="nav-icon">📈</span> Timeline
   </button>
   <button class="nav-btn">
-    <span class="nav-icon">🔗</span> Deps
+    <span class="nav-icon">🔗</span> Dependencias
   </button>
   <button class="nav-btn">
     <span class="nav-icon">⭐</span> Portfolio
@@ -1344,7 +1464,7 @@ const PROJECTS = [
     category: 'Branding',
     icon: '🎨',
     assets: 8,
-    status: 'completado',
+    status: 'en-progreso',
     description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
     client: 'KOLFF Solutions',
     startDate: '2026-01-15',
@@ -1368,7 +1488,7 @@ const PROJECTS = [
     category: 'Marketing Digital',
     icon: '📱',
     assets: 12,
-    status: 'en-revision',
+    status: 'en-progreso',
     description: 'Templates para redes sociales, banners web y contenido digital',
     client: 'KOLFF Solutions',
     startDate: '2026-02-15',
@@ -1406,13 +1526,13 @@ const ASSETS = [
 
 // [DATA] PHASE 2: Deliverables Board — Francisco agregará entregas
 const DELIVERABLES = [
-  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'completed', feedback: 'Aprobado' },
-  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'completed', feedback: 'Requiere ajustes menores' },
-  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'completed', feedback: 'Aprobado y listo' },
-  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'completed', feedback: 'Excelente trabajo' },
-  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'in-review', feedback: 'En revisión con cliente' },
-  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'in-review', feedback: 'Pendiente aprobación' },
-  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'in-progress', feedback: null }
+  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'pending', feedback: null },
+  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'pending', feedback: null },
+  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'pending', feedback: null },
+  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'pending', feedback: null },
+  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'pending', feedback: null },
+  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'pending', feedback: null },
+  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'pending', feedback: null }
 ];
 
 // [DATA] PHASE 3: Asset Versions — Francisco agregará versiones
@@ -1441,11 +1561,7 @@ const COMMENTS = [
 ];
 
 // [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
-const PORTFOLIO_ITEMS = [
-  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
-  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
-  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
-];
+const PORTFOLIO_ITEMS = [];
 
 const TASKS = [
   // ── SEMANA 1 ──
@@ -1872,11 +1988,17 @@ let currentWeek = 1;
 let currentFilter = 'all';
 let completedTasks = new Set();
 
-// Load saved state
-try {
-  const saved = localStorage.getItem('kolff-completed');
-  if (saved) completedTasks = new Set(JSON.parse(saved));
-} catch(e){}
+// Reset old data once, then persist user's own selections
+const DASHBOARD_VERSION = 'v2-clean';
+if (localStorage.getItem('kolff-version') !== DASHBOARD_VERSION) {
+  localStorage.removeItem('kolff-completed');
+  localStorage.setItem('kolff-version', DASHBOARD_VERSION);
+} else {
+  try {
+    const saved = localStorage.getItem('kolff-completed');
+    if (saved) completedTasks = new Set(JSON.parse(saved));
+  } catch(e){}
+}
 
 function saveState() {
   localStorage.setItem('kolff-completed', JSON.stringify([...completedTasks]));
@@ -2192,15 +2314,24 @@ function renderVisual() {
   `).join('');
 }
 
-// ═══ TAB DROPDOWN (Mobile) ═══
-function toggleTabDropdown() {
-  const btn = document.getElementById('tabDropdownBtn');
-  if (btn) {
-    btn.classList.toggle('active');
-  }
+// ═══ HAMBURGER NAV ═══
+function toggleNavMenu() {
+  const btn = document.getElementById('hamburgerBtn');
+  const overlay = document.getElementById('navOverlay');
+  const menu = document.getElementById('navMenu');
+  const isOpen = menu.classList.contains('open');
+  btn.classList.toggle('open');
+  overlay.classList.toggle('open');
+  menu.classList.toggle('open');
+  btn.textContent = isOpen ? '☰' : '✕';
 }
 
-// Close dropdown when clicking outside
+// ═══ TAB DROPDOWN (Mobile header) ═══
+function toggleTabDropdown() {
+  const btn = document.getElementById('tabDropdownBtn');
+  if (btn) btn.classList.toggle('active');
+}
+
 document.addEventListener('click', (e) => {
   const wrapper = document.getElementById('tabDropdownWrapper');
   if (wrapper && !wrapper.contains(e.target)) {
@@ -2220,7 +2351,7 @@ renderVisual();
 renderQuickFilters(); // PHASE 1
 // PHASE 2 and 3 will render on tab switch via switchTab()
 
-// Attach tab click handlers - inline to avoid function definition issues
+// Attach tab click handlers for hamburger menu
 document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -2236,7 +2367,15 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     else if (text.includes('portfolio')) tabName = 'portafolio';
     else if (text.includes('info')) tabName = 'info';
     else if (text.includes('visual')) tabName = 'visual';
-    if (tabName) switchTab(tabName, btn);
+    if (tabName) {
+      switchTab(tabName, btn);
+      // Close hamburger menu after selection
+      const menu = document.getElementById('navMenu');
+      if (menu && menu.classList.contains('open')) toggleNavMenu();
+      // Update mobile dropdown label
+      const label = document.getElementById('currentTabLabel');
+      if (label) label.textContent = btn.textContent.trim();
+    }
   });
 });
 
