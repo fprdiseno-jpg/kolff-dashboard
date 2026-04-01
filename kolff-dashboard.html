@@ -1022,12 +1022,31 @@
     box-shadow: 0 8px 24px rgba(245, 168, 0, 0.4);
   }
 
+  .login-error {
+    color: var(--red);
+    font-size: 13px;
+    margin-top: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    min-height: 18px;
+  }
+
+  .login-error.show {
+    opacity: 1;
+  }
+
   #loginScreen {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
   }
 
   #loginScreen.hidden {
@@ -2279,12 +2298,19 @@ window.loginAttempts = 0;
 window.lockoutTime = null;
 
 function checkPassword() {
+  console.log('checkPassword called');
   const input = document.getElementById('passwordInput').value.trim();
   const errorMsg = document.getElementById('loginError');
   const loginBtn = document.querySelector('.login-btn');
   const passwordInput = document.getElementById('passwordInput');
 
-  if (!input.length) return;
+  console.log('Input value:', input);
+  console.log('Expected:', CORRECT_PASSWORD);
+
+  if (!input.length) {
+    console.log('Empty input');
+    return;
+  }
 
   // Check if locked out due to failed attempts
   if (window.loginAttempts >= 3) {
@@ -2312,12 +2338,14 @@ function checkPassword() {
 
   setTimeout(() => {
     if (input === CORRECT_PASSWORD) {
+      console.log('Password correct!');
       sessionStorage.setItem('kolffAuth', 'authenticated-session');
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('logoutBtn').style.display = 'block';
       window.loginAttempts = 0;
       window.lockoutTime = null;
     } else {
+      console.log('Password incorrect');
       window.loginAttempts++;
       errorMsg.textContent = window.loginAttempts >= 3
         ? 'Demasiados intentos. Intenta más tarde.'
