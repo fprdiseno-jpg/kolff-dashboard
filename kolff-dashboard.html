@@ -1264,18 +1264,6 @@
 </head>
 <body>
 
-<!-- ═══ LOGIN SCREEN ═══ -->
-<div id="loginScreen">
-  <div class="login-modal">
-    <div class="logo">KOLFF</div>
-    <h2>Dashboard Privado</h2>
-    <p>Ingresa la contraseña para continuar</p>
-    <input type="password" id="passwordInput" class="login-input" placeholder="Ingresa la contraseña" autocomplete="off" maxlength="20">
-    <button class="login-btn" onclick="checkPassword()">Acceder</button>
-    <div class="login-error" id="loginError">Contraseña incorrecta</div>
-  </div>
-</div>
-
 <!-- ═══ HEADER ═══ -->
 <div class="header">
   <div class="logo">KOLFF</div>
@@ -1301,7 +1289,6 @@
     </div>
   </div>
 
-  <button id="logoutBtn" class="logout-btn" onclick="logout()" aria-label="Cerrar sesión" style="display:none">Cerrar sesión</button>
 </div>
 
 <!-- ═══ MAIN ═══ -->
@@ -2291,63 +2278,10 @@ function renderVisual() {
   `).join('');
 }
 
-// ═══ SIMPLE AUTHENTICATION ═══
-function checkPassword() {
-  try {
-    const pwd = document.getElementById('passwordInput').value.trim();
-    const btn = document.querySelector('.login-btn');
-    const msg = document.getElementById('loginError');
-
-    if (pwd === 'kolff2026') {
-      localStorage.setItem('auth', '1');
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('logoutBtn').style.display = 'block';
-    } else {
-      msg.textContent = 'Contraseña incorrecta';
-      msg.style.display = 'block';
-      document.getElementById('passwordInput').value = '';
-    }
-  } catch(e) {
-    console.error('Auth error:', e);
-  }
-}
-
-function logout() {
-  localStorage.removeItem('auth');
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('logoutBtn').style.display = 'none';
-  document.getElementById('passwordInput').value = '';
-}
-
+// ═══ UTILITIES ═══
 function toggleTabDropdown() {
   const btn = document.getElementById('tabDropdownBtn');
   if (btn) btn.classList.toggle('active');
-}
-
-// Authentication initialization
-try {
-  const pwInput = document.getElementById('passwordInput');
-  const loginScreen = document.getElementById('loginScreen');
-  const logoutBtn = document.getElementById('logoutBtn');
-
-  // Enter key listener
-  if (pwInput) {
-    pwInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') checkPassword();
-    });
-  }
-
-  // Check if already logged in
-  if (localStorage.getItem('auth') === '1') {
-    if (loginScreen) loginScreen.style.display = 'none';
-    if (logoutBtn) logoutBtn.style.display = 'block';
-  } else {
-    if (loginScreen) loginScreen.style.display = 'flex';
-    if (logoutBtn) logoutBtn.style.display = 'none';
-    if (pwInput) pwInput.focus();
-  }
-} catch(e) {
-  console.error('Init error:', e);
 }
 
 // ═══ INIT ═══
