@@ -835,23 +835,109 @@
   }
 
   .gallery-item {
-    aspect-ratio: 1;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-base);
-    font-size: 48px;
     box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
   }
 
   .gallery-item:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--yellow);
+  }
+
+  .gallery-preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gallery-info {
+    padding: 12px 14px;
+  }
+
+  .gallery-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gallery-size {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* ─── HANDOFF BOARD (Entregas) ─── */
+  .handoff-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 14px 0;
+  }
+
+  .handoff-column {
+    background: var(--bg-secondary);
+    border-radius: 14px;
+    padding: 16px;
+    min-height: 120px;
+  }
+
+  .handoff-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .handoff-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--transition-base);
+    border-left: 4px solid var(--yellow);
+  }
+
+  .handoff-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .handoff-item strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .handoff-date {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
   }
 
   /* ─── VISUAL TEMPLATES ─── */
@@ -1353,7 +1439,7 @@
   <!-- TAB 5: ENTREGAS -->
   <div class="tab-content" id="tab-entregas">
     <div class="section-title"><div class="bar"></div> Entregas y Handoff</div>
-    <div id="handoffBoard"></div>
+    <div class="handoff-board" id="handoffBoard"></div>
   </div>
 
   <!-- TAB 6: TIMELINE -->
