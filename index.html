@@ -2335,58 +2335,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ═══ ROBUST TAB CLICK HANDLERS ═══
-// Function to attach event listeners to buttons
-function attachTabListeners() {
-  // Handle bottom nav buttons
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Extract tab name from text content
-      const text = btn.textContent.toLowerCase();
-      let tabName = '';
-      if (text.includes('flujo')) tabName = 'flujo';
-      else if (text.includes('categoría')) tabName = 'categorias';
-      else if (text.includes('proyecto')) tabName = 'proyectos';
-      else if (text.includes('galería')) tabName = 'galeria';
-      else if (text.includes('entrega')) tabName = 'entregas';
-      else if (text.includes('timeline')) tabName = 'timeline';
-      else if (text.includes('dep')) tabName = 'dependencias';
-      else if (text.includes('portfolio')) tabName = 'portafolio';
-      else if (text.includes('info')) tabName = 'info';
-      else if (text.includes('visual')) tabName = 'visual';
-
-      if (tabName) switchTab(tabName, btn);
-    });
-  });
-
-  // Handle dropdown buttons
-  document.querySelectorAll('.tab-dropdown-menu button').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Extract tab name from onclick or text
-      const text = btn.textContent.toLowerCase();
-      let tabName = '';
-      if (text.includes('flujo')) tabName = 'flujo';
-      else if (text.includes('categoría')) tabName = 'categorias';
-      else if (text.includes('proyecto')) tabName = 'proyectos';
-      else if (text.includes('galería')) tabName = 'galeria';
-      else if (text.includes('entrega')) tabName = 'entregas';
-      else if (text.includes('timeline')) tabName = 'timeline';
-      else if (text.includes('dep')) tabName = 'dependencias';
-      else if (text.includes('portfolio')) tabName = 'portafolio';
-      else if (text.includes('info')) tabName = 'info';
-      else if (text.includes('visual')) tabName = 'visual';
-
-      if (tabName) {
-        switchTab(tabName, null);
-        // Close dropdown after selection
-        const dropdownBtn = document.getElementById('tabDropdownBtn');
-        if (dropdownBtn) dropdownBtn.classList.remove('active');
-      }
-    });
-  });
-}
 
 // ═══ INIT ═══
 
@@ -2398,8 +2346,48 @@ renderVisual();
 renderQuickFilters(); // PHASE 1
 // PHASE 2 and 3 will render on tab switch via switchTab()
 
-// Attach tab click handlers
-attachTabListeners();
+// Attach tab click handlers - inline to avoid function definition issues
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const text = btn.textContent.toLowerCase();
+    let tabName = '';
+    if (text.includes('flujo')) tabName = 'flujo';
+    else if (text.includes('categoría')) tabName = 'categorias';
+    else if (text.includes('proyecto')) tabName = 'proyectos';
+    else if (text.includes('galería')) tabName = 'galeria';
+    else if (text.includes('entrega')) tabName = 'entregas';
+    else if (text.includes('timeline')) tabName = 'timeline';
+    else if (text.includes('dep')) tabName = 'dependencias';
+    else if (text.includes('portfolio')) tabName = 'portafolio';
+    else if (text.includes('info')) tabName = 'info';
+    else if (text.includes('visual')) tabName = 'visual';
+    if (tabName) switchTab(tabName, btn);
+  });
+});
+
+document.querySelectorAll('.tab-dropdown-menu button').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const text = btn.textContent.toLowerCase();
+    let tabName = '';
+    if (text.includes('flujo')) tabName = 'flujo';
+    else if (text.includes('categoría')) tabName = 'categorias';
+    else if (text.includes('proyecto')) tabName = 'proyectos';
+    else if (text.includes('galería')) tabName = 'galeria';
+    else if (text.includes('entrega')) tabName = 'entregas';
+    else if (text.includes('timeline')) tabName = 'timeline';
+    else if (text.includes('dep')) tabName = 'dependencias';
+    else if (text.includes('portfolio')) tabName = 'portafolio';
+    else if (text.includes('info')) tabName = 'info';
+    else if (text.includes('visual')) tabName = 'visual';
+    if (tabName) {
+      switchTab(tabName, null);
+      const dropdownBtn = document.getElementById('tabDropdownBtn');
+      if (dropdownBtn) dropdownBtn.classList.remove('active');
+    }
+  });
+});
 
 </script>
 
