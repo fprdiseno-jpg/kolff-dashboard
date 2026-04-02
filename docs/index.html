@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOLFF — Dashboard Francisco Parra</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    /* Primary Colors */
+    --yellow: #FFB81C;
+    --yellow-light: #FFF8E1;
+    --yellow-gradient: linear-gradient(135deg, #FFB81C 0%, #FFC947 100%);
+    --black: #000000;
+
+    /* Enhanced Text Colors (WCAG AA Compliant) */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-tertiary: #64748B;
+    --text-muted: #94A3B8;
+
+    /* Enhanced Neutral & Background Colors */
+    --dark-gray: #2D2D2D;
+    --mid-gray: #555555;
+    --light-gray: #F4F4F4;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --border-light: #E2E8F0;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+
+    /* Status Colors (Accessible) */
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+    --green-gradient: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+    --red: #DC2626;
+    --red-light: #FEE2E2;
+    --blue: #0284C7;
+    --blue-light: #E0F2FE;
+    --blue-gradient: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%);
+    --orange: #EA580C;
+    --orange-light: #FED7AA;
+
+    /* Shadow Scale - Professional & Modern */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.20);
+    --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.24);
+
+    /* Z-Index Scale */
+    --z-base: 1;
+    --z-dropdown: 10;
+    --z-sticky: 20;
+    --z-modal: 50;
+    --z-tooltip: 100;
+
+    /* Animation Timings - Spring ease */
+    --transition-fast: 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-base: 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-slow: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --spring-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  body {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #F8FAFC 0%, #F4F4F4 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── FOCUS STATES (CRITICAL ACCESSIBILITY) ─── */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
+  }
+
+  /* ─── RESPECT MOTION PREFERENCES ─── */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: var(--black);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    box-shadow: var(--shadow-md);
+  }
+
+  .header .logo {
+    background: var(--yellow-gradient);
+    color: var(--black);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 12px rgba(245, 168, 0, 0.25);
+    transition: all var(--transition-base);
+  }
+
+  .header .logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245, 168, 0, 0.35);
+  }
+
+  .header .subtitle {
+    color: var(--yellow);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .header .user-info {
+    margin-left: auto;
+    color: #999;
+    font-size: 12px;
+  }
+
+  .header .user-info strong { color: var(--white); }
+
+  /* ─── TAB DROPDOWN ─── */
+  .tab-dropdown-wrapper {
+    position: relative;
+    margin-left: 12px;
+  }
+
+  .tab-dropdown-btn {
+    background: transparent;
+    border: 2px solid #666;
+    color: #999;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tab-dropdown-btn:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    background: rgba(245, 168, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(245, 168, 0, 0.15);
+  }
+
+  .tab-dropdown-btn::after {
+    content: '▼';
+    font-size: 10px;
+    transition: transform var(--transition-base);
+  }
+
+  .tab-dropdown-btn.active::after {
+    transform: rotate(180deg);
+  }
+
+  .tab-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    z-index: var(--z-dropdown);
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-base);
+    overflow: hidden;
+  }
+
+  .tab-dropdown-btn.active + .tab-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .tab-dropdown-menu button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    color: var(--text-primary);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all var(--transition-base);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab-dropdown-menu button:last-child {
+    border-bottom: none;
+  }
+
+  .tab-dropdown-menu button:hover {
+    background: var(--yellow-light);
+    color: var(--black);
+    padding-left: 20px;
+  }
+
+  .tab-dropdown-menu button .tab-icon {
+    font-size: 16px;
+  }
+
+  /* Hide header dropdown on desktop, show on mobile */
+  .tab-dropdown-wrapper {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .tab-dropdown-wrapper {
+      display: block;
+    }
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .main {
+    flex: 1;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .main {
+      padding: 16px 12px 110px;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main {
+      padding: 12px 8px 120px;
+    }
+  }
+
+  /* ─── TAB CONTENT ─── */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn var(--transition-base); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION TITLES ─── */
+  .section-title {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin: 24px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      margin: 16px 0 12px;
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      margin: 12px 0 10px;
+      font-size: 1rem;
+    }
+  }
+
+  .section-title .bar {
+    width: 4px;
+    height: 28px;
+    background: var(--yellow-gradient);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(245, 168, 0, 0.3);
+  }
+
+  /* ─── FLOW MAP ─── */
+  .flow-map {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 12px 0;
+    scrollbar-width: thin;
+  }
+
+  .flow-step {
+    min-width: 160px;
+    min-height: 140px;
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    position: relative;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    .flow-map { gap: 10px; padding: 10px 0; }
+    .flow-step { min-width: 140px; min-height: 120px; padding: 14px; }
+  }
+
+  @media (max-width: 480px) {
+    .flow-map { gap: 8px; padding: 8px 0; }
+    .flow-step { min-width: 120px; min-height: 105px; padding: 12px; font-size: 0.85rem; }
+    .flow-step .step-num { width: 26px; height: 26px; font-size: 12px; }
+    .flow-step .step-title { font-size: 11px; }
+    .flow-step .step-time { font-size: 9px; }
+  }
+
+  .flow-step:hover {
+    border-color: var(--yellow);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, rgba(245, 168, 0, 0.02) 0%, rgba(255, 184, 77, 0.02) 100%);
+  }
+
+  .flow-step.done {
+    border-color: var(--green);
+    background: linear-gradient(135deg, var(--green-light) 0%, rgba(220, 252, 231, 0.5) 100%);
+  }
+
+  .flow-step .step-num {
+    width: 32px; height: 32px;
+    background: var(--yellow-gradient);
+    color: var(--black);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 12px rgba(245, 168, 0, 0.25);
+  }
+
+  .flow-step.done .step-num {
+    background: var(--green-gradient);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+  }
+
+  .flow-step .step-title {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .flow-step .step-time { font-size: 11px; color: var(--mid-gray); }
+
+  .flow-arrow {
+    display: flex; align-items: center; flex-shrink: 0;
+    color: var(--yellow); font-size: 20px; font-weight: 700;
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-wrap { margin: 18px 0; }
+
+  @media (max-width: 480px) {
+    .progress-wrap { margin: 12px 0; }
+  }
+
+  .progress-bar-bg {
+    height: 10px;
+    background: var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--yellow-gradient);
+    border-radius: 6px;
+    transition: width .4s var(--spring-ease);
+    box-shadow: 0 2px 8px rgba(245, 168, 0, 0.3);
+  }
+
+  .progress-text {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--mid-gray);
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { display: flex; flex-direction: column; gap: 8px; }
+
+  .check-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .check-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--yellow);
+    transform: translateY(-2px);
+  }
+
+  .check-item.completed .check-header { opacity: 0.75; }
+  .check-item.completed .check-title { text-decoration: line-through; }
+
+  .check-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    min-height: 50px;
+  }
+
+  @media (max-width: 480px) {
+    .checklist { gap: 6px; }
+    .check-header { padding: 12px 14px; gap: 10px; }
+  }
+
+  .check-box {
+    width: 24px; height: 24px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all .2s;
+    font-size: 13px;
+    color: transparent;
+    background: var(--white);
+  }
+
+  .check-item.completed .check-box {
+    background: var(--green-gradient);
+    border-color: var(--green);
+    color: white;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+  }
+
+  .check-title {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    flex: 1;
+  }
+
+  .check-tags { display: flex; gap: 6px; flex-shrink: 0; }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .tag.urgente { background: var(--red-light); color: var(--red); }
+  .tag.alta { background: var(--orange-light); color: var(--orange); }
+  .tag.media { background: var(--blue-light); color: var(--blue); }
+  .tag.baja { background: var(--green-light); color: var(--green); }
+  .tag.seo { background: #E8EAF6; color: #283593; }
+  .tag.legal { background: var(--red-light); color: var(--red); }
+  .tag.marca { background: #F3E5F5; color: #6A1B9A; }
+  .tag.rrss { background: #E0F7FA; color: #00695C; }
+  .tag.web { background: #FFF8E1; color: #E65100; }
+  .tag.contenido { background: #E8F5E9; color: #2E7D32; }
+  .tag.analitica { background: #FCE4EC; color: #AD1457; }
+
+  /* ═══ PRIORITY COLOR CODING ═══ */
+  .priority-indicator {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .priority-urgente .priority-indicator { background: var(--red); }
+  .priority-alta .priority-indicator { background: var(--orange); }
+  .priority-media .priority-indicator { background: var(--blue); }
+  .priority-baja .priority-indicator { background: var(--green); }
+
+  .check-item.priority-urgente { border-left: 5px solid var(--red); }
+  .check-item.priority-alta { border-left: 5px solid var(--orange); }
+  .check-item.priority-media { border-left: 5px solid var(--blue); }
+  .check-item.priority-baja { border-left: 5px solid var(--green); }
+
+  /* ═══ ASSET LINKS ═══ */
+  .asset-links {
+    display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  }
+
+  .asset-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    min-height: 34px;
+    box-shadow: var(--shadow-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .asset-link.figma { background: #E8E8FF; color: #A259FF; }
+  .asset-link.drive { background: #E3F2FD; color: #1976D2; }
+  .asset-link.preview { background: #E8F5E9; color: #388E3C; }
+
+  .asset-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .asset-link::before { content: attr(data-icon); font-size: 12px; }
+
+  /* ═══ QUICK FILTERS (Pills) ═══ */
+  .quick-filters {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+
+  .filter-pill {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: var(--white);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-xs);
+  }
+
+  @media (max-width: 480px) {
+    .quick-filters { gap: 8px; margin: 10px 0; }
+    .filter-pill { padding: 8px 12px; font-size: 10px; min-height: 38px; }
+  }
+
+  .filter-pill:hover {
+    border-color: var(--yellow);
+    background: linear-gradient(135deg, rgba(245, 168, 0, 0.08) 0%, rgba(255, 184, 77, 0.04) 100%);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .filter-pill.active {
+    background: var(--yellow-gradient);
+    color: var(--black);
+    border-color: var(--yellow);
+    box-shadow: 0 4px 12px rgba(245, 168, 0, 0.3);
+  }
+
+  /* ═══ PROJECT VIEW ═══ */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin: 14px 0;
+  }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    .project-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 12px 0; }
+    .project-card { padding: 14px; min-height: 180px; }
+  }
+
+  @media (max-width: 480px) {
+    .project-grid { grid-template-columns: 1fr; gap: 10px; margin: 10px 0; }
+    .project-card { padding: 12px; min-height: auto; }
+  }
+
+  .project-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px);
+    border-color: var(--yellow);
+    background: linear-gradient(135deg, rgba(245, 168, 0, 0.02) 0%, var(--white) 100%);
+  }
+
+  .project-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px; padding-bottom: 14px; border-bottom: 2px solid var(--border);
+  }
+
+  .project-icon { font-size: 28px; }
+
+  .project-name { font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif; font-weight: 700; font-size: 15px; }
+
+  .project-category { font-size: 11px; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.3px; }
+
+  .project-stats {
+    display: flex; justify-content: space-between; font-size: 12px;
+    margin: 10px 0; padding: 8px 0; border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── CATEGORY CARDS ─── */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+  }
+
+  .cat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cat-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--yellow);
+  }
+
+  .cat-card-head {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .cat-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .cat-card-head h3 {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .cat-card-head .cat-count {
+    font-size: 12px;
+    color: var(--mid-gray);
+    font-weight: 600;
+  }
+
+  .cat-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s var(--spring-ease);
+  }
+
+  .cat-card.open .cat-body { max-height: 2000px; }
+
+  .cat-body-inner { padding: 18px; font-size: 13px; line-height: 1.8; }
+
+  .cat-body-inner h4 {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--yellow);
+    margin: 14px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .cat-body-inner h4:first-child { margin-top: 0; }
+
+  .cat-body-inner ul { padding-left: 20px; margin: 8px 0; }
+
+  .cat-body-inner table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; }
+
+  .cat-body-inner table th {
+    background: var(--black);
+    color: var(--yellow);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  .cat-body-inner table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cat-body-inner table tr:hover td { background: var(--yellow-light); }
+
+  .info-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--light-gray);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 2px;
+  }
+
+  .info-badge.active { background: var(--green-light); color: var(--green); }
+  .info-badge.risk { background: var(--red-light); color: var(--red); }
+  .info-badge.missing { background: var(--orange-light); color: var(--orange); }
+
+  /* ─── INFO KOLFF ─── */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+  }
+
+  .info-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--yellow);
+    transform: translateY(-2px);
+  }
+
+  .info-card h3 {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .info-card h3 .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); box-shadow: 0 2px 4px rgba(245, 168, 0, 0.3); }
+
+  .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+
+  .info-row:last-child { border: none; }
+
+  .info-row .label { color: var(--mid-gray); font-weight: 600; }
+
+  .info-row .value { font-weight: 700; text-align: right; max-width: 60%; }
+
+  /* ─── GALLERY GRID ─── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 14px 0;
+  }
+
+  .gallery-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--yellow);
+  }
+
+  .gallery-preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gallery-info {
+    padding: 12px 14px;
+  }
+
+  .gallery-name {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gallery-size {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* ─── HANDOFF BOARD (Entregas) ─── */
+  .handoff-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 14px 0;
+  }
+
+  .handoff-column {
+    background: var(--bg-secondary);
+    border-radius: 14px;
+    padding: 16px;
+    min-height: 120px;
+  }
+
+  .handoff-title {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .handoff-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--transition-base);
+    border-left: 4px solid var(--yellow);
+  }
+
+  .handoff-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .handoff-item strong {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .handoff-date {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+
+  /* ─── VISUAL TEMPLATES ─── */
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    margin: 14px 0;
+  }
+
+  .visual-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+  }
+
+  .visual-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--yellow);
+    transform: translateY(-3px);
+  }
+
+  .visual-preview {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    padding: 24px 16px;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+  }
+
+  .visual-card-body {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .visual-card-body h4 {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .visual-card-body p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .dims {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--black);
+    border: 3px solid var(--yellow);
+    color: var(--yellow);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger-btn:hover {
+    background: var(--yellow);
+    color: var(--black);
+    transform: scale(1.1);
+  }
+
+  .hamburger-btn.open {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms ease;
+  }
+
+  .nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    z-index: 180;
+    transform: translateY(100%);
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 12px 0 24px;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0);
+  }
+
+  .nav-menu-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    margin: 0 auto 12px;
+  }
+
+  .nav-menu-title {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 20px 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+
+  .nav-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all var(--transition-base);
+    text-align: left;
+    border-left: 4px solid transparent;
+  }
+
+  .nav-btn:hover {
+    background: var(--yellow-light);
+    border-left-color: var(--yellow);
+  }
+
+  .nav-btn.active {
+    color: var(--black);
+    background: var(--yellow-light);
+    border-left-color: var(--yellow);
+    font-weight: 700;
+  }
+
+  .nav-btn .nav-icon { font-size: 20px; }
+
+  /* ─── UTILITIES ─── */
+  .check-expand {
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--mid-gray);
+    transition: transform .2s;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .check-item.open .check-expand { transform: rotate(180deg); }
+
+  .check-detail {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all var(--transition-base);
+    overflow: hidden;
+  }
+
+  .check-item.open .check-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .check-detail-inner {
+    padding: 0 16px 16px 50px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--mid-gray);
+    border-top: 1px solid var(--border);
+  }
+
+  .check-detail-inner strong { color: var(--black); font-weight: 700; }
+
+  .check-detail-inner ul { padding-left: 20px; margin: 8px 0; }
+
+  .check-detail-inner .action-tip {
+    background: var(--yellow-light);
+    border-left: 4px solid var(--yellow);
+    padding: 10px 14px;
+    margin-top: 12px;
+    border-radius: 8px;
+  }
+
+  /* ─── PORTFOLIO GRID ─── */
+  .portfolio-stats {
+    display: flex;
+    gap: 24px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .portfolio-stat {
+    flex: 1;
+    min-width: 140px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .portfolio-stat-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--yellow);
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+  }
+
+  .portfolio-stat-label {
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin-top: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+  }
+
+  .portfolio-item {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .portfolio-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .portfolio-item.completed {
+    border-color: var(--green);
+    background: linear-gradient(135deg, var(--green-light) 0%, rgba(220, 252, 231, 0.5) 100%);
+  }
+
+  .portfolio-item-icon { font-size: 40px; margin-bottom: 10px; }
+
+  .portfolio-item-name { font-weight: 700; font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif; }
+
+  .portfolio-item-date { font-size: 11px; color: var(--mid-gray); margin-top: 6px; }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--yellow-gradient);
+    border-radius: 50%;
+    margin-top: 2px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(245, 168, 0, 0.3);
+  }
+
+  .timeline-content {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    flex: 1;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .timeline-version {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .timeline-date {
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin: 4px 0;
+  }
+
+  .timeline-status {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    background: var(--light-gray);
+    color: var(--mid-gray);
+  }
+
+  .timeline-status.released {
+    background: var(--green-light);
+    color: var(--green);
+  }
+
+  /* ─── RESPONSIVE ADJUSTMENTS ─── */
+  @media (max-width: 768px) {
+    .section-title { font-size: 1.1rem; margin: 18px 0 12px; }
+    .header { flex-wrap: wrap; gap: 12px; }
+    .header .user-info { margin-left: 0; order: 3; width: 100%; }
+    .project-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+    .cat-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  }
+
+  @media (max-width: 480px) {
+    body { font-size: 14px; }
+    .header { padding: 12px 14px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .header .logo { font-size: 18px; }
+    .header .user-info { margin-left: 0; margin-top: 8px; width: 100%; }
+    .main { padding: 12px 10px 140px; }
+    .section-title { font-size: 1rem; margin: 14px 0 10px; }
+    .project-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .portfolio-stats { gap: 10px; }
+    .portfolio-stat { padding: 14px; }
+    .portfolio-stat-num { font-size: 24px; }
+    input, button, label { font-size: 16px; }
+  }
+
+  /* ─── PROPUESTAS SECTION ─── */
+  .propuestas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .propuesta-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .propuesta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--yellow-gradient);
+  }
+
+  .propuesta-card:hover {
+    border-color: var(--yellow);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+  }
+
+  .propuesta-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .propuesta-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--yellow-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .propuesta-info h3 {
+    font-family: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .propuesta-subtitle {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .propuesta-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .propuesta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    margin-top: 8px;
+  }
+
+  .propuesta-link:hover {
+    gap: 12px;
+  }
+
+  .propuesta-link::after {
+    content: '→';
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="logo">KOLFF</div>
+  <div class="subtitle">energy.quality — Dashboard Operativo</div>
+  <div class="user-info"><strong>Francisco Parra</strong> · Diseñador Gráfico</div>
+
+  <!-- Tab Dropdown for Mobile/Tablet -->
+  <div class="tab-dropdown-wrapper" id="tabDropdownWrapper">
+    <button class="tab-dropdown-btn" id="tabDropdownBtn" onclick="toggleTabDropdown()">
+      <span id="currentTabLabel">💼 Propuestas</span>
+    </button>
+    <div class="tab-dropdown-menu" id="tabDropdownMenu">
+      <button><span class="tab-icon">💼</span> Propuestas</button>
+      <button><span class="tab-icon">📋</span> Flujo</button>
+      <button><span class="tab-icon">📂</span> Categorías</button>
+      <button><span class="tab-icon">📊</span> Proyectos</button>
+      <button><span class="tab-icon">🖼️</span> Galería</button>
+      <button><span class="tab-icon">📦</span> Entregas</button>
+      <button><span class="tab-icon">📈</span> Timeline</button>
+      <button><span class="tab-icon">🔗</span> Deps</button>
+      <button><span class="tab-icon">⭐</span> Portfolio</button>
+      <button><span class="tab-icon">🏢</span> Info</button>
+      <button><span class="tab-icon">🎨</span> Visual</button>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- TAB 0: PROPUESTAS -->
+  <div class="tab-content active" id="tab-propuestas">
+    <div class="section-title"><div class="bar"></div> Propuestas de Proyecto</div>
+    <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">Accede a las propuestas y documentación de proyecto. Explora la landing page, el sistema de diseño y los componentes profesionales.</p>
+
+    <div class="propuestas-grid">
+      <div class="propuesta-card" onclick="window.open('kolff-landing.html', '_blank')">
+        <div class="propuesta-header">
+          <div class="propuesta-icon">🌐</div>
+          <div class="propuesta-info">
+            <div class="propuesta-subtitle">Propuesta Principal</div>
+            <h3>Landing Page KOLFF</h3>
+          </div>
+        </div>
+        <div class="propuesta-description">
+          Página de presentación corporativa con estructura de productos, servicios y casos de éxito. Diseño profesional basado en la estrategia actual de kolff.cl
+        </div>
+        <a href="kolff-landing.html" target="_blank" class="propuesta-link">Ver Landing Page</a>
+      </div>
+
+      <div class="propuesta-card" onclick="window.open('COMPONENTS.html', '_blank')">
+        <div class="propuesta-header">
+          <div class="propuesta-icon">🎯</div>
+          <div class="propuesta-info">
+            <div class="propuesta-subtitle">Sistema de Diseño</div>
+            <h3>Design System Profesional</h3>
+          </div>
+        </div>
+        <div class="propuesta-description">
+          Biblioteca completa de componentes reutilizables: botones, cards, badges, inputs, alerts y paleta de colores KOLFF certificada.
+        </div>
+        <a href="COMPONENTS.html" target="_blank" class="propuesta-link">Ver Componentes</a>
+      </div>
+
+      <div class="propuesta-card" onclick="window.open('index.html', '_blank')">
+        <div class="propuesta-header">
+          <div class="propuesta-icon">📊</div>
+          <div class="propuesta-info">
+            <div class="propuesta-subtitle">Panel de Control</div>
+            <h3>Dashboard Operativo</h3>
+          </div>
+        </div>
+        <div class="propuesta-description">
+          Panel interactivo con gestión de flujo de trabajo, proyectos, galerías, entregas y timeline. Control centralizado del proyecto.
+        </div>
+        <a href="index.html" class="propuesta-link">Ver Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 1: FLUJO -->
+  <div class="tab-content" id="tab-flujo">
+    <div class="section-title"><div class="bar"></div> Filtros Rápidos</div>
+    <div class="quick-filters" id="quickFilters"></div>
+
+    <div class="section-title"><div class="bar"></div> Flujo de Trabajo Diario</div>
+    <div class="flow-map" id="flowMap">
+      <div class="flow-step" onclick="toggleFlowDone(this)" title="Click para marcar completado">
+        <div class="step-num">1</div>
+        <div class="step-title">Revisión Matutina</div>
+        <div class="step-time">07:30 – 08:00</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" onclick="toggleFlowDone(this)">
+        <div class="step-num">2</div>
+        <div class="step-title">Prioridades del Día</div>
+        <div class="step-time">08:00 – 08:30</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" onclick="toggleFlowDone(this)">
+        <div class="step-num">3</div>
+        <div class="step-title">Bloque Creativo</div>
+        <div class="step-time">08:30 – 12:00</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" onclick="toggleFlowDone(this)">
+        <div class="step-num">4</div>
+        <div class="step-title">Almuerzo</div>
+        <div class="step-time">12:00 – 13:00</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" onclick="toggleFlowDone(this)">
+        <div class="step-num">5</div>
+        <div class="step-title">Web + SEO</div>
+        <div class="step-time">13:00 – 16:00</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" onclick="toggleFlowDone(this)">
+        <div class="step-num">6</div>
+        <div class="step-title">Reuniones + Admin</div>
+        <div class="step-time">16:00 – 17:00</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" onclick="toggleFlowDone(this)">
+        <div class="step-num">7</div>
+        <div class="step-title">Cierre Diario</div>
+        <div class="step-time">17:00 – 17:30</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="dailyProgress" style="width: 0%"></div></div>
+      <div class="progress-text">
+        <span>Avance del Día</span>
+        <span id="progressPercent">0%</span>
+      </div>
+    </div>
+
+    <div class="section-title"><div class="bar"></div> Tareas Hoy</div>
+    <div class="checklist" id="checklist"></div>
+  </div>
+
+  <!-- TAB 2: CATEGORÍAS -->
+  <div class="tab-content" id="tab-categorias">
+    <div class="section-title"><div class="bar"></div> Categorías de Trabajo</div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+
+  <!-- TAB 3: PROYECTOS -->
+  <div class="tab-content" id="tab-proyectos">
+    <div class="section-title"><div class="bar"></div> Proyectos Activos</div>
+    <div class="project-grid" id="projectGrid"></div>
+  </div>
+
+  <!-- TAB 4: GALERÍA -->
+  <div class="tab-content" id="tab-galeria">
+    <div class="section-title"><div class="bar"></div> Galería de Assets</div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- TAB 5: ENTREGAS -->
+  <div class="tab-content" id="tab-entregas">
+    <div class="section-title"><div class="bar"></div> Entregas y Handoff</div>
+    <div class="handoff-board" id="handoffBoard"></div>
+  </div>
+
+  <!-- TAB 6: TIMELINE -->
+  <div class="tab-content" id="tab-timeline">
+    <div class="section-title"><div class="bar"></div> Timeline de Versiones</div>
+    <div class="timeline" id="assetTimeline"></div>
+  </div>
+
+  <!-- TAB 7: DEPENDENCIAS -->
+  <div class="tab-content" id="tab-dependencias">
+    <div class="section-title"><div class="bar"></div> Mapa de Dependencias</div>
+    <div id="dependencyMap" style="padding: 20px; background: var(--white); border-radius: 14px; border: 1px solid var(--border); font-family: monospace; line-height: 1.8;"></div>
+  </div>
+
+  <!-- TAB 8: PORTAFOLIO -->
+  <div class="tab-content" id="tab-portafolio">
+    <div class="section-title"><div class="bar"></div> Reporte de Completados</div>
+    <div class="portfolio-stats" id="portfolioSummary"></div>
+    <div class="section-title"><div class="bar"></div> Items Completados</div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
+
+  <!-- TAB 9: INFO -->
+  <div class="tab-content" id="tab-info">
+    <div class="section-title"><div class="bar"></div> Información KOLFF</div>
+    <div class="info-grid" id="infoGrid"></div>
+  </div>
+
+  <!-- TAB 10: VISUAL -->
+  <div class="tab-content" id="tab-visual">
+    <div class="section-title"><div class="bar"></div> Plantillas Visuales</div>
+    <div class="visual-grid" id="visualGrid"></div>
+  </div>
+
+</div>
+
+<!-- ═══ HAMBURGER NAV ═══ -->
+<button class="hamburger-btn" id="hamburgerBtn" onclick="toggleNavMenu()">☰</button>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNavMenu()"></div>
+<div class="nav-menu" id="navMenu">
+  <div class="nav-menu-handle"></div>
+  <div class="nav-menu-title">Navegación</div>
+  <button class="nav-btn active">
+    <span class="nav-icon">💼</span> Propuestas
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">📋</span> Flujo
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">📂</span> Categorías
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">📊</span> Proyectos
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">🖼️</span> Galería
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">📦</span> Entregas
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">📈</span> Timeline
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">🔗</span> Dependencias
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">⭐</span> Portfolio
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">🏢</span> Info
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">🎨</span> Visual
+  </button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  DATA — PHASE 1, 2, 3 ENHANCEMENTS
+// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════
+//  DATA — MAIN DEFINITIONS
+// ═══════════════════════════════════════════════════════════════════
+
+// [DATA] PHASE 1: Asset Links — Francisco agregará URLs conforme avance
+const ASSET_LINKS = {
+  'project-branding': {
+    figma: 'https://figma.com/file/branding-kolff',
+    drive: 'https://drive.google.com/folder/branding',
+    preview: 'https://preview.kolff/branding'
+  },
+  'project-packaging': {
+    figma: 'https://figma.com/file/packaging-kolff',
+    drive: 'https://drive.google.com/folder/packaging',
+    preview: 'https://preview.kolff/packaging'
+  },
+  'project-marketing': {
+    figma: 'https://figma.com/file/marketing-kolff',
+    drive: 'https://drive.google.com/folder/marketing',
+    ai: 'https://adobe.io/files/marketing'
+  }
+};
+
+// [DATA] PHASE 2: Projects — Francisco agregará proyectos
+const PROJECTS = [
+  {
+    id: 'project-branding',
+    name: 'Sistema de Marca KOLFF',
+    category: 'Branding',
+    icon: '🎨',
+    assets: 8,
+    status: 'en-progreso',
+    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
+    client: 'KOLFF Solutions',
+    startDate: '2026-01-15',
+    endDate: '2026-03-10'
+  },
+  {
+    id: 'project-packaging',
+    name: 'Diseño de Packaging',
+    category: 'Packaging',
+    icon: '📦',
+    assets: 6,
+    status: 'en-progreso',
+    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
+    client: 'KOLFF Solutions',
+    startDate: '2026-02-01',
+    endDate: '2026-04-15'
+  },
+  {
+    id: 'project-marketing',
+    name: 'Materiales de Marketing',
+    category: 'Marketing Digital',
+    icon: '📱',
+    assets: 12,
+    status: 'en-progreso',
+    description: 'Templates para redes sociales, banners web y contenido digital',
+    client: 'KOLFF Solutions',
+    startDate: '2026-02-15',
+    endDate: '2026-04-30'
+  },
+  {
+    id: 'project-uiux',
+    name: 'Rediseño UI/UX Web',
+    category: 'UI/UX',
+    icon: '💻',
+    assets: 15,
+    status: 'en-progreso',
+    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
+    client: 'KOLFF Solutions',
+    startDate: '2026-03-01',
+    endDate: '2026-05-30'
+  }
+];
+
+// [DATA] PHASE 2: Asset Gallery — Francisco agregará assets
+const ASSETS = [
+  { id: 'asset-logo-1', name: 'Logo Principal Color', type: 'vector', size: '2.3 MB', preview: '🎨', lastModified: '2026-03-10' },
+  { id: 'asset-logo-2', name: 'Logo Isotipo', type: 'vector', size: '1.8 MB', preview: '🔷', lastModified: '2026-03-10' },
+  { id: 'asset-palette', name: 'Paleta de Colores', type: 'design', size: '4.5 MB', preview: '🌈', lastModified: '2026-03-05' },
+  { id: 'asset-typography', name: 'Guía Tipográfica', type: 'document', size: '6.2 MB', preview: '📄', lastModified: '2026-03-08' },
+  { id: 'asset-brand-guide', name: 'Brand Guide PDF', type: 'document', size: '12.8 MB', preview: '📖', lastModified: '2026-03-10' },
+  { id: 'asset-box-design', name: 'Diseño Caja Producto', type: 'design', size: '8.5 MB', preview: '📦', lastModified: '2026-03-25' },
+  { id: 'asset-label-design', name: 'Etiqueta Frontal', type: 'design', size: '3.2 MB', preview: '🏷️', lastModified: '2026-03-28' },
+  { id: 'asset-social-ig', name: 'Template Instagram', type: 'design', size: '7.1 MB', preview: '📸', lastModified: '2026-03-20' },
+  { id: 'asset-social-linkedin', name: 'Template LinkedIn', type: 'design', size: '5.9 MB', preview: '💼', lastModified: '2026-03-22' },
+  { id: 'asset-banner-web', name: 'Banner Web Hero', type: 'design', size: '9.3 MB', preview: '🌐', lastModified: '2026-03-26' },
+  { id: 'asset-mockups', name: 'Mockups Packaging', type: 'design', size: '18.7 MB', preview: '🎁', lastModified: '2026-03-27' },
+  { id: 'asset-prototype', name: 'Prototipo UI Interactivo', type: 'design', size: '14.2 MB', preview: '🖱️', lastModified: '2026-03-31' }
+];
+
+// [DATA] PHASE 2: Deliverables Board — Francisco agregará entregas
+const DELIVERABLES = [
+  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'pending', feedback: null },
+  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'pending', feedback: null },
+  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'pending', feedback: null },
+  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'pending', feedback: null },
+  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'pending', feedback: null },
+  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'pending', feedback: null },
+  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'pending', feedback: null }
+];
+
+// [DATA] PHASE 3: Asset Versions — Francisco agregará versiones
+const ASSET_VERSIONS = [
+  { assetId: 'asset-logo-1', version: 'v1.0', date: '2026-02-01', status: 'released', feedback: 'Versión inicial propuesta', changes: 'Logo principal con variaciones color y blanco' },
+  { assetId: 'asset-logo-1', version: 'v1.1', date: '2026-02-10', status: 'released', feedback: 'Ajustes menores', changes: 'Espaciado del isotipo mejorado' },
+  { assetId: 'asset-logo-1', version: 'v2.0', date: '2026-02-20', status: 'released', feedback: 'Versión final aprobada', changes: 'Rediseño completo post-feedback' },
+  { assetId: 'asset-palette', version: 'v1.0', date: '2026-02-15', status: 'released', feedback: 'Paleta inicial', changes: '5 colores principales + variaciones' },
+  { assetId: 'asset-palette', version: 'v1.1', date: '2026-03-05', status: 'released', feedback: 'Colores secundarios agregados', changes: '10 colores totales con codes Hex y RGB' },
+  { assetId: 'asset-brand-guide', version: 'v0.9', date: '2026-02-28', status: 'review', feedback: 'En validación interna', changes: 'Primero draft del documento completo' },
+  { assetId: 'asset-brand-guide', version: 'v1.0', date: '2026-03-10', status: 'released', feedback: 'Aprobado finalmente', changes: 'Documento final con todas las guías' }
+];
+
+// [DATA] PHASE 3: Dependencies — Francisco mapeará dependencias
+const DEPENDENCIES = [
+  { from: 'Sistema de Marca KOLFF', to: 'Materiales de Marketing', description: 'Logo y colores necesarios para templates' },
+  { from: 'Sistema de Marca KOLFF', to: 'Diseño de Packaging', description: 'Paleta y tipografía para boxes' },
+  { from: 'Rediseño UI/UX Web', to: 'Materiales de Marketing', description: 'Componentes de interfaz para banners' }
+];
+
+// [DATA] PHASE 3: Team Comments — Francisco agregará comentarios
+const COMMENTS = [
+  { itemId: 'project-branding', author: 'Francisco Parra', text: 'Logo finalizado y aprobado por cliente. Paleta lista para implementar.', timestamp: '2026-03-10T16:45:00' },
+  { itemId: 'del-5', author: 'Francisco Parra', text: 'Packaging en revisión. Esperando feedback de impresión técnica.', timestamp: '2026-03-20T10:30:00' },
+  { itemId: 'asset-prototype', author: 'Francisco Parra', text: 'Prototipo UI completado. Listo para presentación al cliente mañana.', timestamp: '2026-03-31T18:00:00' }
+];
+
+// [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
+const PORTFOLIO_ITEMS = [];
+
+const TASKS = [
+  // ── SEMANA 1 ──
+  { week:1, title:"Brief de marca con Natalia Astudillo", cat:"marca", priority:"urgente",
+    detail:`<strong>Objetivo:</strong> Alinear expectativas y obtener dirección estratégica.<ul>
+    <li>Pregunta clave: "¿Qué resultado concreto haría que digas 'excelente contratación' en 30 días?"</li>
+    <li>Entender qué duele más en diseño y comunicación</li>
+    <li>Definir proceso de aprobación de piezas</li>
+    <li>Confirmar acceso a GA4, Search Console, Instagram Insights</li>
+    <li>Pedir archivo vectorial del logo (AI/EPS)</li>
+    <li>Preguntar por fotos de productos en alta resolución</li></ul>
+    <div class="action-tip">📎 Entregable: Documento brief firmado con acuerdos y prioridades</div>`},
+  { week:1, title:"Inventario completo de assets digitales", cat:"marca", priority:"alta",
+    detail:`<strong>Recorrer y catalogar:</strong><ul>
+    <li>Logos disponibles (formatos, variaciones, resoluciones)</li>
+    <li>Banco de imágenes de productos</li>
+    <li>Materiales existentes (PPTs, PDFs, datasheets)</li>
+    <li>Accesos a cuentas digitales (Analytics, RRSS, WordPress)</li></ul>
+    <div class="action-tip">📎 Entregable: Listado organizado en Drive con estado de cada asset</div>`},
+  { week:1, title:"Escribir meta descriptions — homepage + 5 categorías", cat:"seo", priority:"urgente",
+    detail:`<strong>Problema:</strong> NINGUNA página tiene meta description. Google muestra texto aleatorio.<br><br>
+    <strong>Páginas prioritarias:</strong><ul>
+    <li>Homepage kolff.cl</li>
+    <li>UPS KOLFF (tienda)</li>
+    <li>Iluminación de Emergencia</li>
+    <li>Respaldo Eléctrico UPS</li>
+    <li>Baterías Industriales</li>
+    <li>Contacto</li></ul>
+    <strong>Formato:</strong> 150-160 caracteres, keyword principal + beneficio + CTA<br>
+    <strong>Herramienta:</strong> Yoast SEO o Rank Math (instalar primero)
+    <div class="action-tip">⏱ Tiempo estimado: 45 min · Impacto SEO: ALTO</div>`},
+  { week:1, title:"Corregir H1 en homepage", cat:"seo", priority:"urgente",
+    detail:`<strong>Problema:</strong> La homepage NO tiene H1. Todo el contenido está en H2.<br><br>
+    <strong>Cómo arreglar:</strong><ul>
+    <li>Abrir homepage en Elementor</li>
+    <li>Primer encabezado visible → cambiar de H2 a H1</li>
+    <li>Incluir keyword principal: "Respaldo energético industrial" o similar</li>
+    <li>Solo UN H1 por página</li></ul>
+    <div class="action-tip">⏱ Tiempo: 5 minutos · Impacto: ALTO — Google necesita H1 para entender la página</div>`},
+  { week:1, title:"Agregar Blog/Noticias al menú principal", cat:"web", priority:"alta",
+    detail:`<strong>Problema:</strong> Existe kolff.cl/noticias/ pero NO está visible en el menú. Inactivo desde ~2020.<br><br>
+    <strong>Ruta WordPress:</strong> Apariencia → Menús → Agregar "Noticias" al menú principal<br>
+    <strong>Posición:</strong> Entre "Empresa" y "Contacto"
+    <div class="action-tip">⏱ Tiempo: 5 minutos · Paso fundamental para futura estrategia de contenido</div>`},
+  { week:1, title:"Observación silenciosa — Día 1", cat:"marca", priority:"alta",
+    detail:`<strong>Observar sin preguntar:</strong><ul>
+    <li>Material impreso visible (afiches, banners, señalética) — ¿hay inconsistencias de color/logo?</li>
+    <li>Pantallas del equipo — ¿Usan Canva? ¿PPT como herramienta de diseño?</li>
+    <li>Canales de comunicación internos (WhatsApp, email, Teams)</li>
+    <li>Material que usa ventas — una presentación activa = diagnóstico honesto</li>
+    <li>Dinámica marketing-ventas — ¿Se hablan? ¿Hay tensión?</li></ul>
+    <div class="action-tip">📝 Anotar en privado: 3 hallazgos · 3 confirmaciones · 1 sorpresa · 1 quick win</div>`},
+  { week:1, title:"Reunión con equipo comercial (días 2-3)", cat:"contenido", priority:"media",
+    detail:`<strong>Preguntas clave:</strong><ul>
+    <li>¿Qué materiales usan cuando visitan un cliente potencial?</li>
+    <li>¿Hay algo que los clientes piden y que hoy no tienen?</li>
+    <li>¿Alguna vez perdieron una licitación donde la presentación visual pudo haber influido?</li></ul>
+    <div class="action-tip">💡 Esta info define prioridades reales: si ventas necesita datasheets, eso va primero</div>`},
+
+  // ── SEMANA 2 ──
+  { week:2, title:"Crear página Política de Privacidad on-domain", cat:"legal", priority:"urgente",
+    detail:`<strong>RIESGO LEGAL REAL:</strong> La política actual posiblemente apunta a Google Drive externo.<br><br>
+    <strong>Problema legal:</strong><ul>
+    <li>Ley 19.628 Chile: política debe estar en el sitio web del responsable</li>
+    <li>GDPR (España): multas hasta 4% facturación o €20M</li>
+    <li>En Google Drive: Google controla disponibilidad, link puede romperse, no es parte de kolff.cl</li></ul>
+    <strong>Solución:</strong><ul>
+    <li>WordPress → Páginas → Nueva página → slug: /politica-de-privacidad</li>
+    <li>Copiar y adaptar contenido existente</li>
+    <li>Actualizar link en footer del sitio</li></ul>
+    <div class="action-tip">⏱ Tiempo: 30 minutos · Impacto: CRÍTICO — elimina riesgo legal real</div>`},
+  { week:2, title:"Instalar banner Cookie Consent (CookieYes)", cat:"legal", priority:"urgente",
+    detail:`<strong>Problema:</strong> kolff.cl NO tiene banner de cookie consent. Viola Ley 19.628 + GDPR.<br><br>
+    <strong>Implementación:</strong><ul>
+    <li>WordPress → Plugins → Agregar nuevo → "CookieYes" (gratis)</li>
+    <li>Configurar categorías de cookies: Necesarias / Analíticas / Marketing</li>
+    <li>Conectar con Google Tag Manager para disparo condicional</li>
+    <li>Personalizar diseño con colores KOLFF (#FFB81C + #000000)</li></ul>
+    <div class="action-tip">⏱ Tiempo: 20 minutos · Requisito legal obligatorio</div>`},
+  { week:2, title:"Verificar GA4 en Google Tag Manager", cat:"analitica", priority:"urgente",
+    detail:`<strong>Verificar en día 1:</strong><ul>
+    <li>¿GA4 está correctamente instalado?</li>
+    <li>¿El tag se dispara en todas las páginas?</li>
+    <li>¿Los eventos estándar funcionan (pageview, scroll, outbound_click)?</li>
+    <li>¿Existe cuenta de GTM asociada a kolff.cl?</li></ul>
+    <strong>Si NO hay GA4:</strong> Crear propiedad GA4 → instalar vía GTM → configurar conversiones básicas
+    <div class="action-tip">📊 Sin analytics no hay medición. Sin medición no hay prueba de impacto.</div>`},
+  { week:2, title:"Google Search Console + Sitemap XML", cat:"seo", priority:"alta",
+    detail:`<strong>Pasos:</strong><ul>
+    <li>Acceder a search.google.com/search-console</li>
+    <li>Verificar propiedad kolff.cl (DNS, HTML tag, o GTM)</li>
+    <li>Verificar que existe sitemap XML (kolff.cl/sitemap.xml o /sitemap_index.xml)</li>
+    <li>Si no existe: Yoast/Rank Math lo genera automáticamente</li>
+    <li>Enviar sitemap en Search Console</li>
+    <li>Revisar errores de indexación</li></ul>
+    <div class="action-tip">📎 Search Console es la fuente de verdad de cómo Google ve kolff.cl</div>`},
+  { week:2, title:"Instalar plugin SEO (Rank Math o Yoast)", cat:"seo", priority:"alta",
+    detail:`<strong>Recomendación:</strong> Rank Math (más funciones gratis) o Yoast SEO (más estable).<br><br>
+    <strong>Configuración inicial:</strong><ul>
+    <li>Wizard de configuración → tipo de sitio: empresa</li>
+    <li>Conectar Search Console</li>
+    <li>Configurar esquema Organization</li>
+    <li>Activar Open Graph automático</li>
+    <li>Revisar robots.txt</li></ul>
+    <div class="action-tip">⏱ Tiempo: 15 minutos de instalación + 30 min de configuración</div>`},
+
+  // ── SEMANA 3 ──
+  { week:3, title:"Alt text en 50 imágenes de productos y banners", cat:"seo", priority:"alta",
+    detail:`<strong>Problema:</strong> Casi 0% de imágenes tienen alt text descriptivo.<br><br>
+    <strong>Cómo hacerlo:</strong><ul>
+    <li>WordPress → Biblioteca de medios → Editar cada imagen</li>
+    <li>Formato: "[Producto] [modelo] — [descripción] | KOLFF"</li>
+    <li>Ejemplo: "UPS KOLFF BLACK 3kVA — Online Doble Conversión Tower | KOLFF"</li>
+    <li>Priorizar: imágenes de homepage, productos principales, banners</li></ul>
+    <strong>Impacto:</strong> Accesibilidad + SEO de imágenes + Google Images
+    <div class="action-tip">⏱ ~1 minuto por imagen × 50 = ~50 minutos. Distribuir en 2-3 sesiones.</div>`},
+  { week:3, title:"Implementar Open Graph en 10 páginas clave", cat:"seo", priority:"media",
+    detail:`<strong>Problema:</strong> Al compartir kolff.cl en LinkedIn/WhatsApp no muestra preview correcto.<br><br>
+    <strong>Páginas prioritarias:</strong> Homepage, las 5 categorías principales, contacto, SAT, blog, empresa<br>
+    <strong>Cómo:</strong> Yoast/Rank Math → pestaña "Social" en cada página → definir título OG, descripción OG, imagen OG (1200×630px)
+    <div class="action-tip">💡 La imagen OG es lo primero que ven en LinkedIn. Crear 10 imágenes con branding KOLFF.</div>`},
+  { week:3, title:"Brand Style Guide v1 — Paleta + Tipografía en Figma", cat:"marca", priority:"alta",
+    detail:`<strong>Componentes mínimos v1:</strong><ul>
+    <li>Logo: variaciones documentadas (positivo, negativo, monocromático, isotipo)</li>
+    <li>Paleta: 8 colores con HEX + RGB + Pantone + uso asignado</li>
+    <li>Tipografía: Montserrat + Open Sans con escala y pesos</li>
+    <li>Espaciado y área de respeto del logo</li>
+    <li>Usos incorrectos (DO/DON'T)</li></ul>
+    <strong>Herramienta:</strong> Figma con variables de color y estilos de texto
+    <div class="action-tip">📎 Este es EL entregable que más impresionará a Gerencia — KOLFF nunca tuvo uno en 40 años.</div>`},
+
+  // ── SEMANA 4 ──
+  { week:4, title:"Google My Business — actualizar perfil completo", cat:"seo", priority:"alta",
+    detail:`<strong>Estado actual:</strong> ~5 reseñas. Una empresa de 40 años con 5 reseñas es un problema de credibilidad.<br><br>
+    <strong>Actualizar:</strong><ul>
+    <li>Fotos: fachada, interiores, productos, equipo (mínimo 10 fotos)</li>
+    <li>Horarios correctos: L-J 07:30-17:00 / V 07:30-16:00</li>
+    <li>Descripción con keywords: respaldo energético, UPS industrial, iluminación emergencia</li>
+    <li>Categoría principal + categorías secundarias</li>
+    <li>Servicios listados individualmente</li></ul>
+    <div class="action-tip">📍 GMB es el primer resultado que ven los clientes que buscan "KOLFF" en Google.</div>`},
+  { week:4, title:"Solicitar 5+ reseñas Google a clientes actuales", cat:"analitica", priority:"media",
+    detail:`<strong>Estrategia:</strong><ul>
+    <li>Coordinar con equipo comercial — identificar 10 clientes satisfechos</li>
+    <li>Crear link directo de reseña GMB</li>
+    <li>Enviar por email personalizado (no masivo)</li>
+    <li>Timing: después de una entrega exitosa o servicio SAT</li></ul>
+    <strong>Meta:</strong> Pasar de ~5 a 10+ reseñas en el primer mes
+    <div class="action-tip">⭐ Cada reseña nueva es credibilidad que trabaja 24/7 para KOLFF.</div>`},
+  { week:4, title:"Brand Style Guide v1 PDF — entregar a Natalia", cat:"marca", priority:"alta",
+    detail:`<strong>Formato de entrega:</strong><ul>
+    <li>PDF exportado desde Figma — mínimo 20 páginas v1</li>
+    <li>Incluir: logo, paleta, tipografía, usos correctos/incorrectos</li>
+    <li>Sección de aplicaciones básicas (tarjeta, email, RRSS)</li>
+    <li>Presentar en reunión con Natalia — explicar cada decisión</li></ul>
+    <div class="action-tip">🎯 Este es tu primer gran entregable tangible. Marca el tono de tu trabajo.</div>`},
+  { week:4, title:"Global Colors y Fonts en Elementor", cat:"web", priority:"media",
+    detail:`<strong>Estandarizar el sitio web:</strong><ul>
+    <li>Elementor → Configuración → Global Colors → agregar paleta KOLFF completa</li>
+    <li>Elementor → Configuración → Global Fonts → Montserrat + Open Sans</li>
+    <li>Esto asegura consistencia en todas las páginas futuras</li></ul>
+    <div class="action-tip">⏱ Tiempo: 15 minutos · Impacto en consistencia: ALTO</div>`},
+];
+
+// ═══ CATEGORIES DATA ═══
+const CATEGORIES = [
+  { id:"seo", icon:"🔍", color:"#283593", bg:"#E8EAF6", title:"SEO", count:0,
+    content:`<h4>Estado Actual — Brechas Críticas</h4>
+    <table><tr><th>Elemento</th><th>Estado</th><th>Urgencia</th></tr>
+    <tr><td>Meta description homepage</td><td><span class="info-badge risk">AUSENTE</span></td><td>INMEDIATA</td></tr>
+    <tr><td>H1 homepage</td><td><span class="info-badge risk">AUSENTE — en H2</span></td><td>INMEDIATA</td></tr>
+    <tr><td>Alt text imágenes</td><td><span class="info-badge missing">~0%</span></td><td>Semana 1-3</td></tr>
+    <tr><td>Open Graph</td><td><span class="info-badge risk">No detectado</span></td><td>Semana 1-3</td></tr>
+    <tr><td>Schema: Product</td><td><span class="info-badge missing">Ausente en WooCommerce</span></td><td>Semana 9-10</td></tr>
+    <tr><td>Sitemap XML</td><td><span class="info-badge missing">No confirmado</span></td><td>Semana 2</td></tr>
+    <tr><td>Blog en menú</td><td><span class="info-badge risk">AUSENTE</span></td><td>DÍA 1</td></tr></table>
+    <h4>KPIs SEO</h4>
+    <ul><li>Meta descriptions: 0 → 10 págs (30d) → todas (90d)</li>
+    <li>Alt text: 0% → 50 imgs (30d) → 80% catálogo (90d)</li>
+    <li>PageSpeed mobile: medir base → +10 pts (90d)</li></ul>
+    <h4>Stack SEO Recomendado</h4>
+    <ul><li>Rank Math o Yoast SEO (gratis)</li>
+    <li>Schema Pro ($79/año)</li>
+    <li>Google Search Console (gratis)</li>
+    <li>Cloudflare CDN (gratis)</li></ul>`},
+
+  { id:"legal", icon:"⚖️", color:"#C62828", bg:"#FFEBEE", title:"Compliance Legal", count:0,
+    content:`<h4>RIESGO ACTIVO — Requiere acción inmediata</h4>
+    <table><tr><th>Problema</th><th>Ley</th><th>Urgencia</th></tr>
+    <tr><td>Política privacidad en Google Drive externo</td><td>Ley 19.628 + GDPR</td><td><span class="info-badge risk">INMEDIATA</span></td></tr>
+    <tr><td>Sin banner cookie consent</td><td>Ley 19.628 + GDPR</td><td><span class="info-badge risk">INMEDIATA</span></td></tr>
+    <tr><td>Sin política de cookies on-domain</td><td>Requisito legal activo</td><td><span class="info-badge risk">INMEDIATA</span></td></tr></table>
+    <h4>Por qué Google Drive es riesgo</h4>
+    <ul><li>Ley 19.628 exige política disponible permanentemente en sitio web del responsable</li>
+    <li>En Drive: Google controla disponibilidad</li>
+    <li>Link puede romperse sin aviso</li>
+    <li>No es parte del dominio kolff.cl</li>
+    <li>GDPR: multas hasta 4% facturación anual o €20M</li></ul>
+    <h4>Solución</h4>
+    <ul><li>Crear /politica-de-privacidad en WordPress (30 min)</li>
+    <li>Instalar CookieYes para cookie consent (20 min)</li>
+    <li>Conectar con GTM para disparo condicional</li></ul>`},
+
+  { id:"marca", icon:"🎨", color:"#6A1B9A", bg:"#F3E5F5", title:"Marca e Identidad", count:0,
+    content:`<h4>Estado Actual</h4>
+    <table><tr><th>Elemento</th><th>Estado</th><th>Problema</th></tr>
+    <tr><td>Logo</td><td><span class="info-badge missing">Sin versiones</span></td><td>Solo positivo activo</td></tr>
+    <tr><td>Paleta</td><td><span class="info-badge missing">Incompleta</span></td><td>Solo amarillo + negro</td></tr>
+    <tr><td>Tipografía</td><td>Montserrat detectada</td><td>Sin escala formal</td></tr>
+    <tr><td>Fotografía</td><td><span class="info-badge risk">Sin guía</span></td><td>Inconsistente</td></tr>
+    <tr><td>Plantillas RRSS</td><td><span class="info-badge risk">NO EXISTEN</span></td><td>Cada pieza desde cero</td></tr>
+    <tr><td>Brand Style Guide</td><td><span class="info-badge risk">NO EXISTE</span></td><td>Nunca en 40 años</td></tr></table>
+    <h4>Colores Confirmados</h4>
+    <ul><li>KOLFF Yellow: #FFB81C — Logo, CTAs, acentos</li>
+    <li>KOLFF Black: #000000 — Fondos premium</li>
+    <li>KOLFF White: #FFFFFF — Docs técnicos</li></ul>
+    <h4>Tipografía Confirmada</h4>
+    <ul><li>Montserrat — títulos y CTA (pesos: 600, 700, 800)</li>
+    <li>Open Sans — cuerpo de texto (pesos: 300, 400)</li></ul>
+    <h4>Entregables Plan</h4>
+    <ul><li>Sem 3: Brand Style Guide v1 en Figma (paleta + tipo)</li>
+    <li>Sem 4: BSG v1 PDF entregado a Gerencia</li>
+    <li>Sem 6: 4 variaciones de logo (pos/neg/mono/iso)</li>
+    <li>Sem 12: BSG v2 con feedback</li></ul>`},
+
+  { id:"web", icon:"🌐", color:"#E65100", bg:"#FFF3E0", title:"Web y WordPress", count:0,
+    content:`<h4>Stack Tecnológico</h4>
+    <ul><li>WordPress 6.8 + Elementor + WooCommerce + PHP + DoubleClick</li>
+    <li>Desarrollador externo: GoMarketing</li></ul>
+    <h4>Estructura Menú Actual</h4>
+    <ul><li>Tienda → Lámpara EUROSAN / Iluminación Pro Estándar / Iluminación Pro Industrial y Minera / UPS KOLFF</li>
+    <li>Productos y Servicios → Iluminación Emergencia / Respaldo Eléctrico / UPS Industriales / Baterías / Poste Solar / SAT</li>
+    <li>Empresa · Noticias (NO visible en menú) · Contacto</li></ul>
+    <h4>Problemas UX / Conversión</h4>
+    <ul><li>Hero slider diluido (4-5 banners)</li>
+    <li>2 WhatsApp sin diferenciación (ventas/soporte)</li>
+    <li>Sin buscador/filtro por industria</li>
+    <li>Sin CTA flotante WhatsApp</li>
+    <li>Formulario solo al final del journey</li>
+    <li>Sin sección certificaciones como badges</li>
+    <li>Sin páginas por sector (Minería, Data Centers, Manufactura)</li></ul>
+    <h4>Plugins Recomendados</h4>
+    <table><tr><th>Categoría</th><th>Plugin</th><th>Costo</th></tr>
+    <tr><td>SEO</td><td>Rank Math / Yoast</td><td>Gratis</td></tr>
+    <tr><td>Caché</td><td>WP Rocket / LiteSpeed</td><td>$49-99/año</td></tr>
+    <tr><td>Imágenes</td><td>ShortPixel</td><td>Gratis/pago</td></tr>
+    <tr><td>WhatsApp</td><td>WP Social Chat / Chaty</td><td>Gratis</td></tr>
+    <tr><td>Cookies</td><td>CookieYes</td><td>Gratis</td></tr>
+    <tr><td>Schema</td><td>Schema Pro</td><td>$79/año</td></tr>
+    <tr><td>Seguridad</td><td>Wordfence</td><td>Gratis</td></tr>
+    <tr><td>CDN</td><td>Cloudflare</td><td>Gratis</td></tr>
+    <tr><td>Backup</td><td>UpdraftPlus</td><td>Gratis</td></tr></table>`},
+
+  { id:"rrss", icon:"📱", color:"#00695C", bg:"#E0F7FA", title:"Redes Sociales", count:0,
+    content:`<h4>Estado de Canales</h4>
+    <table><tr><th>Canal</th><th>Estado</th><th>Métricas</th></tr>
+    <tr><td>Instagram @kolff_chile</td><td><span class="info-badge active">Activo</span></td><td>1.998 seg / 432 posts</td></tr>
+    <tr><td>LinkedIn KOLFF LATAM</td><td><span class="info-badge active">Activo</span></td><td>4.119 seguidores</td></tr>
+    <tr><td>LinkedIn KOLFF SpA Chile</td><td><span class="info-badge active">Activo</span></td><td>1.039 seguidores</td></tr>
+    <tr><td>Facebook KOLFF Chile</td><td><span class="info-badge missing">Baja actividad</span></td><td>163 likes</td></tr>
+    <tr><td>YouTube</td><td><span class="info-badge risk">AUSENTE</span></td><td>—</td></tr>
+    <tr><td>Google My Business</td><td><span class="info-badge missing">Mínimo</span></td><td>~5 reseñas</td></tr></table>
+    <h4>LinkedIn 2025 — Algoritmo Nexus</h4>
+    <ul><li>Contenido IA: -30% alcance, -55% engagement</li>
+    <li>Factor #1: dwell time (tiempo consumiendo)</li>
+    <li>Comentarios >15 palabras = 2.5x peso</li>
+    <li>Mejor formato: Carruseles PDF (6.60% ER)</li>
+    <li>Óptimo: 9 slides, 25-50 palabras/slide, mobile-first</li>
+    <li>Horarios: Mar-Jue 8-10AM / 12-2PM / 3-5PM</li>
+    <li>Nunca 2 posts en 24 horas</li></ul>
+    <h4>Plan Semanal LinkedIn</h4>
+    <ul><li><strong>Lunes:</strong> Thought leadership — tendencias energéticas</li>
+    <li><strong>Miércoles:</strong> Storytelling — proyectos reales, equipo</li>
+    <li><strong>Viernes:</strong> Evidencia — casos estudio, métricas</li></ul>
+    <h4>KPIs RRSS</h4>
+    <ul><li>Instagram: 1.998 → +600 seg (90d) · 16 piezas/mes</li>
+    <li>LinkedIn: sin plan → 12 piezas/mes</li>
+    <li>GMB reseñas: ~5 → +20 (90d)</li></ul>`},
+
+  { id:"contenido", icon:"✏️", color:"#2E7D32", bg:"#E8F5E9", title:"Contenido y Datasheets", count:0,
+    content:`<h4>Lo que funciona con ingenieros</h4>
+    <ul><li>Restricciones y datos reales de implementación</li>
+    <li>Especificaciones técnicas descargables</li>
+    <li>Casos: problema → solución → resultado operacional</li>
+    <li>Videos técnicos ≤2 minutos</li>
+    <li>Resultados de pruebas estandarizadas</li></ul>
+    <h4>Lo que fracasa</h4>
+    <ul><li>Carruseles genéricos "10 tips" con fotos de stock</li>
+    <li>Copy promocional sin datos</li>
+    <li>Afirmaciones vagas sin evidencia técnica</li></ul>
+    <h4>Fichas Técnicas — Regla 3-30-300</h4>
+    <ul><li><strong>3 seg:</strong> Header visual + beneficio principal</li>
+    <li><strong>30 seg:</strong> Specs principales</li>
+    <li><strong>300 seg:</strong> Tabla completa + notas técnicas</li></ul>
+    <h4>Estructura Ficha KOLFF</h4>
+    <ol><li>Header: Logo + nombre + categoría + color de línea</li>
+    <li>Hero: Foto producto fondo blanco + foto en contexto</li>
+    <li>3 beneficios principales (arriba del fold)</li>
+    <li>Tabla specs con unidades, tolerancias, condiciones</li>
+    <li>Certificaciones como badges (ISO, CE, ABB)</li>
+    <li>CTA cotización en amarillo</li>
+    <li>Footer: contacto + revisión + fecha</li></ol>
+    <h4>Email Marketing B2B</h4>
+    <ul><li>CTR manufactura: 4.22% (más alto de cualquier industria)</li>
+    <li>ROI: $36-42 por cada $1</li>
+    <li>Regla 80/20: 80% educativo, 20% promocional</li></ul>`},
+
+  { id:"analitica", icon:"📊", color:"#AD1457", bg:"#FCE4EC", title:"Analítica y Métricas", count:0,
+    content:`<h4>Verificar Día 1</h4>
+    <ul><li>¿GA4 está correctamente instalado en GTM?</li>
+    <li>¿Search Console está configurado?</li>
+    <li>¿Hay banner cookie consent activo?</li>
+    <li>¿La URL de privacidad apunta a Google Drive?</li>
+    <li>¿Elementor está actualizado?</li>
+    <li>¿Hay backups automáticos?</li></ul>
+    <h4>KPIs 90 Días Completos</h4>
+    <table><tr><th>KPI</th><th>Actual</th><th>30 días</th><th>90 días</th></tr>
+    <tr><td>Páginas con meta</td><td>0</td><td>10</td><td>Todas</td></tr>
+    <tr><td>Alt text</td><td>~0%</td><td>50 imgs</td><td>80%</td></tr>
+    <tr><td>Compliance legal</td><td>No cumple</td><td>Cumple</td><td>Documentado</td></tr>
+    <tr><td>Seg. Instagram</td><td>1.998</td><td>+150</td><td>+600</td></tr>
+    <tr><td>Posts IG/mes</td><td>0</td><td>12</td><td>16</td></tr>
+    <tr><td>Posts LI/mes</td><td>0</td><td>8</td><td>12</td></tr>
+    <tr><td>Reseñas GMB</td><td>~5</td><td>+5</td><td>+20</td></tr>
+    <tr><td>PageSpeed</td><td>?</td><td>Medido</td><td>+10 pts</td></tr>
+    <tr><td>BSG</td><td>No existe</td><td>v1</td><td>v2</td></tr>
+    <tr><td>Datasheets</td><td>0</td><td>3</td><td>10+</td></tr></table>`},
+];
+
+// ═══ INFO KOLFF DATA ═══
+const INFO_CARDS = [
+  { title:"Datos Corporativos", rows:[
+    ["Razón social","KOLFF SpA"],
+    ["Presidente","Eduardo Cordero Homad"],
+    ["Gte. Marketing","Natalia Astudillo"],
+    ["Slogan","energy.quality"],
+    ["Sede","Av. Pdte. Frei Montalva 8551, Quilicura"],
+    ["Of. Antofagasta","Hugo Robles Robles 323, local 9"],
+    ["Fono","+56 2 2570 6300 / 6327"],
+    ["Email","info@kolff.cl"],
+    ["Web","kolff.cl"],
+    ["Empleados","~100 personas"],
+    ["Presencia","Chile, Perú, Argentina, Brasil, España"],
+  ]},
+  { title:"Líneas de Negocio", rows:[
+    ["UPS KOLFF BLUE","0,6–2 kVA · Line Interactive"],
+    ["UPS KOLFF BLACK","1–10 kVA · Online Doble Conversión"],
+    ["UPS BLACK NOVA RT","1–10 kVA · Rack/Tower Dual"],
+    ["UPS KOLFF ORANGE K","7,5–200 kVA · Trifásica paralelizable"],
+    ["ABB PowerValue 11T","1–10 kVA · doble conversión"],
+    ["ABB DPA Modulares","10 kW – 3.000 kW"],
+    ["ABB PowerWave 33","60–500 kW"],
+    ["ABB Megaflex","750+ kVA"],
+    ["Iluminación","Estándar + Industrial/Minera"],
+    ["Baterías","Fabricación alemana, hasta 20 años"],
+    ["Emergentes","Poste Solar, Data Center, Electromovilidad"],
+  ]},
+  { title:"Certificaciones y Partners", rows:[
+    ["ISO 9001:2015","✅ Vigente"],
+    ["ISO 14001:2004","✅ Vigente"],
+    ["OHSAS 18001:2007","✅ Vigente"],
+    ["ABB Exclusivo","✅ Chile y Perú"],
+    ["AHK Chile","✅ Miembro Cámara Chileno-Alemana"],
+    ["EXPONOR 2026","Jun 8-11 Antofagasta"],
+    ["Reconocimiento ABB","Dic 2025 — Caso éxito Watts Megaflex"],
+  ]},
+  { title:"Clientes Clase Mundial", rows:[
+    ["BHP Escondida","Postes fotovoltaicos vía ferroviaria"],
+    ["Quebrada Blanca (Teck)","+70 sistemas respaldo QB2"],
+    ["ALMA Observatory","Sistemas respaldo energético"],
+    ["Metro Santiago","Iluminación emergencia intermodales"],
+    ["Anglo American","UPS ORANGE extracción mineral"],
+    ["Coca-Cola","Respaldo >1,5 MW cadena productiva"],
+    ["Watts","ABB Megaflex 750 kVA — caso éxito"],
+    ["Nutreco Chile","Proveedor categoría 'Aprobado'"],
+  ]},
+  { title:"Competidores Globales", rows:[
+    ["Schneider Electric","5.4M seg LI · Verde #3DCD58 · ~20% market share"],
+    ["Eaton","Azul + naranja · Fuerte en datasheets"],
+    ["Vertiv","Datos como protagonista visual"],
+    ["ABB","Partner KOLFF · AI-ready MegaFlex"],
+  ]},
+  { title:"Competencias Nacionales", rows:[
+    ["Rhona","UPS y transformadores · Competidor directo en Chile"],
+    ["Legrand Chile","Infraestructura eléctrica · Presencia retail"],
+    ["Salicru","UPS importados · Foco en PYME y oficinas"],
+    ["Engipower","UPS y energía · Distribuidor multimarca"],
+    ["Cummins Chile","Generadores + UPS · Segmento industrial pesado"],
+    ["Emerson/Vertiv Chile","Data centers · Fuerte en infraestructura TI"],
+    ["Delta Chile","UPS y eficiencia energética · Crecimiento en LATAM"],
+    ["Diferencial KOLFF","Fabricante propio + ABB exclusivo + SAT 24/7 + Triple ISO"],
+  ]},
+  { title:"Ventaja Competitiva (NO comunicada)", rows:[
+    ["Fabricante propio","Marca KOLFF (no solo distribuidor)"],
+    ["ABB exclusivo","Único en Chile y Perú"],
+    ["40+ años","Trayectoria local"],
+    ["Clientes mineros","Clase mundial verificable"],
+    ["SAT 24/7","Diferenciador vs competencia"],
+    ["Triple ISO","Calidad + Ambiente + Seguridad"],
+  ]},
+  { title:"Contactos Clave", rows:[
+    ["Natalia Astudillo","Gte. Marketing (jefatura directa)"],
+    ["Gonzalo Cordero","Comercial · gonzalo.cordero@kolff.cl"],
+    ["Fono comercial","+56 9 8294 8085"],
+    ["GoMarketing","Desarrollador web externo"],
+  ]},
+];
+
+// ═══ VISUAL TEMPLATES DATA ═══
+const VISUAL_TEMPLATES = [
+  { name:"Feed Producto", dims:"1080×1080px", channel:"Instagram", desc:"Fondo negro, producto centrado, franja amarilla inferior",
+    bg:"#000000", fg:"#FFB81C", text:"KOLFF BLACK\n3 kVA" },
+  { name:"Feed Educativo", dims:"1080×1080px", channel:"Instagram", desc:"Fondo blanco, borde izquierdo amarillo 8px, dato técnico grande",
+    bg:"#FFFFFF", fg:"#000000", text:"¿Sabías que...?", border:"left" },
+  { name:"Carrusel Portada", dims:"1080×1080px", channel:"Instagram", desc:"Fondo amarillo pleno, tipografía blanca extrabold, hook",
+    bg:"#FFB81C", fg:"#FFFFFF", text:"5 ERRORES\nEN UPS" },
+  { name:"Carrusel Slide", dims:"1080×1080px", channel:"Instagram", desc:"Fondo gris #F4F4F4, ícono técnico + texto",
+    bg:"#F4F4F4", fg:"#000000", text:"⚡ Tip #1" },
+  { name:"Carrusel CTA Final", dims:"1080×1080px", channel:"Instagram", desc:"Fondo negro, WhatsApp + web + teléfono",
+    bg:"#000000", fg:"#FFB81C", text:"COTIZA\nAHORA" },
+  { name:"Reels Cover", dims:"1080×1920px", channel:"Instagram", desc:"Fondo oscuro, título amarillo extrabold",
+    bg:"#2D2D2D", fg:"#FFB81C", text:"UPS EN\nACCIÓN", tall:true },
+  { name:"Stories Técnica", dims:"1080×1920px", channel:"Instagram", desc:"Encuesta técnica, fondo negro",
+    bg:"#000000", fg:"#FFFFFF", text:"¿Line Interactive\no Doble Conversión?", tall:true },
+  { name:"LinkedIn Post", dims:"1200×627px", channel:"LinkedIn", desc:"Fondo blanco/#F4F4F4, borde izquierdo amarillo 6px",
+    bg:"#F4F4F4", fg:"#000000", text:"Caso de Éxito\nMinería", border:"left", wide:true },
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════════════════════════
+
+let currentWeek = 1;
+let currentFilter = 'all';
+let completedTasks = new Set();
+
+// Reset old data once, then persist user's own selections
+const DASHBOARD_VERSION = 'v2-clean';
+if (localStorage.getItem('kolff-version') !== DASHBOARD_VERSION) {
+  localStorage.removeItem('kolff-completed');
+  localStorage.setItem('kolff-version', DASHBOARD_VERSION);
+} else {
+  try {
+    const saved = localStorage.getItem('kolff-completed');
+    if (saved) completedTasks = new Set(JSON.parse(saved));
+  } catch(e){}
+}
+
+function saveState() {
+  localStorage.setItem('kolff-completed', JSON.stringify([...completedTasks]));
+}
+
+function renderChecklist() {
+  const el = document.getElementById('checklist');
+  const filtered = TASKS.filter(t => {
+    if (t.week !== currentWeek) return false;
+    if (currentFilter !== 'all' && t.cat !== currentFilter) return false;
+    return true;
+  });
+
+  if (!filtered.length) {
+    el.innerHTML = `<div style="text-align:center;padding:40px;color:var(--mid-gray)">No hay tareas para esta combinación de semana y filtro.</div>`;
+    updateProgress();
+    return;
+  }
+
+  el.innerHTML = filtered.map((t, i) => {
+    const idx = TASKS.indexOf(t);
+    const done = completedTasks.has(idx);
+    // PHASE 1: Priority color coding with indicator
+    const priorityClass = `priority-${t.priority}`;
+    return `<div class="check-item ${done ? 'completed' : ''} ${priorityClass}" data-idx="${idx}" data-cat="${t.cat}">
+      <div class="check-header">
+        <div class="check-box" onclick="event.stopPropagation();toggleTask(${idx})">✓</div>
+        <span class="priority-indicator"></span>
+        <div class="check-title">${t.title}</div>
+        <div class="check-tags">
+          <span class="tag ${t.cat}">${t.cat}</span>
+          <span class="tag ${t.priority}">${t.priority}</span>
+        </div>
+        <div class="check-expand" onclick="toggleDetail(this.parentElement.parentElement)">▼</div>
+      </div>
+      <div class="check-detail">
+        <div class="check-detail-inner">${t.detail}</div>
+        <!-- PHASE 1: Asset Links section -->
+        <div class="asset-links" style="display:none" id="assets-${idx}"></div>
+        <!-- PHASE 3: Comments section -->
+        <div class="comments-section" style="display:none" id="comments-${idx}"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  updateProgress();
+  renderQuickFilters(); // PHASE 1
+}
+
+function toggleTask(idx) {
+  if (completedTasks.has(idx)) completedTasks.delete(idx);
+  else completedTasks.add(idx);
+  saveState();
+  renderChecklist();
+}
+
+function toggleDetail(item) {
+  item.classList.toggle('open');
+}
+
+function toggleFlowDone(step) {
+  step.classList.toggle('done');
+}
+
+function updateProgress() {
+  const weekTasks = TASKS.filter(t => t.week === currentWeek);
+  const done = weekTasks.filter((t,i) => completedTasks.has(TASKS.indexOf(t))).length;
+  const total = weekTasks.length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('dailyProgress').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '%';
+}
+
+function selectWeek(w, btn) {
+  currentWeek = w;
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChecklist();
+}
+
+function filterTasks(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChecklist();
+}
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  // Trigger renders for new tabs
+  if (tab === 'proyectos') renderProjects();
+  if (tab === 'galeria') renderGallery();
+  if (tab === 'entregas') renderHandoffBoard();
+  if (tab === 'timeline') renderTimeline();
+  if (tab === 'dependencias') renderDependencies();
+  if (tab === 'portafolio') renderPortfolio();
+}
+
+// ═══ PHASE 1: QUICK FILTERS ═══
+function renderQuickFilters() {
+  const container = document.getElementById('quickFilters');
+  const categories = ['all', ...new Set(TASKS.map(t => t.cat))];
+
+  container.innerHTML = categories.map(cat => {
+    const label = cat === 'all' ? 'Todas' : cat.toUpperCase();
+    return `<button class="filter-pill ${currentFilter === cat ? 'active' : ''}"
+      onclick="currentFilter='${cat}'; renderChecklist(); this.parentElement.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active')); this.classList.add('active')">
+      ${label}
+    </button>`;
+  }).join('');
+}
+
+// ═══ PHASE 2: RENDER PROJECTS ═══
+function renderProjects() {
+  const container = document.getElementById('projectGrid');
+  if (!PROJECTS.length) {
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">No hay proyectos aún. Francisco agregará conforme avance.</div>';
+    return;
+  }
+
+  container.innerHTML = PROJECTS.map(p => `
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon">${p.icon || '📁'}</div>
+        <div>
+          <div class="project-name">${p.name}</div>
+          <div class="project-category">${p.category}</div>
+        </div>
+      </div>
+      <div class="project-stats">
+        <div class="project-stat"><strong>${p.assets || 0}</strong> assets</div>
+        <div class="project-stat"><strong>${TASKS.filter(t => t.title.includes(p.name)).length}</strong> tareas</div>
+      </div>
+      <div class="project-status ${(p.status || 'en-progreso').replace(/ /g, '-')}">
+        ${p.status || 'En Progreso'}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ PHASE 2: RENDER GALLERY ═══
+function renderGallery() {
+  const container = document.getElementById('galleryGrid');
+  if (!ASSETS.length) {
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">No hay assets. Francisco agregará archivos Figma, Drive, etc.</div>';
+    return;
+  }
+
+  container.innerHTML = ASSETS.map(a => `
+    <div class="gallery-item">
+      <div class="gallery-preview">${a.preview || '📄'}</div>
+      <div class="gallery-info">
+        <div class="gallery-name">${a.name}</div>
+        <div class="gallery-size">${a.size || 'N/A'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ PHASE 2: RENDER HANDOFF BOARD ═══
+function renderHandoffBoard() {
+  const container = document.getElementById('handoffBoard');
+  const statuses = ['pending', 'in-progress', 'review', 'completed'];
+  const statusLabels = { 'pending': 'Por Entregar', 'in-progress': 'En Progreso', 'review': 'En Revisión', 'completed': 'Completado' };
+
+  if (!DELIVERABLES.length) {
+    container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">
+      No hay entregas registradas. Francisco agregará conforme complete proyectos.
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = statuses.map(status => {
+    const items = DELIVERABLES.filter(d => (d.status || 'pending') === status);
+    return `
+      <div class="handoff-column">
+        <div class="handoff-title">${statusLabels[status]} (${items.length})</div>
+        ${items.map(d => `
+          <div class="handoff-item">
+            <strong>${d.title}</strong>
+            <div class="handoff-date">📅 ${d.date || 'TBD'}</div>
+            <div class="handoff-date">📄 ${d.file || 'Sin archivo'}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
+}
+
+// ═══ PHASE 3: RENDER ASSET TIMELINE ═══
+function renderTimeline() {
+  const container = document.getElementById('assetTimeline');
+  if (!ASSET_VERSIONS.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--mid-gray)">No hay versiones registradas. Francisco agregará conforme actualice assets.</div>';
+    return;
+  }
+
+  const sorted = [...ASSET_VERSIONS].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  container.innerHTML = sorted.map(v => `
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-version">${v.version}</div>
+        <div class="timeline-date">📅 ${v.date}</div>
+        <span class="timeline-status ${v.status || 'draft'}">${v.status || 'DRAFT'}</span>
+        <div style="margin-top:6px;font-size:11px">${v.feedback || 'Sin comentarios'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ PHASE 3: RENDER DEPENDENCIES ═══
+function renderDependencies() {
+  const container = document.getElementById('dependencyMap');
+  if (!DEPENDENCIES.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--mid-gray)">No hay dependencias mapeadas. Francisco las agregará conforme identifique relaciones.</div>';
+    return;
+  }
+
+  container.innerHTML = DEPENDENCIES.map(d => `
+    <span class="dependency-node">${d.from}</span>
+    <span class="dependency-arrow">→</span>
+    <span class="dependency-node">${d.to}</span>
+  `).join('') + '<br><br><em style="color:var(--mid-gray);font-size:11px">💡 Las dependencias te ayudan a entender qué debe completarse primero.</em>';
+}
+
+// ═══ PHASE 3: RENDER PORTFOLIO ═══
+function renderPortfolio() {
+  const container = document.getElementById('portfolioSummary');
+  const portfolioGrid = document.getElementById('portfolioGrid');
+  const completed = PORTFOLIO_ITEMS.length;
+  const totalTasks = TASKS.length;
+  const completionRate = totalTasks ? Math.round(completed / totalTasks * 100) : 0;
+
+  container.innerHTML = `
+    <div class="portfolio-stat">
+      <div class="portfolio-stat-num">${completed}</div>
+      <div class="portfolio-stat-label">Completados</div>
+    </div>
+    <div class="portfolio-stat">
+      <div class="portfolio-stat-num">${completionRate}%</div>
+      <div class="portfolio-stat-label">Avance</div>
+    </div>
+    <div class="portfolio-stat">
+      <div class="portfolio-stat-num">${totalTasks}</div>
+      <div class="portfolio-stat-label">Tareas Totales</div>
+    </div>
+  `;
+
+  if (!PORTFOLIO_ITEMS.length) {
+    portfolioGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mid-gray)">Aún sin completados. Conforme Francisco complete tareas, aparecerán aquí.</div>';
+    return;
+  }
+
+  portfolioGrid.innerHTML = PORTFOLIO_ITEMS.map(p => `
+    <div class="portfolio-item completed">
+      <div class="portfolio-item-icon">${p.icon || '✅'}</div>
+      <div class="portfolio-item-name">${p.name}</div>
+      <div class="portfolio-item-date">✅ ${p.dateCompleted}</div>
+    </div>
+  `).join('');
+}
+
+// ═══ RENDER CATEGORIES ═══
+function renderCategories() {
+  // count tasks per category
+  CATEGORIES.forEach(c => { c.count = TASKS.filter(t => t.cat === c.id).length; });
+
+  document.getElementById('catGrid').innerHTML = CATEGORIES.map(c => `
+    <div class="cat-card" onclick="this.classList.toggle('open')">
+      <div class="cat-card-head">
+        <div class="cat-icon" style="background:${c.bg};color:${c.color}">${c.icon}</div>
+        <div>
+          <h3>${c.title}</h3>
+          <div class="cat-count">${c.count} tareas · Click para expandir</div>
+        </div>
+      </div>
+      <div class="cat-body"><div class="cat-body-inner">${c.content}</div></div>
+    </div>
+  `).join('');
+}
+
+// ═══ RENDER INFO ═══
+function renderInfo() {
+  document.getElementById('infoGrid').innerHTML = INFO_CARDS.map(card => `
+    <div class="info-card">
+      <h3><span class="dot"></span> ${card.title}</h3>
+      ${card.rows.map(r => `<div class="info-row"><span class="label">${r[0]}</span><span class="value">${r[1]}</span></div>`).join('')}
+    </div>
+  `).join('');
+}
+
+// ═══ RENDER VISUAL ═══
+function renderVisual() {
+  document.getElementById('visualGrid').innerHTML = VISUAL_TEMPLATES.map(v => `
+    <div class="visual-card">
+      <div class="visual-preview" style="background:${v.bg};color:${v.fg};font-size:${v.tall ? '16' : '20'}px;
+        ${v.border === 'left' ? 'border-left:8px solid #FFB81C;' : ''}
+        ${v.tall ? 'height:200px;' : ''}">
+        ${v.text.replace(/\n/g,'<br>')}
+      </div>
+      <div class="visual-card-body">
+        <h4>${v.name}</h4>
+        <p>${v.desc}</p>
+        <div class="dims">${v.dims} · ${v.channel}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ HAMBURGER NAV ═══
+function toggleNavMenu() {
+  const btn = document.getElementById('hamburgerBtn');
+  const overlay = document.getElementById('navOverlay');
+  const menu = document.getElementById('navMenu');
+  const isOpen = menu.classList.contains('open');
+  btn.classList.toggle('open');
+  overlay.classList.toggle('open');
+  menu.classList.toggle('open');
+  btn.textContent = isOpen ? '☰' : '✕';
+}
+
+// ═══ TAB DROPDOWN (Mobile header) ═══
+function toggleTabDropdown() {
+  const btn = document.getElementById('tabDropdownBtn');
+  if (btn) btn.classList.toggle('active');
+}
+
+document.addEventListener('click', (e) => {
+  const wrapper = document.getElementById('tabDropdownWrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    const btn = document.getElementById('tabDropdownBtn');
+    if (btn) btn.classList.remove('active');
+  }
+});
+
+
+// ═══ INIT ═══
+
+renderChecklist();
+renderCategories();
+renderInfo();
+renderVisual();
+// PHASE 1, 2, 3: Initialize new features
+renderQuickFilters(); // PHASE 1
+// PHASE 2 and 3 will render on tab switch via switchTab()
+
+// Attach tab click handlers for hamburger menu
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const text = btn.textContent.toLowerCase();
+    let tabName = '';
+    if (text.includes('propuesta')) tabName = 'propuestas';
+    else if (text.includes('flujo')) tabName = 'flujo';
+    else if (text.includes('categoría')) tabName = 'categorias';
+    else if (text.includes('proyecto')) tabName = 'proyectos';
+    else if (text.includes('galería')) tabName = 'galeria';
+    else if (text.includes('entrega')) tabName = 'entregas';
+    else if (text.includes('timeline')) tabName = 'timeline';
+    else if (text.includes('dep')) tabName = 'dependencias';
+    else if (text.includes('portfolio')) tabName = 'portafolio';
+    else if (text.includes('info')) tabName = 'info';
+    else if (text.includes('visual')) tabName = 'visual';
+    if (tabName) {
+      switchTab(tabName, btn);
+      // Close hamburger menu after selection
+      const menu = document.getElementById('navMenu');
+      if (menu && menu.classList.contains('open')) toggleNavMenu();
+      // Update mobile dropdown label
+      const label = document.getElementById('currentTabLabel');
+      if (label) label.textContent = btn.textContent.trim();
+    }
+  });
+});
+
+document.querySelectorAll('.tab-dropdown-menu button').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const text = btn.textContent.toLowerCase();
+    let tabName = '';
+    if (text.includes('propuesta')) tabName = 'propuestas';
+    else if (text.includes('flujo')) tabName = 'flujo';
+    else if (text.includes('categoría')) tabName = 'categorias';
+    else if (text.includes('proyecto')) tabName = 'proyectos';
+    else if (text.includes('galería')) tabName = 'galeria';
+    else if (text.includes('entrega')) tabName = 'entregas';
+    else if (text.includes('timeline')) tabName = 'timeline';
+    else if (text.includes('dep')) tabName = 'dependencias';
+    else if (text.includes('portfolio')) tabName = 'portafolio';
+    else if (text.includes('info')) tabName = 'info';
+    else if (text.includes('visual')) tabName = 'visual';
+    if (tabName) {
+      switchTab(tabName, null);
+      const dropdownBtn = document.getElementById('tabDropdownBtn');
+      if (dropdownBtn) dropdownBtn.classList.remove('active');
+    }
+  });
+});
+
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+  GUÍA DE IMPLEMENTACIÓN — CÓMO AGREGAR DATOS
+  ═══════════════════════════════════════════════════════════════════ -->
+<div style="display:none">
+
+FASE 1: COLOR-CODE + ASSET LINKS + QUICK FILTERS
+════════════════════════════════════════════════════
+
+✅ YA IMPLEMENTADO:
+  ✓ Color-code left border por prioridad (urgente/alta/media/baja)
+  ✓ Quick filters pills en el header del tab Flujo
+  ✓ Estructura para agregar Asset Links
+  ✓ Indicadores de prioridad visuales
+
+PARA AGREGAR ASSET LINKS:
+  1. Editar const ASSET_LINKS (línea ~959)
+  2. Estructura:
+     const ASSET_LINKS = {
+       'task-key': {
+         figma: 'https://figma.com/file/...',
+         drive: 'https://drive.google.com/file/...',
+         preview: 'https://example.com/preview'
+       }
+     };
+
+
+FASE 2: PROJECT VIEW + ASSET GALLERY + HANDOFF BOARD
+════════════════════════════════════════════════════════
+
+PROJECTS (línea ~975):
+  Template:
+  {
+    id: 'proj-1',
+    name: 'Brand Style Guide v1',
+    category: 'Marca',
+    icon: '🎨',
+    assets: 5,
+    status: 'en-progreso',
+    description: 'Paleta + tipografía en Figma'
+  }
+
+ASSETS (línea ~985):
+  Template:
+  {
+    id: 'asset-1',
+    name: 'Logo Positivo',
+    type: 'vector',
+    size: '2.3 MB',
+    preview: '📎',
+    lastModified: '2026-03-31'
+  }
+
+DELIVERABLES (línea ~994):
+  Template:
+  {
+    id: 'del-1',
+    title: 'Brief de Marca',
+    date: '2026-03-05',
+    file: 'Brief_KOLFF_v1.pdf',
+    status: 'completed', // pending, in-progress, review, completed
+    feedback: 'Aprobado por Natalia'
+  }
+
+
+FASE 3: TIMELINE + DEPENDENCIES + COMMENTS + PORTFOLIO
+════════════════════════════════════════════════════════
+
+ASSET_VERSIONS (línea ~1006):
+  Template:
+  {
+    assetId: 'logo-1',
+    version: 'v1.0',
+    date: '2026-03-01',
+    status: 'released', // draft, review, released
+    feedback: 'Versión inicial aprobada',
+    changes: 'Logo principal en color KOLFF'
+  }
+
+DEPENDENCIES (línea ~1015):
+  Template:
+  {
+    from: 'Brand Style Guide',
+    to: 'RRSS Templates'
+  }
+
+COMMENTS (línea ~1022):
+  Template:
+  {
+    itemId: 'task-1',
+    author: 'Francisco',
+    text: 'Revisar con @Natalia antes de finalizar',
+    timestamp: '2026-03-31T14:30:00'
+  }
+
+PORTFOLIO_ITEMS (línea ~1030):
+  Template:
+  {
+    id: 'port-1',
+    name: 'Brand Style Guide',
+    icon: '📖',
+    dateCompleted: '2026-03-15',
+    category: 'marca'
+  }
+
+
+ARCHIVO Y LÍNEAS CLAVE
+═════════════════════════
+
+C:\Users\franc\Desktop\ruflo-main\Francisco Parra kolff\kolff-dashboard.html
+
+Estructuras de datos para llenar:
+  - ASSET_LINKS (línea ~959)
+  - PROJECTS (línea ~975)
+  - ASSETS (línea ~985)
+  - DELIVERABLES (línea ~994)
+  - ASSET_VERSIONS (línea ~1006)
+  - DEPENDENCIES (línea ~1015)
+  - COMMENTS (línea ~1022)
+  - PORTFOLIO_ITEMS (línea ~1030)
+
+Funciones ya implementadas (no editar):
+  - renderQuickFilters() — Renderiza filtros por categoría
+  - renderProjects() — Renderiza grid de proyectos
+  - renderGallery() — Renderiza galería de assets
+  - renderHandoffBoard() — Renderiza kanban de entregas
+  - renderTimeline() — Renderiza línea de tiempo de versiones
+  - renderDependencies() — Renderiza mapa de dependencias
+  - renderPortfolio() — Renderiza reporte de completados
+
+
+RECOMENDACIONES DE IMPLEMENTACIÓN
+═══════════════════════════════════
+
+1. EMPEZAR CON PHASE 1 (Esta semana):
+   ✓ Color-code de prioridades YA ACTIVO
+   ✓ Agregar Asset Links mientras trabajas en tareas
+   ✓ Quick filters funcionan automáticamente
+
+2. PASAR A PHASE 2 (Próximas 1-2 semanas):
+   ✓ Crear 2-3 proyectos principales (Brand, Web, RRSS)
+   ✓ Catalogar assets en Drive/Figma
+   ✓ Registrar entregas conforme las completes
+
+3. FASE 3 (Una vez que tengas momentum):
+   ✓ Timeline de versiones para documentar cambios
+   ✓ Mapa de dependencias para entender flujo
+   ✓ Agregar comentarios con @mentions
+   ✓ Portfolio para mostrar completados a stakeholders
+
+
+TESTING: Cómo verificar que funciona
+════════════════════════════════════════
+
+1. Abre el dashboard (ya está autenticado)
+2. En tab "Flujo" verás filtros rápidos (PHASE 1 ✅)
+3. Nota que cada tarea tiene color left-border por prioridad
+4. Haz clic en las nuevas pestañas inferiores:
+   📊 Proyectos → Template vacío hasta que agregues datos
+   🖼️ Galería → Idem
+   📦 Entregas → Idem
+   📈 Timeline → Idem
+   🔗 Deps → Idem
+   ⭐ Portfolio → Idem
+
+5. Una vez agregues datos a los arrays, aparecerán automáticamente sin recargar
+
+
+EJEMPLO: Agregar tu primer proyecto
+═════════════════════════════════════
+
+Edita const PROJECTS = [ ... ] y agrega:
+
+const PROJECTS = [
+  {
+    id: 'brand-guide',
+    name: 'Brand Style Guide v1',
+    category: 'Marca',
+    icon: '🎨',
+    assets: 3,
+    status: 'en-progreso',
+    description: 'Paleta de colores + tipografía en Figma'
+  },
+  {
+    id: 'rrss-templates',
+    name: 'Templates RRSS',
+    category: 'Contenido',
+    icon: '📱',
+    assets: 12,
+    status: 'completado',
+    description: '12 templates Instagram lista para publicar'
+  }
+];
+
+Luego haz clic en 📊 Proyectos y verás tus 2 proyectos.
+
+
+NOTAS IMPORTANTES
+═════════════════
+
+- NO edites TASKS (estructura original de trabajo)
+- NO modifiques funciones de renderizado (todo funciona ya)
+- SOLO agrega datos a los arrays PHASE 1/2/3
+- Los datos persisten en localStorage para tareas completadas
+- Asset Links, Projects, etc. se cargan desde memoria cada sesión
+  (considera guardar en localStorage si necesitas persistencia)
+
+</div>
+
+</body>
+</html>
