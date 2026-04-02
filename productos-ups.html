@@ -45,6 +45,17 @@
             color: #6b7280;
         }
 
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 200ms ease;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -149,8 +160,8 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <div class="logo">KOLFF</div>
-            <div class="breadcrumb">Productos / UPS y Respaldo</div>
+            <a href="kolff-landing.html" class="logo" style="text-decoration: none; cursor: pointer;">KOLFF</a>
+            <div class="breadcrumb"><a href="kolff-landing.html">Productos</a> / UPS y Respaldo</div>
         </div>
     </header>
 
