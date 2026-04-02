@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPS y Sistemas de Respaldo - KOLFF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFB81C;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --font-primary: 'Helvetica Neue', Helvetica, 'Arial', sans-serif;
+            --font-secondary: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-secondary); background: var(--white); color: var(--gray-900); line-height: 1.6; }
+
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 200ms ease;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            font-family: var(--font-primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: var(--black);
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-primary);
+        }
+
+        .section {
+            margin-top: 60px;
+            padding: 60px 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            font-family: var(--font-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .feature {
+            padding: 24px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+
+        .specs-table th {
+            background: var(--gray-100);
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .specs-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+
+        .footer {
+            background: var(--gray-900);
+            color: #d1d5db;
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="kolff-landing.html" class="logo" style="text-decoration: none; cursor: pointer;">KOLFF</a>
+            <div class="breadcrumb"><a href="kolff-landing.html">Productos</a> / UPS y Respaldo</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Sistemas UPS y Respaldo Eléctrico</h1>
+            <p>
+                Soluciones ininterrumpibles de potencia diseñadas para proteger tus operaciones críticas
+                contra interrupciones eléctricas. Garantiza continuidad operativa 24/7.
+            </p>
+            <button class="btn">Solicitar Especificaciones Técnicas</button>
+        </section>
+
+        <section class="section">
+            <h2>Características Principales</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Respaldo Inmediato</h3>
+                    <p>Cambio automático a batería en milisegundos ante falla eléctrica. Cero tiempo de inactividad.</p>
+                </div>
+                <div class="feature">
+                    <h3>Doble Conversión</h3>
+                    <p>Tecnología de doble conversión estabiliza voltaje continuamente, protegiendo equipos sensibles.</p>
+                </div>
+                <div class="feature">
+                    <h3>Escalabilidad Modular</h3>
+                    <p>Arquitectura modular con hotswap. Expande capacidad sin parar operaciones críticas.</p>
+                </div>
+                <div class="feature">
+                    <h3>Monitoreo Inteligente</h3>
+                    <p>Software de gestión con dashboard remoto, alertas preventivas y reportes analíticos.</p>
+                </div>
+                <div class="feature">
+                    <h3>Eficiencia Máxima</h3>
+                    <p>Eficiencia operativa del 95%+. Reduce costos energéticos significativamente.</p>
+                </div>
+                <div class="feature">
+                    <h3>Certificación Industrial</h3>
+                    <p>Certificado IEC 62040, UL y ATEX. Cumple estándares para entornos críticos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Modelos Disponibles</h2>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Potencia</th>
+                        <th>Autonomía</th>
+                        <th>Aplicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>UPS BLACK 3K</td>
+                        <td>3000 VA</td>
+                        <td>15 minutos</td>
+                        <td>Equipos de oficina y servidores pequeños</td>
+                    </tr>
+                    <tr>
+                        <td>UPS BLACK 6K</td>
+                        <td>6000 VA</td>
+                        <td>30 minutos</td>
+                        <td>Servidores y equipos de red</td>
+                    </tr>
+                    <tr>
+                        <td>UPS BLACK TOWER 10K</td>
+                        <td>10000 VA</td>
+                        <td>45 minutos</td>
+                        <td>Data centers y infraestructura crítica</td>
+                    </tr>
+                    <tr>
+                        <td>UPS MODULAR 20K+</td>
+                        <td>20000+ VA</td>
+                        <td>Configurable</td>
+                        <td>Instalaciones mineras e industriales</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Beneficios Económicos</h2>
+            <p style="margin-bottom: 16px;">
+                Invertir en UPS KOLFF proporciona:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">✓ Cero pérdida de datos por cortes eléctricos</li>
+                <li style="padding: 8px 0;">✓ Reducción de costos operacionales por inactividad</li>
+                <li style="padding: 8px 0;">✓ Protección de inversión en equipos críticos</li>
+                <li style="padding: 8px 0;">✓ Aumento de productividad y eficiencia</li>
+                <li style="padding: 8px 0;">✓ ROI típico en 2-3 años</li>
+                <li style="padding: 8px 0;">✓ Cumplimiento de requisitos de continuidad operativa</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Casos de Uso</h2>
+            <p style="margin-bottom: 16px;">
+                Nuestros sistemas UPS son ideales para:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">• Centros de datos con requisitos de 99.99% uptime</li>
+                <li style="padding: 8px 0;">• Operaciones mineras con equipos críticos 24/7</li>
+                <li style="padding: 8px 0;">• Hospitales y servicios de emergencia médica</li>
+                <li style="padding: 8px 0;">• Plantas de manufactura de precisión</li>
+                <li style="padding: 8px 0;">• Telecomunicaciones e infraestructura de red</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Garantía y Servicio Técnico</h2>
+            <p style="margin-bottom: 16px;">
+                Garantía integral en todos nuestros equipos:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">✓ Garantía de 3 años en equipos y baterías</li>
+                <li style="padding: 8px 0;">✓ Mantenimiento preventivo incluido primer año</li>
+                <li style="padding: 8px 0;">✓ Servicio técnico 24/7 con respuesta en 2 horas</li>
+                <li style="padding: 8px 0;">✓ Reemplazo de componentes sin costo durante garantía</li>
+                <li style="padding: 8px 0;">✓ Soporte técnico remoto y presencial disponible</li>
+                <li style="padding: 8px 0;">✓ Capacitación operativa para tu equipo</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="footer">
+        KOLFF 2026 | Soluciones de Respaldo Eléctrico | Todos los derechos reservados
+    </footer>
+</body>
+</html>
