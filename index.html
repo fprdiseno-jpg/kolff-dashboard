@@ -1542,55 +1542,91 @@ const ASSET_LINKS = {
   }
 };
 
-// [DATA] PHASE 2: Projects — Francisco agregará proyectos
+// [DATA] PHASE 2: Products KOLFF — 7 Productos Principales
 const PROJECTS = [
   {
-    id: 'project-branding',
-    name: 'Sistema de Marca KOLFF',
-    category: 'Branding',
-    icon: '🎨',
-    assets: 8,
-    status: 'en-progreso',
-    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
-    client: 'KOLFF Solutions',
-    startDate: '2026-01-15',
-    endDate: '2026-03-10'
-  },
-  {
-    id: 'project-packaging',
-    name: 'Diseño de Packaging',
-    category: 'Packaging',
-    icon: '📦',
-    assets: 6,
-    status: 'en-progreso',
-    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-01',
-    endDate: '2026-04-15'
-  },
-  {
-    id: 'project-marketing',
-    name: 'Materiales de Marketing',
-    category: 'Marketing Digital',
-    icon: '📱',
+    id: 'product-ups',
+    name: 'Respaldo Eléctrico UPS',
+    category: 'Energía',
+    icon: '⚡',
     assets: 12,
-    status: 'en-progreso',
-    description: 'Templates para redes sociales, banners web y contenido digital',
+    status: 'completado',
+    description: 'Sistemas UPS industrial de alta capacidad con respaldo de energía confiable. Disponible en 6 países',
     client: 'KOLFF Solutions',
-    startDate: '2026-02-15',
-    endDate: '2026-04-30'
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
   },
   {
-    id: 'project-uiux',
-    name: 'Rediseño UI/UX Web',
-    category: 'UI/UX',
-    icon: '💻',
-    assets: 15,
-    status: 'en-progreso',
-    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
+    id: 'product-lighting',
+    name: 'Iluminación de Emergencia LED',
+    category: 'Iluminación',
+    icon: '💡',
+    assets: 10,
+    status: 'completado',
+    description: 'Luminarias LED de emergencia para zonas críticas. Certificación DS43 y bajo consumo energético',
     client: 'KOLFF Solutions',
-    startDate: '2026-03-01',
-    endDate: '2026-05-30'
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-batteries',
+    name: 'Baterías Industriales',
+    category: 'Energía',
+    icon: '🔋',
+    assets: 8,
+    status: 'completado',
+    description: 'Baterías de respaldo industrial de larga duración y alta performance',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-solar',
+    name: 'Equipos Fotovoltaicos',
+    category: 'Energía Renovable',
+    icon: '☀️',
+    assets: 14,
+    status: 'completado',
+    description: 'Soluciones solares profesionales con paneles de alta eficiencia y sistemas de control',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-pro-lighting',
+    name: 'Iluminación Profesional Robusta',
+    category: 'Iluminación',
+    icon: '🎆',
+    assets: 11,
+    status: 'completado',
+    description: 'Sistemas de iluminación profesional de alta potencia para espacios críticos',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-ev',
+    name: 'Soluciones Electromovilidad',
+    category: 'Transporte',
+    icon: '🚗',
+    assets: 9,
+    status: 'completado',
+    description: 'Tecnologías para vehículos eléctricos y estaciones de carga rápida',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-service',
+    name: 'Servicio Técnico 24/7',
+    category: 'Servicio',
+    icon: '🔧',
+    assets: 15,
+    status: 'completado',
+    description: 'Soporte técnico profesional disponible 24/7 con respuesta inmediata',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
   }
 ];
 
@@ -1648,6 +1684,44 @@ const COMMENTS = [
 
 // [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
 const PORTFOLIO_ITEMS = [];
+
+// ═══════════════════════════════════════════════════════════════════
+//  KOLFF OFFICIAL INFORMATION — Brand Guidelines
+// ═══════════════════════════════════════════════════════════════════
+
+const KOLFF_BRAND = {
+  company: 'KOLFF ®',
+  tagline: 'energy.quality',
+  founded: '1990',
+  founder: 'Eduardo Cordero',
+  description: 'Soluciones de energía confiable para impulsar tu negocio',
+  phone: '+56 2 2570 6300',
+  website: 'www.kolff.cl',
+  email: 'info@kolff.cl',
+  colors: {
+    primary: '#FFB81C',
+    primaryName: 'Pantone 1235 C',
+    secondary: '#000000',
+    secondaryName: 'Pantone Black'
+  }
+};
+
+// [DATA] LOCATIONS — 6 Países Global Presence
+const LOCATIONS = [
+  { id: 'loc-chile', country: 'Chile', flag: '🇨🇱', cities: 'Santiago, Quilicura', phone: '+56 2 2570 6300', email: 'info@kolff.cl', web: 'www.kolff.cl' },
+  { id: 'loc-peru', country: 'Perú', flag: '🇵🇪', cities: 'Lima, San Isidro', phone: '+51 (1) XXXX-XXXX', email: 'peru@kolff.cl', web: 'www.kolff.pe' },
+  { id: 'loc-argentina', country: 'Argentina', flag: '🇦🇷', cities: 'Buenos Aires', phone: '+54 (11) XXXX-XXXX', email: 'argentina@kolff.cl', web: 'www.kolff.ar' },
+  { id: 'loc-brasil', country: 'Brasil', flag: '🇧🇷', cities: 'São Paulo', phone: '+55 (11) XXXX-XXXX', email: 'brasil@kolff.cl', web: 'www.kolff.com.br' },
+  { id: 'loc-españa', country: 'España', flag: '🇪🇸', cities: 'Madrid', phone: '+34 (91) XXXX-XXXX', email: 'españa@kolff.cl', web: 'www.kolff.es' },
+  { id: 'loc-eeuu', country: 'EE.UU', flag: '🇺🇸', cities: 'Fort Lauderdale, Florida', phone: '+1 (954) XXX-XXXX', email: 'usa@kolff.cl', web: 'www.kolff.us' }
+];
+
+// [DATA] BRAND VALUES — 3 Core Values
+const VALUES = [
+  { name: 'INSPIRED', icon: '✨', description: 'Innovación y excelencia en cada solución que entregamos' },
+  { name: 'GENUINE', icon: '✓', description: 'Compromiso genuino con la calidad y autenticidad' },
+  { name: 'TRUSTED', icon: '🛡️', description: 'Confiabilidad total en nuestros productos y servicio' }
+];
 
 const TASKS = [
   // ── SEMANA 1 ──
