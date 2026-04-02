@@ -241,7 +241,7 @@
     font-size: 16px;
   }
 
-  /* Hide dropdown on desktop, show on tablet/mobile */
+  /* Hide header dropdown on desktop, show on mobile */
   .tab-dropdown-wrapper {
     display: none;
   }
@@ -249,9 +249,6 @@
   @media (max-width: 768px) {
     .tab-dropdown-wrapper {
       display: block;
-    }
-    .bottom-nav {
-      display: none !important;
     }
   }
 
@@ -838,86 +835,291 @@
   }
 
   .gallery-item {
-    aspect-ratio: 1;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-base);
-    font-size: 48px;
     box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
   }
 
   .gallery-item:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--yellow);
   }
 
-  /* ─── BOTTOM NAV (Desktop only - 768px+) ─── */
-  .bottom-nav {
+  .gallery-preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gallery-info {
+    padding: 12px 14px;
+  }
+
+  .gallery-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gallery-size {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* ─── HANDOFF BOARD (Entregas) ─── */
+  .handoff-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 14px 0;
+  }
+
+  .handoff-column {
+    background: var(--bg-secondary);
+    border-radius: 14px;
+    padding: 16px;
+    min-height: 120px;
+  }
+
+  .handoff-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .handoff-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--transition-base);
+    border-left: 4px solid var(--yellow);
+  }
+
+  .handoff-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .handoff-item strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .handoff-date {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+
+  /* ─── VISUAL TEMPLATES ─── */
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    margin: 14px 0;
+  }
+
+  .visual-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+  }
+
+  .visual-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--yellow);
+    transform: translateY(-3px);
+  }
+
+  .visual-preview {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    padding: 24px 16px;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+  }
+
+  .visual-card-body {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .visual-card-body h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .visual-card-body p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .dims {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--black);
+    border: 3px solid var(--yellow);
+    color: var(--yellow);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger-btn:hover {
+    background: var(--yellow);
+    color: var(--black);
+    transform: scale(1.1);
+  }
+
+  .hamburger-btn.open {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms ease;
+  }
+
+  .nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--black);
-    display: none;
-    justify-content: center;
-    gap: 0;
-    z-index: 100;
-    border-top: 3px solid var(--yellow);
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    z-index: 180;
+    transform: translateY(100%);
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 12px 0 24px;
   }
 
-  @media (min-width: 768px) {
-    .bottom-nav {
-      display: flex;
-    }
+  .nav-menu.open {
+    transform: translateY(0);
   }
 
-  @media (max-width: 480px) {
-    .bottom-nav {
-      display: none;
-    }
+  .nav-menu-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    margin: 0 auto 12px;
+  }
+
+  .nav-menu-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 20px 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
   }
 
   .nav-btn {
-    flex: 1;
-    max-width: 160px;
-    padding: 12px 10px 10px;
+    width: 100%;
+    padding: 14px 20px;
     background: none;
     border: none;
-    color: #888;
+    color: var(--text-primary);
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 14px;
     transition: all var(--transition-base);
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    text-align: left;
+    border-left: 4px solid transparent;
   }
 
-  .nav-btn:hover { color: var(--yellow); }
+  .nav-btn:hover {
+    background: var(--yellow-light);
+    border-left-color: var(--yellow);
+  }
 
-  .nav-btn.active { color: var(--yellow); }
-
-  .nav-btn.active::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: 15%;
-    right: 15%;
-    height: 3px;
-    background: var(--yellow-gradient);
-    border-radius: 0 0 4px 4px;
+  .nav-btn.active {
+    color: var(--black);
+    background: var(--yellow-light);
+    border-left-color: var(--yellow);
+    font-weight: 700;
   }
 
   .nav-btn .nav-icon { font-size: 20px; }
@@ -1135,16 +1337,16 @@
       <span id="currentTabLabel">📋 Flujo</span>
     </button>
     <div class="tab-dropdown-menu" id="tabDropdownMenu">
-      <button onclick="switchTab('flujo', null)"><span class="tab-icon">📋</span> Flujo</button>
-      <button onclick="switchTab('categorias', null)"><span class="tab-icon">📂</span> Categorías</button>
-      <button onclick="switchTab('proyectos', null)"><span class="tab-icon">📊</span> Proyectos</button>
-      <button onclick="switchTab('galeria', null)"><span class="tab-icon">🖼️</span> Galería</button>
-      <button onclick="switchTab('entregas', null)"><span class="tab-icon">📦</span> Entregas</button>
-      <button onclick="switchTab('timeline', null)"><span class="tab-icon">📈</span> Timeline</button>
-      <button onclick="switchTab('dependencias', null)"><span class="tab-icon">🔗</span> Deps</button>
-      <button onclick="switchTab('portafolio', null)"><span class="tab-icon">⭐</span> Portfolio</button>
-      <button onclick="switchTab('info', null)"><span class="tab-icon">🏢</span> Info</button>
-      <button onclick="switchTab('visual', null)"><span class="tab-icon">🎨</span> Visual</button>
+      <button><span class="tab-icon">📋</span> Flujo</button>
+      <button><span class="tab-icon">📂</span> Categorías</button>
+      <button><span class="tab-icon">📊</span> Proyectos</button>
+      <button><span class="tab-icon">🖼️</span> Galería</button>
+      <button><span class="tab-icon">📦</span> Entregas</button>
+      <button><span class="tab-icon">📈</span> Timeline</button>
+      <button><span class="tab-icon">🔗</span> Deps</button>
+      <button><span class="tab-icon">⭐</span> Portfolio</button>
+      <button><span class="tab-icon">🏢</span> Info</button>
+      <button><span class="tab-icon">🎨</span> Visual</button>
     </div>
   </div>
 
@@ -1237,7 +1439,7 @@
   <!-- TAB 5: ENTREGAS -->
   <div class="tab-content" id="tab-entregas">
     <div class="section-title"><div class="bar"></div> Entregas y Handoff</div>
-    <div id="handoffBoard"></div>
+    <div class="handoff-board" id="handoffBoard"></div>
   </div>
 
   <!-- TAB 6: TIMELINE -->
@@ -1269,41 +1471,45 @@
   <!-- TAB 10: VISUAL -->
   <div class="tab-content" id="tab-visual">
     <div class="section-title"><div class="bar"></div> Plantillas Visuales</div>
-    <div class="gallery-grid" id="visualGrid"></div>
+    <div class="visual-grid" id="visualGrid"></div>
   </div>
 
 </div>
 
-<!-- ═══ BOTTOM NAV (Desktop 768px+) ═══ -->
-<div class="bottom-nav">
-  <button class="nav-btn active" onclick="switchTab('flujo', this)">
+<!-- ═══ HAMBURGER NAV ═══ -->
+<button class="hamburger-btn" id="hamburgerBtn" onclick="toggleNavMenu()">☰</button>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNavMenu()"></div>
+<div class="nav-menu" id="navMenu">
+  <div class="nav-menu-handle"></div>
+  <div class="nav-menu-title">Navegación</div>
+  <button class="nav-btn active">
     <span class="nav-icon">📋</span> Flujo
   </button>
-  <button class="nav-btn" onclick="switchTab('categorias', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📂</span> Categorías
   </button>
-  <button class="nav-btn" onclick="switchTab('proyectos', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📊</span> Proyectos
   </button>
-  <button class="nav-btn" onclick="switchTab('galeria', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🖼️</span> Galería
   </button>
-  <button class="nav-btn" onclick="switchTab('entregas', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📦</span> Entregas
   </button>
-  <button class="nav-btn" onclick="switchTab('timeline', this)">
+  <button class="nav-btn">
     <span class="nav-icon">📈</span> Timeline
   </button>
-  <button class="nav-btn" onclick="switchTab('dependencias', this)">
-    <span class="nav-icon">🔗</span> Deps
+  <button class="nav-btn">
+    <span class="nav-icon">🔗</span> Dependencias
   </button>
-  <button class="nav-btn" onclick="switchTab('portafolio', this)">
+  <button class="nav-btn">
     <span class="nav-icon">⭐</span> Portfolio
   </button>
-  <button class="nav-btn" onclick="switchTab('info', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🏢</span> Info
   </button>
-  <button class="nav-btn" onclick="switchTab('visual', this)">
+  <button class="nav-btn">
     <span class="nav-icon">🎨</span> Visual
   </button>
 </div>
@@ -1313,133 +1519,8 @@
 //  DATA — PHASE 1, 2, 3 ENHANCEMENTS
 // ═══════════════════════════════════════════════════════════════════
 
-const ASSET_LINKS = {
-  'project-branding': {
-    figma: 'https://figma.com/file/branding-kolff',
-    drive: 'https://drive.google.com/folder/branding',
-    preview: 'https://preview.kolff/branding'
-  },
-  'project-packaging': {
-    figma: 'https://figma.com/file/packaging-kolff',
-    drive: 'https://drive.google.com/folder/packaging',
-    preview: 'https://preview.kolff/packaging'
-  },
-  'project-marketing': {
-    figma: 'https://figma.com/file/marketing-kolff',
-    drive: 'https://drive.google.com/folder/marketing',
-    ai: 'https://adobe.io/files/marketing'
-  }
-};
-
-const PROJECTS = [
-  {
-    id: 'project-branding',
-    name: 'Sistema de Marca KOLFF',
-    category: 'Branding',
-    icon: '🎨',
-    assets: 8,
-    status: 'completado',
-    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
-    client: 'KOLFF Solutions',
-    startDate: '2026-01-15',
-    endDate: '2026-03-10'
-  },
-  {
-    id: 'project-packaging',
-    name: 'Diseño de Packaging',
-    category: 'Packaging',
-    icon: '📦',
-    assets: 6,
-    status: 'en-progreso',
-    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-01',
-    endDate: '2026-04-15'
-  },
-  {
-    id: 'project-marketing',
-    name: 'Materiales de Marketing',
-    category: 'Marketing Digital',
-    icon: '📱',
-    assets: 12,
-    status: 'en-revision',
-    description: 'Templates para redes sociales, banners web y contenido digital',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-15',
-    endDate: '2026-04-30'
-  },
-  {
-    id: 'project-uiux',
-    name: 'Rediseño UI/UX Web',
-    category: 'UI/UX',
-    icon: '💻',
-    assets: 15,
-    status: 'en-progreso',
-    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
-    client: 'KOLFF Solutions',
-    startDate: '2026-03-01',
-    endDate: '2026-05-30'
-  }
-];
-
-const ASSETS = [
-  { id: 'asset-logo-1', name: 'Logo Principal Color', type: 'vector', size: '2.3 MB', preview: '🎨', lastModified: '2026-03-10' },
-  { id: 'asset-logo-2', name: 'Logo Isotipo', type: 'vector', size: '1.8 MB', preview: '🔷', lastModified: '2026-03-10' },
-  { id: 'asset-palette', name: 'Paleta de Colores', type: 'design', size: '4.5 MB', preview: '🌈', lastModified: '2026-03-05' },
-  { id: 'asset-typography', name: 'Guía Tipográfica', type: 'document', size: '6.2 MB', preview: '📄', lastModified: '2026-03-08' },
-  { id: 'asset-brand-guide', name: 'Brand Guide PDF', type: 'document', size: '12.8 MB', preview: '📖', lastModified: '2026-03-10' },
-  { id: 'asset-box-design', name: 'Diseño Caja Producto', type: 'design', size: '8.5 MB', preview: '📦', lastModified: '2026-03-25' },
-  { id: 'asset-label-design', name: 'Etiqueta Frontal', type: 'design', size: '3.2 MB', preview: '🏷️', lastModified: '2026-03-28' },
-  { id: 'asset-social-ig', name: 'Template Instagram', type: 'design', size: '7.1 MB', preview: '📸', lastModified: '2026-03-20' },
-  { id: 'asset-social-linkedin', name: 'Template LinkedIn', type: 'design', size: '5.9 MB', preview: '💼', lastModified: '2026-03-22' },
-  { id: 'asset-banner-web', name: 'Banner Web Hero', type: 'design', size: '9.3 MB', preview: '🌐', lastModified: '2026-03-26' },
-  { id: 'asset-mockups', name: 'Mockups Packaging', type: 'design', size: '18.7 MB', preview: '🎁', lastModified: '2026-03-27' },
-  { id: 'asset-prototype', name: 'Prototipo UI Interactivo', type: 'design', size: '14.2 MB', preview: '🖱️', lastModified: '2026-03-31' }
-];
-
-const DELIVERABLES = [
-  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'completed', feedback: 'Aprobado' },
-  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'completed', feedback: 'Requiere ajustes menores' },
-  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'completed', feedback: 'Aprobado y listo' },
-  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'completed', feedback: 'Excelente trabajo' },
-  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'in-review', feedback: 'En revisión con cliente' },
-  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'in-review', feedback: 'Pendiente aprobación' },
-  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'in-progress', feedback: null }
-];
-
-const ASSET_VERSIONS = [
-  { assetId: 'asset-logo-1', version: 'v1.0', date: '2026-02-01', status: 'released', feedback: 'Versión inicial propuesta', changes: 'Logo principal con variaciones color y blanco' },
-  { assetId: 'asset-logo-1', version: 'v1.1', date: '2026-02-10', status: 'released', feedback: 'Ajustes menores', changes: 'Espaciado del isotipo mejorado' },
-  { assetId: 'asset-logo-1', version: 'v2.0', date: '2026-02-20', status: 'released', feedback: 'Versión final aprobada', changes: 'Rediseño completo post-feedback' },
-  { assetId: 'asset-palette', version: 'v1.0', date: '2026-02-15', status: 'released', feedback: 'Paleta inicial', changes: '5 colores principales + variaciones' },
-  { assetId: 'asset-palette', version: 'v1.1', date: '2026-03-05', status: 'released', feedback: 'Colores secundarios agregados', changes: '10 colores totales con codes Hex y RGB' },
-  { assetId: 'asset-brand-guide', version: 'v0.9', date: '2026-02-28', status: 'review', feedback: 'En validación interna', changes: 'Primero draft del documento completo' },
-  { assetId: 'asset-brand-guide', version: 'v1.0', date: '2026-03-10', status: 'released', feedback: 'Aprobado finalmente', changes: 'Documento final con todas las guías' }
-];
-
-const DEPENDENCIES = [
-  { from: 'Sistema de Marca KOLFF', to: 'Materiales de Marketing', description: 'Logo y colores necesarios para templates' },
-  { from: 'Sistema de Marca KOLFF', to: 'Diseño de Packaging', description: 'Paleta y tipografía para boxes' },
-  { from: 'Rediseño UI/UX Web', to: 'Materiales de Marketing', description: 'Componentes de interfaz para banners' }
-];
-
-const COMMENTS = [
-  { itemId: 'project-branding', author: 'Francisco Parra', text: 'Logo finalizado y aprobado por cliente. Paleta lista para implementar.', timestamp: '2026-03-10T16:45:00' },
-  { itemId: 'del-5', author: 'Francisco Parra', text: 'Packaging en revisión. Esperando feedback de impresión técnica.', timestamp: '2026-03-20T10:30:00' },
-  { itemId: 'asset-prototype', author: 'Francisco Parra', text: 'Prototipo UI completado. Listo para presentación al cliente mañana.', timestamp: '2026-03-31T18:00:00' }
-];
-
-const PORTFOLIO_ITEMS = [
-  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
-  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
-  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
-];
-
 // ═══════════════════════════════════════════════════════════════════
-//  ORIGINAL DATA (KOLFF)
-// ═══════════════════════════════════════════════════════════════════
-// ═══════════════════════════════════════════════════════════════════
-//  DATA — PHASE 1, 2, 3 ENHANCEMENTS
+//  DATA — MAIN DEFINITIONS
 // ═══════════════════════════════════════════════════════════════════
 
 // [DATA] PHASE 1: Asset Links — Francisco agregará URLs conforme avance
@@ -1469,7 +1550,7 @@ const PROJECTS = [
     category: 'Branding',
     icon: '🎨',
     assets: 8,
-    status: 'completado',
+    status: 'en-progreso',
     description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
     client: 'KOLFF Solutions',
     startDate: '2026-01-15',
@@ -1493,7 +1574,7 @@ const PROJECTS = [
     category: 'Marketing Digital',
     icon: '📱',
     assets: 12,
-    status: 'en-revision',
+    status: 'en-progreso',
     description: 'Templates para redes sociales, banners web y contenido digital',
     client: 'KOLFF Solutions',
     startDate: '2026-02-15',
@@ -1531,13 +1612,13 @@ const ASSETS = [
 
 // [DATA] PHASE 2: Deliverables Board — Francisco agregará entregas
 const DELIVERABLES = [
-  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'completed', feedback: 'Aprobado' },
-  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'completed', feedback: 'Requiere ajustes menores' },
-  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'completed', feedback: 'Aprobado y listo' },
-  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'completed', feedback: 'Excelente trabajo' },
-  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'in-review', feedback: 'En revisión con cliente' },
-  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'in-review', feedback: 'Pendiente aprobación' },
-  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'in-progress', feedback: null }
+  { id: 'del-1', title: 'Brief de Proyecto', date: '2026-01-20', file: 'Brief_KOLFF_Inicial.pdf', status: 'pending', feedback: null },
+  { id: 'del-2', title: 'Propuesta de Logo (v1)', date: '2026-02-05', file: 'Logo_Propuesta_v1.zip', status: 'pending', feedback: null },
+  { id: 'del-3', title: 'Logo Versión Final', date: '2026-02-20', file: 'Logo_Final_v2.zip', status: 'pending', feedback: null },
+  { id: 'del-4', title: 'Brand Guide Completo', date: '2026-03-10', file: 'KOLFF_Brand_Guide_v1.pdf', status: 'pending', feedback: null },
+  { id: 'del-5', title: 'Diseños Packaging (Borrador)', date: '2026-03-15', file: 'Packaging_Draft_v1.zip', status: 'pending', feedback: null },
+  { id: 'del-6', title: 'Materiales Marketing (Batch 1)', date: '2026-03-28', file: 'Marketing_Batch1.zip', status: 'pending', feedback: null },
+  { id: 'del-7', title: 'Prototipo UI Web', date: '2026-03-31', file: 'Prototype_UI_v1.figma', status: 'pending', feedback: null }
 ];
 
 // [DATA] PHASE 3: Asset Versions — Francisco agregará versiones
@@ -1566,11 +1647,7 @@ const COMMENTS = [
 ];
 
 // [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
-const PORTFOLIO_ITEMS = [
-  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
-  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
-  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
-];
+const PORTFOLIO_ITEMS = [];
 
 const TASKS = [
   // ── SEMANA 1 ──
@@ -1953,6 +2030,16 @@ const INFO_CARDS = [
     ["Vertiv","Datos como protagonista visual"],
     ["ABB","Partner KOLFF · AI-ready MegaFlex"],
   ]},
+  { title:"Competencias Nacionales", rows:[
+    ["Rhona","UPS y transformadores · Competidor directo en Chile"],
+    ["Legrand Chile","Infraestructura eléctrica · Presencia retail"],
+    ["Salicru","UPS importados · Foco en PYME y oficinas"],
+    ["Engipower","UPS y energía · Distribuidor multimarca"],
+    ["Cummins Chile","Generadores + UPS · Segmento industrial pesado"],
+    ["Emerson/Vertiv Chile","Data centers · Fuerte en infraestructura TI"],
+    ["Delta Chile","UPS y eficiencia energética · Crecimiento en LATAM"],
+    ["Diferencial KOLFF","Fabricante propio + ABB exclusivo + SAT 24/7 + Triple ISO"],
+  ]},
   { title:"Ventaja Competitiva (NO comunicada)", rows:[
     ["Fabricante propio","Marca KOLFF (no solo distribuidor)"],
     ["ABB exclusivo","Único en Chile y Perú"],
@@ -1997,11 +2084,17 @@ let currentWeek = 1;
 let currentFilter = 'all';
 let completedTasks = new Set();
 
-// Load saved state
-try {
-  const saved = localStorage.getItem('kolff-completed');
-  if (saved) completedTasks = new Set(JSON.parse(saved));
-} catch(e){}
+// Reset old data once, then persist user's own selections
+const DASHBOARD_VERSION = 'v2-clean';
+if (localStorage.getItem('kolff-version') !== DASHBOARD_VERSION) {
+  localStorage.removeItem('kolff-completed');
+  localStorage.setItem('kolff-version', DASHBOARD_VERSION);
+} else {
+  try {
+    const saved = localStorage.getItem('kolff-completed');
+    if (saved) completedTasks = new Set(JSON.parse(saved));
+  } catch(e){}
+}
 
 function saveState() {
   localStorage.setItem('kolff-completed', JSON.stringify([...completedTasks]));
@@ -2071,9 +2164,8 @@ function updateProgress() {
   const done = weekTasks.filter((t,i) => completedTasks.has(TASKS.indexOf(t))).length;
   const total = weekTasks.length;
   const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = `${done} de ${total} tareas completadas`;
-  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('dailyProgress').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '%';
 }
 
 function selectWeek(w, btn) {
@@ -2318,15 +2410,24 @@ function renderVisual() {
   `).join('');
 }
 
-// ═══ TAB DROPDOWN (Mobile) ═══
-function toggleTabDropdown() {
-  const btn = document.getElementById('tabDropdownBtn');
-  if (btn) {
-    btn.classList.toggle('active');
-  }
+// ═══ HAMBURGER NAV ═══
+function toggleNavMenu() {
+  const btn = document.getElementById('hamburgerBtn');
+  const overlay = document.getElementById('navOverlay');
+  const menu = document.getElementById('navMenu');
+  const isOpen = menu.classList.contains('open');
+  btn.classList.toggle('open');
+  overlay.classList.toggle('open');
+  menu.classList.toggle('open');
+  btn.textContent = isOpen ? '☰' : '✕';
 }
 
-// Close dropdown when clicking outside
+// ═══ TAB DROPDOWN (Mobile header) ═══
+function toggleTabDropdown() {
+  const btn = document.getElementById('tabDropdownBtn');
+  if (btn) btn.classList.toggle('active');
+}
+
 document.addEventListener('click', (e) => {
   const wrapper = document.getElementById('tabDropdownWrapper');
   if (wrapper && !wrapper.contains(e.target)) {
@@ -2346,7 +2447,7 @@ renderVisual();
 renderQuickFilters(); // PHASE 1
 // PHASE 2 and 3 will render on tab switch via switchTab()
 
-// Attach tab click handlers - inline to avoid function definition issues
+// Attach tab click handlers for hamburger menu
 document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -2362,7 +2463,15 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     else if (text.includes('portfolio')) tabName = 'portafolio';
     else if (text.includes('info')) tabName = 'info';
     else if (text.includes('visual')) tabName = 'visual';
-    if (tabName) switchTab(tabName, btn);
+    if (tabName) {
+      switchTab(tabName, btn);
+      // Close hamburger menu after selection
+      const menu = document.getElementById('navMenu');
+      if (menu && menu.classList.contains('open')) toggleNavMenu();
+      // Update mobile dropdown label
+      const label = document.getElementById('currentTabLabel');
+      if (label) label.textContent = btn.textContent.trim();
+    }
   });
 });
 
