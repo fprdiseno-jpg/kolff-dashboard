@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iluminación Profesional - KOLFF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFB81C;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-secondary); background: var(--white); color: var(--gray-900); line-height: 1.6; }
+
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            font-family: var(--font-primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: var(--black);
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-primary);
+        }
+
+        .section {
+            margin-top: 60px;
+            padding: 60px 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            font-family: var(--font-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .feature {
+            padding: 24px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+
+        .specs-table th {
+            background: var(--gray-100);
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .specs-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+
+        .footer {
+            background: var(--gray-900);
+            color: #d1d5db;
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">KOLFF</div>
+            <div class="breadcrumb">Productos / Iluminación</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Soluciones de Iluminación Profesional</h1>
+            <p>
+                Sistemas de iluminación LED de alta eficiencia y sistemas de emergencia para aplicaciones
+                industriales, minería, y espacios críticos. Máxima seguridad y visibilidad garantizada.
+            </p>
+            <button class="btn">Consultar Soluciones Customizadas</button>
+        </section>
+
+        <section class="section">
+            <h2>Características Principales</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Eficiencia LED</h3>
+                    <p>Reduce consumo energético hasta 80% comparado con iluminación tradicional.</p>
+                </div>
+                <div class="feature">
+                    <h3>Larga Durabilidad</h3>
+                    <p>50,000 horas de vida útil garantizando bajo mantenimiento y costos reducidos.</p>
+                </div>
+                <div class="feature">
+                    <h3>Emergencia Automática</h3>
+                    <p>Sistemas de emergencia que se activan automáticamente ante falta de energía.</p>
+                </div>
+                <div class="feature">
+                    <h3>Control Inteligente</h3>
+                    <p>Sistemas de control automático con sensores de movimiento y regulación de intensidad.</p>
+                </div>
+                <div class="feature">
+                    <h3>Ambientes Extremos</h3>
+                    <p>Resistente a polvo, humedad y temperaturas extremas en entornos mineros e industriales.</p>
+                </div>
+                <div class="feature">
+                    <h3>Seguridad Certificada</h3>
+                    <p>Cumple normativas de seguridad industrial y certificaciones ATEX si es requerido.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Líneas de Productos</h2>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Línea</th>
+                        <th>Tecnología</th>
+                        <th>Potencia</th>
+                        <th>Aplicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>LED Proyectores</td>
+                        <td>LED de Alta Potencia</td>
+                        <td>50W - 400W</td>
+                        <td>Áreas amplias, minería</td>
+                    </tr>
+                    <tr>
+                        <td>LED Industriales</td>
+                        <td>LED Industrial Hermético</td>
+                        <td>20W - 200W</td>
+                        <td>Plantas y talleres</td>
+                    </tr>
+                    <tr>
+                        <td>Sistemas de Emergencia</td>
+                        <td>LED + Batería</td>
+                        <td>5W - 50W</td>
+                        <td>Salidas de emergencia</td>
+                    </tr>
+                    <tr>
+                        <td>Control Automático</td>
+                        <td>LED Smart Control</td>
+                        <td>Configurable</td>
+                        <td>Espacios inteligentes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Beneficios Operacionales</h2>
+            <p style="margin-bottom: 16px;">
+                Nuestras soluciones de iluminación ofrecen:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">✓ Reducción de costos energéticos hasta 80%</li>
+                <li style="padding: 8px 0;">✓ Mantenimiento mínimo con larga vida útil</li>
+                <li style="padding: 8px 0;">✓ Mejora de seguridad y visibilidad</li>
+                <li style="padding: 8px 0;">✓ Cumplimiento normativo garantizado</li>
+                <li style="padding: 8px 0;">✓ Soporte técnico especializado 24/7</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="footer">
+        KOLFF 2026 | Soluciones de Iluminación Profesional | Todos los derechos reservados
+    </footer>
+</body>
+</html>

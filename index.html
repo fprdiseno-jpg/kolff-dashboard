@@ -1321,6 +1321,106 @@
     .portfolio-stat-num { font-size: 24px; }
     input, button, label { font-size: 16px; }
   }
+
+  /* ─── PROPUESTAS SECTION ─── */
+  .propuestas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .propuesta-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .propuesta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--yellow-gradient);
+  }
+
+  .propuesta-card:hover {
+    border-color: var(--yellow);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+  }
+
+  .propuesta-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .propuesta-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--yellow-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .propuesta-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .propuesta-subtitle {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .propuesta-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .propuesta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    margin-top: 8px;
+  }
+
+  .propuesta-link:hover {
+    gap: 12px;
+  }
+
+  .propuesta-link::after {
+    content: '→';
+    font-size: 16px;
+  }
 </style>
 </head>
 <body>
@@ -1334,9 +1434,10 @@
   <!-- Tab Dropdown for Mobile/Tablet -->
   <div class="tab-dropdown-wrapper" id="tabDropdownWrapper">
     <button class="tab-dropdown-btn" id="tabDropdownBtn" onclick="toggleTabDropdown()">
-      <span id="currentTabLabel">📋 Flujo</span>
+      <span id="currentTabLabel">💼 Propuestas</span>
     </button>
     <div class="tab-dropdown-menu" id="tabDropdownMenu">
+      <button><span class="tab-icon">💼</span> Propuestas</button>
       <button><span class="tab-icon">📋</span> Flujo</button>
       <button><span class="tab-icon">📂</span> Categorías</button>
       <button><span class="tab-icon">📊</span> Proyectos</button>
@@ -1356,8 +1457,58 @@
 <!-- ═══ MAIN ═══ -->
 <div class="main">
 
+  <!-- TAB 0: PROPUESTAS -->
+  <div class="tab-content active" id="tab-propuestas">
+    <div class="section-title"><div class="bar"></div> Propuestas de Proyecto</div>
+    <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">Accede a las propuestas y documentación de proyecto. Explora la landing page, el sistema de diseño y los componentes profesionales.</p>
+
+    <div class="propuestas-grid">
+      <div class="propuesta-card" onclick="window.open('kolff-landing.html', '_blank')">
+        <div class="propuesta-header">
+          <div class="propuesta-icon">🌐</div>
+          <div class="propuesta-info">
+            <div class="propuesta-subtitle">Propuesta Principal</div>
+            <h3>Landing Page KOLFF</h3>
+          </div>
+        </div>
+        <div class="propuesta-description">
+          Página de presentación corporativa con estructura de productos, servicios y casos de éxito. Diseño profesional basado en la estrategia actual de kolff.cl
+        </div>
+        <a href="kolff-landing.html" target="_blank" class="propuesta-link">Ver Landing Page</a>
+      </div>
+
+      <div class="propuesta-card" onclick="window.open('COMPONENTS.html', '_blank')">
+        <div class="propuesta-header">
+          <div class="propuesta-icon">🎯</div>
+          <div class="propuesta-info">
+            <div class="propuesta-subtitle">Sistema de Diseño</div>
+            <h3>Design System Profesional</h3>
+          </div>
+        </div>
+        <div class="propuesta-description">
+          Biblioteca completa de componentes reutilizables: botones, cards, badges, inputs, alerts y paleta de colores KOLFF certificada.
+        </div>
+        <a href="COMPONENTS.html" target="_blank" class="propuesta-link">Ver Componentes</a>
+      </div>
+
+      <div class="propuesta-card" onclick="window.open('index.html', '_blank')">
+        <div class="propuesta-header">
+          <div class="propuesta-icon">📊</div>
+          <div class="propuesta-info">
+            <div class="propuesta-subtitle">Panel de Control</div>
+            <h3>Dashboard Operativo</h3>
+          </div>
+        </div>
+        <div class="propuesta-description">
+          Panel interactivo con gestión de flujo de trabajo, proyectos, galerías, entregas y timeline. Control centralizado del proyecto.
+        </div>
+        <a href="index.html" class="propuesta-link">Ver Dashboard</a>
+      </div>
+    </div>
+  </div>
+
   <!-- TAB 1: FLUJO -->
-  <div class="tab-content active" id="tab-flujo">
+  <div class="tab-content" id="tab-flujo">
     <div class="section-title"><div class="bar"></div> Filtros Rápidos</div>
     <div class="quick-filters" id="quickFilters"></div>
 
@@ -2453,7 +2604,8 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     e.preventDefault();
     const text = btn.textContent.toLowerCase();
     let tabName = '';
-    if (text.includes('flujo')) tabName = 'flujo';
+    if (text.includes('propuesta')) tabName = 'propuestas';
+    else if (text.includes('flujo')) tabName = 'flujo';
     else if (text.includes('categoría')) tabName = 'categorias';
     else if (text.includes('proyecto')) tabName = 'proyectos';
     else if (text.includes('galería')) tabName = 'galeria';
@@ -2480,7 +2632,8 @@ document.querySelectorAll('.tab-dropdown-menu button').forEach(btn => {
     e.preventDefault();
     const text = btn.textContent.toLowerCase();
     let tabName = '';
-    if (text.includes('flujo')) tabName = 'flujo';
+    if (text.includes('propuesta')) tabName = 'propuestas';
+    else if (text.includes('flujo')) tabName = 'flujo';
     else if (text.includes('categoría')) tabName = 'categorias';
     else if (text.includes('proyecto')) tabName = 'proyectos';
     else if (text.includes('galería')) tabName = 'galeria';
