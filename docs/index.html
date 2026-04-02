@@ -1625,6 +1625,14 @@
     <div class="visual-grid" id="visualGrid"></div>
   </div>
 
+  <!-- TAB 11: DESIGN SYSTEM -->
+  <div class="tab-content" id="tab-design-system">
+    <div class="section-title"><div class="bar"></div> Design System v2.0</div>
+    <div style="background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); height: 800px; margin-top: 24px;">
+      <iframe src="COMPONENTS.html" style="width: 100%; height: 100%; border: none; border-radius: 12px;" title="Design System"></iframe>
+    </div>
+  </div>
+
 </div>
 
 <!-- ═══ HAMBURGER NAV ═══ -->
@@ -1665,6 +1673,9 @@
   </button>
   <button class="nav-btn">
     <span class="nav-icon">🎨</span> Visual
+  </button>
+  <button class="nav-btn">
+    <span class="nav-icon">🎯</span> Design System
   </button>
 </div>
 
@@ -2618,6 +2629,7 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     else if (text.includes('portfolio')) tabName = 'portafolio';
     else if (text.includes('info')) tabName = 'info';
     else if (text.includes('visual')) tabName = 'visual';
+    else if (text.includes('design')) tabName = 'design-system';
     if (tabName) {
       switchTab(tabName, btn);
       // Close hamburger menu after selection
@@ -2646,6 +2658,7 @@ document.querySelectorAll('.tab-dropdown-menu button').forEach(btn => {
     else if (text.includes('portfolio')) tabName = 'portafolio';
     else if (text.includes('info')) tabName = 'info';
     else if (text.includes('visual')) tabName = 'visual';
+    else if (text.includes('design')) tabName = 'design-system';
     if (tabName) {
       switchTab(tabName, null);
       const dropdownBtn = document.getElementById('tabDropdownBtn');
