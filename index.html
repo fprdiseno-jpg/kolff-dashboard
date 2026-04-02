@@ -10,11 +10,11 @@
   * { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
-    /* Primary Colors */
-    --yellow: #F5A800;
-    --yellow-light: #FFF3CC;
-    --yellow-gradient: linear-gradient(135deg, #F5A800 0%, #FFB84D 100%);
-    --black: #1A1A1A;
+    /* Primary Colors — KOLFF Official Brand */
+    --yellow: #FFB81C;
+    --yellow-light: #FFF8E1;
+    --yellow-gradient: linear-gradient(135deg, #FFB81C 0%, #FFC947 100%);
+    --black: #000000;
 
     /* Enhanced Text Colors (WCAG AA Compliant) */
     --text-primary: #0F172A;
@@ -1333,52 +1333,76 @@ const ASSET_LINKS = {
 
 const PROJECTS = [
   {
-    id: 'project-branding',
-    name: 'Sistema de Marca KOLFF',
-    category: 'Branding',
-    icon: '🎨',
+    id: 'product-ups',
+    name: 'Respaldo Eléctrico UPS',
+    category: 'Producto Energético',
+    icon: '⚡',
+    assets: 12,
+    status: 'completado',
+    description: 'Sistemas de UPS industrial con respaldo de energía confiable — Available en 6 países',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-lighting',
+    name: 'Iluminación de Emergencia LED',
+    category: 'Producto Energético',
+    icon: '💡',
+    assets: 10,
+    status: 'completado',
+    description: 'Luminarias LED de emergencia para zonas críticas con certificación DS43',
+    client: 'KOLFF Solutions',
+    startDate: '1992-06-01',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-batteries',
+    name: 'Baterías Industriales',
+    category: 'Producto Energético',
+    icon: '🔋',
+    assets: 9,
+    status: 'completado',
+    description: 'Baterías de litio y plomo-ácido para aplicaciones industriales premium',
+    client: 'KOLFF Solutions',
+    startDate: '1995-03-20',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-solar',
+    name: 'Equipos Fotovoltaicos',
+    category: 'Producto Energético',
+    icon: '☀️',
+    assets: 11,
+    status: 'completado',
+    description: 'Paneles solares y sistemas fotovoltaicos con máximo ahorro energético',
+    client: 'KOLFF Solutions',
+    startDate: '2005-07-10',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-pro-lighting',
+    name: 'Iluminación Profesional Robusta',
+    category: 'Producto Energético',
+    icon: '🎆',
     assets: 8,
     status: 'completado',
-    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
+    description: 'Luminarias profesionales para minería, puertos y zonas de difícil acceso',
     client: 'KOLFF Solutions',
-    startDate: '2026-01-15',
-    endDate: '2026-03-10'
+    startDate: '2008-11-15',
+    endDate: '2026-03-31'
   },
   {
-    id: 'project-packaging',
-    name: 'Diseño de Packaging',
-    category: 'Packaging',
-    icon: '📦',
-    assets: 6,
+    id: 'product-ev',
+    name: 'Soluciones Electromovilidad',
+    category: 'Producto Innovador',
+    icon: '🚗',
+    assets: 7,
     status: 'en-progreso',
-    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
+    description: 'Baterías y sistemas de carga para vehículos eléctricos de nueva generación',
     client: 'KOLFF Solutions',
-    startDate: '2026-02-01',
-    endDate: '2026-04-15'
-  },
-  {
-    id: 'project-marketing',
-    name: 'Materiales de Marketing',
-    category: 'Marketing Digital',
-    icon: '📱',
-    assets: 12,
-    status: 'en-revision',
-    description: 'Templates para redes sociales, banners web y contenido digital',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-15',
-    endDate: '2026-04-30'
-  },
-  {
-    id: 'project-uiux',
-    name: 'Rediseño UI/UX Web',
-    category: 'UI/UX',
-    icon: '💻',
-    assets: 15,
-    status: 'en-progreso',
-    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
-    client: 'KOLFF Solutions',
-    startDate: '2026-03-01',
-    endDate: '2026-05-30'
+    startDate: '2020-01-10',
+    endDate: '2026-12-31'
   }
 ];
 
@@ -1430,10 +1454,100 @@ const COMMENTS = [
 ];
 
 const PORTFOLIO_ITEMS = [
-  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
-  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
-  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
+  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual: #FFB81C + Helvética + Brand Guide' },
+  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo registrado' },
+  { id: 'port-3', name: 'Guía Tipográfica Helvética', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Tipografía Helvética Thin, Light, Roman, Medium, Bold' },
+  { id: 'port-4', name: 'Paleta de Colores Official', icon: '🎨', dateCompleted: '2026-03-05', category: 'branding', description: 'Amarillo #FFB81C + Negro #000000 + Neutrales WCAG AA' },
+  { id: 'port-5', name: 'Design System KOLFF', icon: '⚙️', dateCompleted: '2026-03-31', category: 'design', description: 'Sistema de componentes reutilizables profesional' }
 ];
+
+// ═══════════════════════════════════════════════════════════════════
+//  KOLFF OFFICIAL INFORMATION — Brand Guidelines
+// ═══════════════════════════════════════════════════════════════════
+
+const KOLFF_BRAND = {
+  company: 'KOLFF ®',
+  tagline: 'energy.quality',
+  founded: '1990-01-15',
+  founder: 'Eduardo Cordero',
+  headquarters: {
+    address: 'Av. Puente Verde 1901, Quilicura, Santiago de Chile',
+    phone: '+56 2 2570 6300',
+    website: 'www.kolff.cl',
+    email: 'info@kolff.cl'
+  },
+  colors: {
+    primary: '#FFB81C',
+    primaryName: 'Pantone 1235 C',
+    secondary: '#000000',
+    secondaryName: 'Pantone Black'
+  },
+  typography: 'Helvética (Thin, Light, Roman, Medium, Bold)',
+  values: [
+    { name: 'INSPIRED', description: 'Inspirado en la innovación y excelencia' },
+    { name: 'GENUINE', description: 'Genuino en nuestro compromiso y calidad' },
+    { name: 'TRUSTED', description: 'Confiable en cada solución entregada' }
+  ],
+  products: [
+    'Respaldo Eléctrico UPS',
+    'Iluminación de Emergencia',
+    'Baterías Industriales',
+    'Equipos Fotovoltaicos',
+    'Iluminación Profesional',
+    'Electromovilidad',
+    'Servicio Técnico'
+  ],
+  locations: [
+    {
+      country: 'Chile',
+      city: 'Santiago',
+      address: 'Av. Puente Verde 1901, Quilicura',
+      phone: '+56 2 2570 6300',
+      website: 'www.kolff.cl',
+      status: 'Casa Matriz'
+    },
+    {
+      country: 'Perú',
+      city: 'Lima',
+      address: 'Av. Andrés Aramburú 511, San Isidro',
+      phone: '+51 1 2089170',
+      website: 'www.kolff.com.pe',
+      status: 'Activa'
+    },
+    {
+      country: 'Argentina',
+      city: 'Buenos Aires',
+      address: 'México 3869, Buenos Aires',
+      phone: '+54 11 4932972',
+      website: 'www.kolff.com.ar',
+      status: 'Activa'
+    },
+    {
+      country: 'Brasil',
+      city: 'São Paulo',
+      address: 'Av. Nossa Senhora Do Sabará 209, Vila Sofia',
+      phone: '+55 11 5524102',
+      website: 'www.kolff.com.br',
+      status: 'Activa'
+    },
+    {
+      country: 'España',
+      city: 'Madrid',
+      address: 'Calle Ing. Torres Quevedo 20, 28022',
+      phone: '+34 608078895',
+      website: 'www.kolff.es',
+      status: 'Activa'
+    },
+    {
+      country: 'EE.UU',
+      city: 'Fort Lauderdale',
+      address: '500 East Broward Boulevard Suite 1710, Florida',
+      phone: '+1 954 848 2858',
+      website: 'www.kolff.com',
+      status: 'Reciente'
+    }
+  ]
+};
 
 // ═══════════════════════════════════════════════════════════════════
 //  ORIGINAL DATA (KOLFF)
@@ -1464,52 +1578,76 @@ const ASSET_LINKS = {
 // [DATA] PHASE 2: Projects — Francisco agregará proyectos
 const PROJECTS = [
   {
-    id: 'project-branding',
-    name: 'Sistema de Marca KOLFF',
-    category: 'Branding',
-    icon: '🎨',
+    id: 'product-ups',
+    name: 'Respaldo Eléctrico UPS',
+    category: 'Producto Energético',
+    icon: '⚡',
+    assets: 12,
+    status: 'completado',
+    description: 'Sistemas de UPS industrial con respaldo de energía confiable — Available en 6 países',
+    client: 'KOLFF Solutions',
+    startDate: '1990-01-15',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-lighting',
+    name: 'Iluminación de Emergencia LED',
+    category: 'Producto Energético',
+    icon: '💡',
+    assets: 10,
+    status: 'completado',
+    description: 'Luminarias LED de emergencia para zonas críticas con certificación DS43',
+    client: 'KOLFF Solutions',
+    startDate: '1992-06-01',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-batteries',
+    name: 'Baterías Industriales',
+    category: 'Producto Energético',
+    icon: '🔋',
+    assets: 9,
+    status: 'completado',
+    description: 'Baterías de litio y plomo-ácido para aplicaciones industriales premium',
+    client: 'KOLFF Solutions',
+    startDate: '1995-03-20',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-solar',
+    name: 'Equipos Fotovoltaicos',
+    category: 'Producto Energético',
+    icon: '☀️',
+    assets: 11,
+    status: 'completado',
+    description: 'Paneles solares y sistemas fotovoltaicos con máximo ahorro energético',
+    client: 'KOLFF Solutions',
+    startDate: '2005-07-10',
+    endDate: '2026-03-31'
+  },
+  {
+    id: 'product-pro-lighting',
+    name: 'Iluminación Profesional Robusta',
+    category: 'Producto Energético',
+    icon: '🎆',
     assets: 8,
     status: 'completado',
-    description: 'Identidad visual completa: logo, paleta de colores, tipografía y guías de marca',
+    description: 'Luminarias profesionales para minería, puertos y zonas de difícil acceso',
     client: 'KOLFF Solutions',
-    startDate: '2026-01-15',
-    endDate: '2026-03-10'
+    startDate: '2008-11-15',
+    endDate: '2026-03-31'
   },
   {
-    id: 'project-packaging',
-    name: 'Diseño de Packaging',
-    category: 'Packaging',
-    icon: '📦',
-    assets: 6,
+    id: 'product-ev',
+    name: 'Soluciones Electromovilidad',
+    category: 'Producto Innovador',
+    icon: '🚗',
+    assets: 7,
     status: 'en-progreso',
-    description: 'Diseño de cajas y etiquetas de producto con especificaciones de impresión',
+    description: 'Baterías y sistemas de carga para vehículos eléctricos de nueva generación',
     client: 'KOLFF Solutions',
-    startDate: '2026-02-01',
-    endDate: '2026-04-15'
-  },
-  {
-    id: 'project-marketing',
-    name: 'Materiales de Marketing',
-    category: 'Marketing Digital',
-    icon: '📱',
-    assets: 12,
-    status: 'en-revision',
-    description: 'Templates para redes sociales, banners web y contenido digital',
-    client: 'KOLFF Solutions',
-    startDate: '2026-02-15',
-    endDate: '2026-04-30'
-  },
-  {
-    id: 'project-uiux',
-    name: 'Rediseño UI/UX Web',
-    category: 'UI/UX',
-    icon: '💻',
-    assets: 15,
-    status: 'en-progreso',
-    description: 'Interfaz nueva para plataforma web con prototipo interactivo',
-    client: 'KOLFF Solutions',
-    startDate: '2026-03-01',
-    endDate: '2026-05-30'
+    startDate: '2020-01-10',
+    endDate: '2026-12-31'
   }
 ];
 
@@ -1567,10 +1705,100 @@ const COMMENTS = [
 
 // [DATA] PHASE 3: Portfolio Items — Francisco marcará completados
 const PORTFOLIO_ITEMS = [
-  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual completa con brand guide' },
-  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo' },
-  { id: 'port-3', name: 'Guía Tipográfica', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Especificaciones completas de tipografía' }
+  { id: 'port-1', name: 'Sistema de Marca KOLFF', icon: '🎨', dateCompleted: '2026-03-10', category: 'branding', description: 'Identidad visual: #FFB81C + Helvética + Brand Guide' },
+  { id: 'port-2', name: 'Logo Principal + Variaciones', icon: '🔷', dateCompleted: '2026-02-20', category: 'branding', description: 'Logo en color, escala de grises e isotipo registrado' },
+  { id: 'port-3', name: 'Guía Tipográfica Helvética', icon: '📄', dateCompleted: '2026-03-08', category: 'branding', description: 'Tipografía Helvética Thin, Light, Roman, Medium, Bold' },
+  { id: 'port-4', name: 'Paleta de Colores Official', icon: '🎨', dateCompleted: '2026-03-05', category: 'branding', description: 'Amarillo #FFB81C + Negro #000000 + Neutrales WCAG AA' },
+  { id: 'port-5', name: 'Design System KOLFF', icon: '⚙️', dateCompleted: '2026-03-31', category: 'design', description: 'Sistema de componentes reutilizables profesional' }
 ];
+
+// ═══════════════════════════════════════════════════════════════════
+//  KOLFF OFFICIAL INFORMATION — Brand Guidelines
+// ═══════════════════════════════════════════════════════════════════
+
+const KOLFF_BRAND = {
+  company: 'KOLFF ®',
+  tagline: 'energy.quality',
+  founded: '1990-01-15',
+  founder: 'Eduardo Cordero',
+  headquarters: {
+    address: 'Av. Puente Verde 1901, Quilicura, Santiago de Chile',
+    phone: '+56 2 2570 6300',
+    website: 'www.kolff.cl',
+    email: 'info@kolff.cl'
+  },
+  colors: {
+    primary: '#FFB81C',
+    primaryName: 'Pantone 1235 C',
+    secondary: '#000000',
+    secondaryName: 'Pantone Black'
+  },
+  typography: 'Helvética (Thin, Light, Roman, Medium, Bold)',
+  values: [
+    { name: 'INSPIRED', description: 'Inspirado en la innovación y excelencia' },
+    { name: 'GENUINE', description: 'Genuino en nuestro compromiso y calidad' },
+    { name: 'TRUSTED', description: 'Confiable en cada solución entregada' }
+  ],
+  products: [
+    'Respaldo Eléctrico UPS',
+    'Iluminación de Emergencia',
+    'Baterías Industriales',
+    'Equipos Fotovoltaicos',
+    'Iluminación Profesional',
+    'Electromovilidad',
+    'Servicio Técnico'
+  ],
+  locations: [
+    {
+      country: 'Chile',
+      city: 'Santiago',
+      address: 'Av. Puente Verde 1901, Quilicura',
+      phone: '+56 2 2570 6300',
+      website: 'www.kolff.cl',
+      status: 'Casa Matriz'
+    },
+    {
+      country: 'Perú',
+      city: 'Lima',
+      address: 'Av. Andrés Aramburú 511, San Isidro',
+      phone: '+51 1 2089170',
+      website: 'www.kolff.com.pe',
+      status: 'Activa'
+    },
+    {
+      country: 'Argentina',
+      city: 'Buenos Aires',
+      address: 'México 3869, Buenos Aires',
+      phone: '+54 11 4932972',
+      website: 'www.kolff.com.ar',
+      status: 'Activa'
+    },
+    {
+      country: 'Brasil',
+      city: 'São Paulo',
+      address: 'Av. Nossa Senhora Do Sabará 209, Vila Sofia',
+      phone: '+55 11 5524102',
+      website: 'www.kolff.com.br',
+      status: 'Activa'
+    },
+    {
+      country: 'España',
+      city: 'Madrid',
+      address: 'Calle Ing. Torres Quevedo 20, 28022',
+      phone: '+34 608078895',
+      website: 'www.kolff.es',
+      status: 'Activa'
+    },
+    {
+      country: 'EE.UU',
+      city: 'Fort Lauderdale',
+      address: '500 East Broward Boulevard Suite 1710, Florida',
+      phone: '+1 954 848 2858',
+      website: 'www.kolff.com',
+      status: 'Reciente'
+    }
+  ]
+};
 
 const TASKS = [
   // ── SEMANA 1 ──

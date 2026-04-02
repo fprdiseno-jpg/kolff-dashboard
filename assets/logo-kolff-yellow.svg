@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <!-- Minimal Logo - Yellow Variant -->
+
+  <!-- KOLFF Text - Yellow -->
+  <text x="200" y="85" font-family="Helvetica, Arial, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="#FFB81C" letter-spacing="6">KOLFF</text>
+
+  <!-- Registered Trademark Symbol -->
+  <text x="280" y="65" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFB81C">®</text>
+</svg>

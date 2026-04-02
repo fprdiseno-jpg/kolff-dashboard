@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOLFF - Componentes Reutilizables</title>
+    <style>
+        :root {
+            --color-primary: #FFB81C;
+            --color-primary-dark: #E6A41A;
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F8F8F8;
+            --color-gray-100: #F2F2F2;
+            --color-gray-200: #E5E5E5;
+            --color-gray-400: #999999;
+            --color-gray-600: #666666;
+            --color-gray-800: #333333;
+            --color-gray-900: #1A1A1A;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #666666;
+            --color-text-muted: #999999;
+            --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --space-8: 8px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-40: 40px;
+            --space-48: 48px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--color-white);
+            color: var(--color-text);
+            padding: var(--space-48);
+        }
+
+        h1, h2 {
+            margin: var(--space-24) 0 var(--space-16);
+            color: var(--color-black);
+        }
+
+        .component-section {
+            margin-bottom: var(--space-48);
+            padding-bottom: var(--space-48);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-24);
+            margin-top: var(--space-24);
+        }
+
+        code {
+            background: var(--color-gray-50);
+            padding: var(--space-8) var(--space-16);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--color-gray-800);
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background: var(--color-gray-900);
+            color: var(--color-white);
+            padding: var(--space-24);
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: var(--space-24) 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ─────────────────  BUTTONS  ──────────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .btn {
+            display: inline-block;
+            padding: var(--space-12) var(--space-32);
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: center;
+            text-decoration: none;
+            font-family: var(--font-primary);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-black);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-black);
+            border: 2px solid var(--color-black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-light {
+            background: var(--color-white);
+            color: var(--color-black);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .btn-light:hover {
+            border-color: var(--color-black);
+            background: var(--color-gray-50);
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ──────────────  CARDS  ───────────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: 8px;
+            padding: var(--space-32);
+            transition: all var(--transition-base);
+        }
+
+        .card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-8);
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-16);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: var(--space-16);
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ──────────  BADGES & PILLS  ──────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-4) var(--space-12);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 12px;
+            background: var(--color-gray-100);
+            color: var(--color-text-secondary);
+        }
+
+        .badge-primary {
+            background: var(--color-primary);
+            color: var(--color-black);
+        }
+
+        .badge-dark {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ─────────────  INPUTS & FORMS  ───────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .form-group {
+            margin-bottom: var(--space-24);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: var(--space-8);
+            color: var(--color-text);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: var(--space-12) var(--space-16);
+            border: 1px solid var(--color-gray-200);
+            border-radius: 4px;
+            font-family: var(--font-primary);
+            font-size: 16px;
+            color: var(--color-text);
+            transition: border-color var(--transition-base);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+            border-color: var(--color-primary);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ─────────  ALERTS & NOTIFICATIONS  ────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .alert {
+            padding: var(--space-16) var(--space-20);
+            border-radius: 4px;
+            margin-bottom: var(--space-16);
+            font-size: 14px;
+        }
+
+        .alert-info {
+            background: #E0F2FE;
+            color: #0284C7;
+            border-left: 4px solid #0284C7;
+        }
+
+        .alert-success {
+            background: #DCFCE7;
+            color: #16A34A;
+            border-left: 4px solid #16A34A;
+        }
+
+        .alert-warning {
+            background: #FEF3C7;
+            color: #D97706;
+            border-left: 4px solid #D97706;
+        }
+
+        .alert-error {
+            background: #FEE2E2;
+            color: #DC2626;
+            border-left: 4px solid #DC2626;
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ───────────  TYPOGRAPHY  ────────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .text-sm {
+            font-size: 12px;
+        }
+
+        .text-base {
+            font-size: 16px;
+        }
+
+        .text-lg {
+            font-size: 18px;
+        }
+
+        .text-xl {
+            font-size: 20px;
+        }
+
+        .text-muted {
+            color: var(--color-text-muted);
+        }
+
+        .text-secondary {
+            color: var(--color-text-secondary);
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ──────────────  GRID  ────────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .grid {
+            display: grid;
+            gap: var(--space-24);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .grid-4,
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-4,
+            .grid-3,
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ──────────────  LAYOUT  ───────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .flex {
+            display: flex;
+            gap: var(--space-16);
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-16);
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-16);
+        }
+
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-16);
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ──────────  ICONS & AVATARS  ────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-sm {
+            width: 24px;
+            height: 24px;
+            font-size: 16px;
+        }
+
+        .icon-md {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+        }
+
+        .icon-lg {
+            width: 60px;
+            height: 60px;
+            font-size: 32px;
+        }
+
+        .icon-primary {
+            background: var(--color-primary);
+            color: var(--color-black);
+        }
+
+        .icon-dark {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .icon-light {
+            background: var(--color-gray-100);
+            color: var(--color-text);
+        }
+
+        /* ═══════════════════════════════════════════════════════ */
+        /* ───────────  DEMO GRID  ───────────────────── */
+        /* ═══════════════════════════════════════════════════════ */
+
+        .demo-box {
+            padding: var(--space-16);
+            background: var(--color-gray-50);
+            border: 1px dashed var(--color-gray-200);
+            border-radius: 4px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+    </style>
+</head>
+<body>
+    <h1>KOLFF - Componentes Reutilizables</h1>
+    <p>Catálogo de componentes y utilidades para la página web de KOLFF.</p>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ─────────────────  BUTTONS  ──────────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Botones</h2>
+
+        <div class="component-grid">
+            <div class="demo-box">
+                <button class="btn btn-primary">Botón Primario</button>
+            </div>
+            <div class="demo-box">
+                <button class="btn btn-secondary">Botón Secundario</button>
+            </div>
+            <div class="demo-box">
+                <button class="btn btn-light">Botón Light</button>
+            </div>
+        </div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;button class="btn btn-primary"&gt;Botón Primario&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Botón Secundario&lt;/button&gt;
+&lt;button class="btn btn-light"&gt;Botón Light&lt;/button&gt;</code></pre>
+
+        <h3>Variantes CSS</h3>
+        <ul>
+            <li><code>.btn-primary</code> - Amarillo KOLFF (CTA principal)</li>
+            <li><code>.btn-secondary</code> - Negro con borde (CTA secundario)</li>
+            <li><code>.btn-light</code> - Blanco con borde gris (CTA terciario)</li>
+        </ul>
+
+        <h3>Estados</h3>
+        <ul>
+            <li>Hover: transform translateY(-2px), shadow-md</li>
+            <li>Active: transform reset</li>
+            <li>Focus: outline 2px solid primary, offset 2px</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────────  CARDS  ───────────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Cards</h2>
+
+        <div class="component-grid">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <div class="card-title">UPS - Respaldo Eléctrico</div>
+                <div class="card-subtitle">Sistemas confiables de respaldo</div>
+                <p class="text-sm text-secondary">Protege tus equipos críticos ante cortes eléctricos con nuestros sistemas UPS de última generación.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <div class="card-title">Iluminación de Emergencia</div>
+                <div class="card-subtitle">Visibilidad garantizada</div>
+                <p class="text-sm text-secondary">Soluciones de iluminación confiables para emergencias y situaciones críticas.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔋</div>
+                <div class="card-title">Baterías Industriales</div>
+                <div class="card-subtitle">Alto rendimiento</div>
+                <p class="text-sm text-secondary">Baterías diseñadas para aplicaciones industriales exigentes y duraderas.</p>
+            </div>
+        </div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;div class="card"&gt;
+  &lt;div class="card-icon"&gt;⚡&lt;/div&gt;
+  &lt;div class="card-title"&gt;Título&lt;/div&gt;
+  &lt;div class="card-subtitle"&gt;Subtítulo&lt;/div&gt;
+  &lt;p&gt;Descripción...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Estados</h3>
+        <ul>
+            <li>Default: border gray-200</li>
+            <li>Hover: border primary, shadow-md, translateY(-4px)</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────  BADGES & PILLS  ──────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Badges</h2>
+
+        <div class="flex">
+            <span class="badge">Badge Default</span>
+            <span class="badge badge-primary">Badge Primary</span>
+            <span class="badge badge-dark">Badge Dark</span>
+        </div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;span class="badge"&gt;Badge Default&lt;/span&gt;
+&lt;span class="badge badge-primary"&gt;Badge Primary&lt;/span&gt;
+&lt;span class="badge badge-dark"&gt;Badge Dark&lt;/span&gt;</code></pre>
+
+        <h3>Usos</h3>
+        <ul>
+            <li>Tags en productos</li>
+            <li>Status indicators</li>
+            <li>Categorías</li>
+            <li>Versiones (v1.0, beta)</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ─────────────  INPUTS & FORMS  ───────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Formularios</h2>
+
+        <form style="max-width: 400px;">
+            <div class="form-group">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-input" placeholder="Tu nombre">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" placeholder="tu@email.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mensaje</label>
+                <textarea class="form-textarea" placeholder="Tu mensaje..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;Nombre&lt;/label&gt;
+  &lt;input type="text" class="form-input" placeholder="..."&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Estados</h3>
+        <ul>
+            <li>Default: border gray-200</li>
+            <li>Focus: outline primary 2px, border primary</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ─────────  ALERTS & NOTIFICATIONS  ────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Alerts</h2>
+
+        <div class="alert alert-info">ℹ️ Mensaje informativo. Usa para información general.</div>
+        <div class="alert alert-success">✅ Mensaje de éxito. Usa para confirmaciones.</div>
+        <div class="alert alert-warning">⚠️ Mensaje de advertencia. Usa para alertas.</div>
+        <div class="alert alert-error">❌ Mensaje de error. Usa para problemas.</div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;div class="alert alert-info"&gt;Mensaje informativo&lt;/div&gt;
+&lt;div class="alert alert-success"&gt;Mensaje de éxito&lt;/div&gt;
+&lt;div class="alert alert-warning"&gt;Mensaje de advertencia&lt;/div&gt;
+&lt;div class="alert alert-error"&gt;Mensaje de error&lt;/div&gt;</code></pre>
+
+        <h3>Variantes</h3>
+        <ul>
+            <li><code>.alert-info</code> - Azul (información)</li>
+            <li><code>.alert-success</code> - Verde (éxito)</li>
+            <li><code>.alert-warning</code> - Naranja (advertencia)</li>
+            <li><code>.alert-error</code> - Rojo (error)</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────  TYPOGRAPHY  ──────────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Tipografía</h2>
+
+        <h3>Tamaños</h3>
+        <p class="text-sm">Texto pequeño (12px) - .text-sm</p>
+        <p class="text-base">Texto base (16px) - .text-base</p>
+        <p class="text-lg">Texto grande (18px) - .text-lg</p>
+        <p class="text-xl">Texto extra grande (20px) - .text-xl</p>
+
+        <h3>Variantes</h3>
+        <p class="text-secondary">Texto secundario - .text-secondary</p>
+        <p class="text-muted">Texto mutado - .text-muted</p>
+        <p class="font-bold">Texto bold - .font-bold</p>
+        <p class="font-semibold">Texto semibold - .font-semibold</p>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;p class="text-sm"&gt;Pequeño&lt;/p&gt;
+&lt;p class="text-lg"&gt;Grande&lt;/p&gt;
+&lt;p class="font-bold"&gt;Bold&lt;/p&gt;
+&lt;p class="text-muted"&gt;Mutado&lt;/p&gt;</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────────  GRID SYSTEM  ────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Grid System</h2>
+
+        <h3>Grid 2 Columnas</h3>
+        <div class="grid grid-2">
+            <div class="demo-box">Columna 1</div>
+            <div class="demo-box">Columna 2</div>
+        </div>
+
+        <h3>Grid 3 Columnas</h3>
+        <div class="grid grid-3">
+            <div class="demo-box">Columna 1</div>
+            <div class="demo-box">Columna 2</div>
+            <div class="demo-box">Columna 3</div>
+        </div>
+
+        <h3>Grid 4 Columnas</h3>
+        <div class="grid grid-4">
+            <div class="demo-box">Col 1</div>
+            <div class="demo-box">Col 2</div>
+            <div class="demo-box">Col 3</div>
+            <div class="demo-box">Col 4</div>
+        </div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;div class="grid grid-2"&gt;
+  &lt;div&gt;Columna 1&lt;/div&gt;
+  &lt;div&gt;Columna 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Responsive</h3>
+        <ul>
+            <li>Desktop (1200px+): 2/3/4 columnas según clase</li>
+            <li>Tablet (768px-1199px): 2 columnas</li>
+            <li>Mobile (< 768px): 1 columna</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────  LAYOUT UTILITIES  ────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Layout Utilities</h2>
+
+        <h3>Flexbox</h3>
+
+        <h4>.flex (horizontal con gap)</h4>
+        <div class="flex">
+            <div class="demo-box">Item 1</div>
+            <div class="demo-box">Item 2</div>
+            <div class="demo-box">Item 3</div>
+        </div>
+
+        <h4>.flex-between (space-between + center)</h4>
+        <div class="flex-between">
+            <div class="demo-box">Izquierda</div>
+            <div class="demo-box">Derecha</div>
+        </div>
+
+        <h4>.flex-center (center align)</h4>
+        <div class="flex-center">
+            <div class="demo-box">Centrado</div>
+        </div>
+
+        <h4>.flex-column (vertical)</h4>
+        <div class="flex-column" style="max-width: 200px;">
+            <div class="demo-box">Item 1</div>
+            <div class="demo-box">Item 2</div>
+            <div class="demo-box">Item 3</div>
+        </div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;div class="flex"&gt;...&lt;/div&gt;
+&lt;div class="flex-between"&gt;...&lt;/div&gt;
+&lt;div class="flex-center"&gt;...&lt;/div&gt;
+&lt;div class="flex-column"&gt;...&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────  ICONS & AVATARS  ────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Icons & Avatars</h2>
+
+        <h3>Tamaños</h3>
+        <div class="flex">
+            <div class="icon icon-sm icon-primary">K</div>
+            <div class="icon icon-md icon-primary">K</div>
+            <div class="icon icon-lg icon-primary">K</div>
+        </div>
+
+        <h3>Colores</h3>
+        <div class="flex">
+            <div class="icon icon-md icon-primary">⚡</div>
+            <div class="icon icon-md icon-dark">💡</div>
+            <div class="icon icon-md icon-light">🔋</div>
+        </div>
+
+        <h3>HTML</h3>
+        <pre><code>&lt;div class="icon icon-sm icon-primary"&gt;K&lt;/div&gt;
+&lt;div class="icon icon-md icon-dark"&gt;⚡&lt;/div&gt;
+&lt;div class="icon icon-lg icon-light"&gt;💡&lt;/div&gt;</code></pre>
+
+        <h3>Variantes</h3>
+        <ul>
+            <li><code>.icon-sm</code> - 24x24px</li>
+            <li><code>.icon-md</code> - 40x40px</li>
+            <li><code>.icon-lg</code> - 60x60px</li>
+            <li><code>.icon-primary</code> - Yellow KOLFF</li>
+            <li><code>.icon-dark</code> - Black</li>
+            <li><code>.icon-light</code> - Gray 100</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────  VARIABLES CSS  ────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Variables CSS (Custom Properties)</h2>
+
+        <h3>Colores</h3>
+        <pre><code>--color-primary: #FFB81C
+--color-primary-dark: #E6A41A
+--color-black: #000000
+--color-white: #FFFFFF
+--color-gray-50: #F8F8F8
+--color-gray-900: #1A1A1A
+--color-text: #1A1A1A
+--color-text-secondary: #666666</code></pre>
+
+        <h3>Espaciado (8px base)</h3>
+        <pre><code>--space-8: 8px
+--space-16: 16px
+--space-24: 24px
+--space-32: 32px
+--space-40: 40px
+--space-48: 48px</code></pre>
+
+        <h3>Sombras</h3>
+        <pre><code>--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08)
+--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12)</code></pre>
+
+        <h3>Tipografía</h3>
+        <pre><code>--font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif</code></pre>
+
+        <h3>Transiciones</h3>
+        <pre><code>--transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1)</code></pre>
+
+        <h3>Uso en CSS</h3>
+        <pre><code>background: var(--color-primary);
+padding: var(--space-16);
+box-shadow: var(--shadow-md);
+transition: all var(--transition-base);</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- ──────────  GUÍA DE USO  ────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="component-section">
+        <h2>Guía de Uso</h2>
+
+        <h3>Para nueva página o sección:</h3>
+        <ol>
+            <li>Copia el CSS de variables (:root)</li>
+            <li>Copia las clases que necesites (buttons, cards, forms, etc.)</li>
+            <li>Personaliza colores/espaciado según necesites</li>
+            <li>Usa clases reutilizables en HTML</li>
+        </ol>
+
+        <h3>Mejores prácticas:</h3>
+        <ul>
+            <li>Mantén consistencia en espaciado (múltiplos de 8px)</li>
+            <li>Usa variables CSS para cambios globales</li>
+            <li>Combina componentes (ej: btn + icon juntos)</li>
+            <li>Respeta accesibilidad (focus states, contraste)</li>
+            <li>Prueba responsiveness en mobile (375px), tablet (768px), desktop (1440px)</li>
+        </ul>
+
+        <h3>Nombres de clases (BEM light):</h3>
+        <ul>
+            <li><code>.btn-primary</code> - Block.modifier</li>
+            <li><code>.card-title</code> - Block-element</li>
+            <li><code>.text-muted</code> - Utility class</li>
+            <li><code>.grid-3</code> - Variant class</li>
+        </ul>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid var(--color-gray-200); margin: var(--space-48) 0;">
+    <p style="text-align: center; color: var(--color-text-muted); font-size: 12px;">
+        KOLFF Design System v1.0 - 2024
+    </p>
+</body>
+</html>
