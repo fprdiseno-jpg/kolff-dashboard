@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energías Renovables - KOLFF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #FFB81C; --black: #000000; --white: #FFFFFF; --gray-50: #F9FAFB; --gray-100: #F3F4F6; --gray-700: #374151; --gray-900: #111827; --font-primary: 'Helvetica Neue', Helvetica, 'Arial', sans-serif; --font-secondary: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-secondary); background: var(--white); color: var(--gray-900); line-height: 1.6; }
+        .header { background: var(--white); border-bottom: 1px solid #e5e7eb; padding: 16px 40px; position: sticky; top: 0; z-index: 100; }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+        .breadcrumb { font-size: 12px; color: #6b7280; } .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 700; transition: all 200ms ease; } .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 80px 40px; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 24px; font-family: var(--font-primary); }
+        .hero p { font-size: 18px; color: #6b7280; margin-bottom: 32px; max-width: 600px; }
+        .btn { background: var(--primary); color: var(--black); padding: 12px 28px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: var(--font-primary); }
+        .section { margin-top: 60px; padding: 60px 0; border-top: 1px solid #e5e7eb; }
+        .section h2 { font-size: 32px; font-weight: 800; margin-bottom: 32px; font-family: var(--font-primary); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin-top: 32px; }
+        .feature { padding: 24px; background: var(--gray-50); border-radius: 8px; border: 1px solid #e5e7eb; }
+        .feature h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+        .feature p { font-size: 14px; color: #6b7280; line-height: 1.6; }
+        .specs-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+        .specs-table th { background: var(--gray-100); padding: 12px; text-align: left; font-weight: 700; font-size: 13px; border-bottom: 2px solid #e5e7eb; }
+        .specs-table td { padding: 12px; border-bottom: 1px solid #e5e7eb; font-size: 13px; }
+        .footer { background: var(--gray-900); color: #d1d5db; padding: 40px; margin-top: 60px; text-align: center; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="kolff-landing.html" class="logo" style="text-decoration: none; cursor: pointer;">KOLFF</a>
+            <div class="breadcrumb"><a href="kolff-landing.html">Productos</a> / Energías Renovables</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Soluciones Fotovoltaicas y Energía Sostenible</h1>
+            <p>
+                Sistemas de energía solar profesionales diseñados para empresas. Reduce costos operativos
+                y carbon footprint con soluciones renovables de alto rendimiento y máxima durabilidad.
+            </p>
+            <button class="btn">Calcular Ahorro Energético</button>
+        </section>
+
+        <section class="section">
+            <h2>Características Principales</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Eficiencia Máxima</h3>
+                    <p>Paneles de última generación con eficiencia superior al 22% garantizada.</p>
+                </div>
+                <div class="feature">
+                    <h3>Durabilidad</h3>
+                    <p>Productos con garantía de 25 años y rendimiento asegurado a largo plazo.</p>
+                </div>
+                <div class="feature">
+                    <h3>ROI Rápido</h3>
+                    <p>Sistemas dimensionados para retorno de inversión en 5-7 años típicamente.</p>
+                </div>
+                <div class="feature">
+                    <h3>Monitoreo Inteligente</h3>
+                    <p>Sistema de monitoreo en tiempo real para optimizar producción energética.</p>
+                </div>
+                <div class="feature">
+                    <h3>Híbrido con UPS</h3>
+                    <p>Integración con sistemas UPS garantiza continuidad 24/7.</p>
+                </div>
+                <div class="feature">
+                    <h3>Sustentabilidad</h3>
+                    <p>Reduce dependencia energética y cumple metas ESG corporativas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Sistemas Disponibles</h2>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Sistema</th>
+                        <th>Potencia</th>
+                        <th>Paneles</th>
+                        <th>Aplicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sistema Pequeño</td>
+                        <td>5 kW</td>
+                        <td>12-15 paneles</td>
+                        <td>Oficinas, pequeñas industrias</td>
+                    </tr>
+                    <tr>
+                        <td>Sistema Medio</td>
+                        <td>25 kW</td>
+                        <td>50-60 paneles</td>
+                        <td>Plantas medianas</td>
+                    </tr>
+                    <tr>
+                        <td>Sistema Grande</td>
+                        <td>100 kW</td>
+                        <td>200-250 paneles</td>
+                        <td>Fábricas e instalaciones</td>
+                    </tr>
+                    <tr>
+                        <td>Sistema Enterprise</td>
+                        <td>500+ kW</td>
+                        <td>Configurable</td>
+                        <td>Grandes complejos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Componentes del Sistema</h2>
+            <p style="margin-bottom: 16px;">
+                Cada instalación solar incluye:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">✓ Paneles fotovoltaicos de marca premium</li>
+                <li style="padding: 8px 0;">✓ Inversores trifásicos de alto rendimiento</li>
+                <li style="padding: 8px 0;">✓ Sistema de montaje estructural</li>
+                <li style="padding: 8px 0;">✓ Monitoreo y analytics en tiempo real</li>
+                <li style="padding: 8px 0;">✓ Instalación y puesta en marcha profesional</li>
+                <li style="padding: 8px 0;">✓ Mantenimiento y soporte técnico 24/7</li>
+                <li style="padding: 8px 0;">✓ Tramitación de subsidios y certificaciones</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Beneficios Económicos</h2>
+            <p style="margin-bottom: 16px;">
+                Inversor en energía solar obtiene:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">✓ Reducción de 60-80% en consumo eléctrico</li>
+                <li style="padding: 8px 0;">✓ Protección contra inflación de energía</li>
+                <li style="padding: 8px 0;">✓ Beneficios fiscales y subsidios disponibles</li>
+                <li style="padding: 8px 0;">✓ Aumento de valor del inmueble</li>
+                <li style="padding: 8px 0;">✓ Crédito de carbono potencial</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>ROI y Recuperación de Inversión</h2>
+            <p style="margin-bottom: 16px;">
+                Retorno de inversión típico:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">• Sistemas solares: 5-8 años de ROI</li>
+                <li style="padding: 8px 0;">• Sistemas híbridos: 6-10 años considerando almacenamiento</li>
+                <li style="padding: 8px 0;">• Depreciación acelerada y créditos fiscales disponibles</li>
+                <li style="padding: 8px 0;">• Aumento de 5-10% en valor de propiedad</li>
+                <li style="padding: 8px 0;">• Ingresos por exceso energético (en algunos mercados)</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Casos de Aplicación</h2>
+            <p style="margin-bottom: 16px;">
+                Ideales para:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">• Operaciones mineras remotas sin acceso a red pública</li>
+                <li style="padding: 8px 0;">• Agroindustria con demanda estacional variable</li>
+                <li style="padding: 8px 0;">• Campamentos de exploración petrolera y gasífera</li>
+                <li style="padding: 8px 0;">• Instalaciones industriales con objetivo ESG corporativo</li>
+                <li style="padding: 8px 0;">• Comunidades rurales con electrificación remota</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Garantía y Servicio Post-Instalación</h2>
+            <p style="margin-bottom: 16px;">
+                Cobertura integral:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 8px 0;">✓ Garantía de 25 años en paneles solares</li>
+                <li style="padding: 8px 0;">✓ Garantía de 10 años en baterías de almacenamiento</li>
+                <li style="padding: 8px 0;">✓ Garantía de 5 años en inversores y componentes</li>
+                <li style="padding: 8px 0;">✓ Monitoreo de producción en tiempo real</li>
+                <li style="padding: 8px 0;">✓ Mantenimiento preventivo especializado</li>
+                <li style="padding: 8px 0;">✓ Soporte técnico 24/7 disponible</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="footer">
+        KOLFF 2026 | Soluciones de Energía Renovable | Todos los derechos reservados
+    </footer>
+</body>
+</html>
