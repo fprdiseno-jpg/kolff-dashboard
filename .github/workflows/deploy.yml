@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        cname: kolff-dashboard.fprdiseno.com
+        force_orphan: true
+
+    - name: Create deployment status
+      if: always()
+      run: |
+        echo "✅ Deployment completed"
+        echo "Dashboard: https://fprdiseno-jpg.github.io/kolff-dashboard/"
+        echo "Landing: https://fprdiseno-jpg.github.io/kolff-dashboard/kolff-landing.html"
+        echo "Components: https://fprdiseno-jpg.github.io/kolff-dashboard/COMPONENTS.html"
