@@ -1,0 +1,9 @@
+theme: null
+plugins: []
+exclude: [".git", ".gitignore", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/"]
+include: [".nojekyll"]
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+highlighter: rouge
