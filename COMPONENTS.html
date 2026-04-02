@@ -1,557 +1,2120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOLFF Design System v2.0 - Professional Documentation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #FFB81C;
-            --primary-dark: #E6A41A;
-            --primary-light: #FFF8E1;
-            --black: #000000;
-            --white: #FFFFFF;
-            --gray-50: #F9FAFB;
-            --gray-100: #F3F4F6;
-            --gray-200: #E5E7EB;
-            --gray-300: #D1D5DB;
-            --gray-400: #9CA3AF;
-            --gray-500: #6B7280;
-            --gray-600: #4B5563;
-            --gray-700: #374151;
-            --gray-800: #1F2937;
-            --gray-900: #111827;
-            --success: #10B981;
-            --error: #EF4444;
-            --warning: #F59E0B;
-            --info: #3B82F6;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOLFF Design System v3.0 — Professional Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* === BRAND COLORS === */
+      --primary:        #FFB81C;
+      --primary-dark:   #E6A41A;
+      --primary-light:  #FFF8E1;
+      --primary-mid:    #FFC947;
+      --black:          #000000;
+      --white:          #FFFFFF;
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; }
+      /* === TEXT === */
+      --text-primary:   #0F172A;
+      --text-secondary: #475569;
+      --text-tertiary:  #64748B;
+      --text-muted:     #94A3B8;
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            line-height: 1.6;
-        }
+      /* === NEUTRALS === */
+      --gray-50:  #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-800: #1F2937;
+      --gray-900: #111827;
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 0;
-            min-height: 100vh;
-        }
+      /* === FUNCTIONAL === */
+      --success:      #16A34A;
+      --success-light:#DCFCE7;
+      --error:        #DC2626;
+      --error-light:  #FEE2E2;
+      --warning:      #EA580C;
+      --warning-light:#FED7AA;
+      --info:         #0284C7;
+      --info-light:   #E0F2FE;
 
-        /* ═══ HEADER ═══ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--black);
-            color: var(--white);
-            padding: 20px 40px;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+      /* === SHADOWS === */
+      --shadow-xs:    0 1px 2px rgba(0,0,0,0.05);
+      --shadow-sm:    0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md:    0 4px 16px rgba(0,0,0,0.12);
+      --shadow-lg:    0 8px 32px rgba(0,0,0,0.16);
+      --shadow-xl:    0 12px 48px rgba(0,0,0,0.20);
+      --shadow-hover: 0 16px 40px rgba(0,0,0,0.24);
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+      /* === TYPOGRAPHY === */
+      --font-primary:   'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-secondary: 'Inter', sans-serif;
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, #FFC947 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-        }
+      /* === SPACING === */
+      --space-xs:  4px;
+      --space-sm:  8px;
+      --space-md:  16px;
+      --space-lg:  24px;
+      --space-xl:  32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      --space-4xl: 96px;
 
-        .header-meta {
-            font-size: 13px;
-            color: var(--gray-400);
-        }
+      /* === BORDERS === */
+      --border:        #E5E7EB;
+      --border-radius: 8px;
 
-        .header-meta .version {
-            color: var(--primary);
-            font-weight: 700;
-        }
+      /* === TRANSITIONS === */
+      --transition: 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-        /* ═══ SIDEBAR ═══ */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 70px;
-            width: 280px;
-            height: calc(100vh - 70px);
-            background: var(--white);
-            border-right: 1px solid var(--gray-200);
-            overflow-y: auto;
-            padding: 24px 0;
-            z-index: 90;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-        .sidebar-section {
-            padding: 0;
-            margin-bottom: 24px;
-        }
+    body {
+      font-family: var(--font-secondary);
+      background: var(--gray-50);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-        .sidebar-title {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            padding: 12px 20px;
-            letter-spacing: 0.5px;
-        }
+    /* ═══════════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════════ */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: var(--black);
+      z-index: 1000;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+    }
 
-        .sidebar-link {
-            display: block;
-            padding: 12px 20px;
-            color: var(--gray-700);
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 200ms ease;
-            border-left: 3px solid transparent;
-        }
+    .header-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
 
-        .sidebar-link:hover,
-        .sidebar-link.active {
-            background: var(--primary-light);
-            color: var(--black);
-            border-left-color: var(--primary);
-            padding-left: 18px;
-        }
+    .header-logo {
+      font-family: var(--font-primary);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
 
-        /* ═══ MAIN CONTENT ═══ */
-        .main-content {
-            margin-top: 70px;
-            margin-left: 280px;
-            padding: 60px 40px;
-            background: var(--white);
-        }
+    .header-divider {
+      width: 1px;
+      height: 24px;
+      background: #333;
+      flex-shrink: 0;
+    }
 
-        .section {
-            margin-bottom: 80px;
-        }
+    .header-tag {
+      font-family: var(--font-secondary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
 
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--black);
-            margin-bottom: 12px;
-            font-family: 'Roboto', sans-serif;
-        }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+    }
 
-        .section-description {
-            font-size: 16px;
-            color: var(--gray-600);
-            margin-bottom: 40px;
-        }
+    .header-nav a {
+      font-family: var(--font-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
 
-        /* ═══ COLOR PALETTE ═══ */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
+    .header-nav a:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+    }
 
-        .color-swatch {
-            text-align: center;
-        }
+    .header-nav a.nav-cta {
+      color: var(--black);
+      background: var(--primary);
+      font-weight: 700;
+      margin-left: 8px;
+    }
 
-        .swatch {
-            width: 100%;
-            height: 120px;
-            border-radius: 8px;
-            border: 1px solid var(--gray-200);
-            margin-bottom: 12px;
-            transition: transform 200ms ease;
-        }
+    .header-nav a.nav-cta:hover {
+      background: var(--primary-dark);
+    }
 
-        .swatch:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
+    /* ═══════════════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════════════ */
+    .layout {
+      display: flex;
+      margin-top: 64px;
+      min-height: calc(100vh - 64px);
+    }
 
-        .color-code {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: var(--gray-600);
-            margin-bottom: 4px;
-        }
+    /* ═══════════════════════════════════════════════
+       SIDEBAR
+    ═══════════════════════════════════════════════ */
+    .sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 260px;
+      height: calc(100vh - 64px);
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 32px 0 40px;
+      scrollbar-width: thin;
+    }
 
-        .color-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
 
-        /* ═══ TYPOGRAPHY ═══ */
-        .typography-scale {
-            margin-bottom: 40px;
-        }
+    .sidebar-group { margin-bottom: 28px; }
 
-        .type-sample {
-            margin-bottom: 32px;
-            padding: 24px;
-            background: var(--gray-50);
-            border-radius: 8px;
-        }
+    .sidebar-label {
+      font-family: var(--font-primary);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      padding: 0 20px 8px;
+      display: block;
+    }
 
-        .type-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
+    .sidebar-link {
+      display: block;
+      padding: 9px 20px;
+      font-family: var(--font-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 150ms ease;
+    }
 
-        /* ═══ COMPONENTS ═══ */
-        .component-showcase {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 32px;
-            transition: all 200ms ease;
-        }
+    .sidebar-link:hover {
+      color: var(--text-primary);
+      background: var(--gray-50);
+      border-left-color: var(--gray-200);
+    }
 
-        .component-showcase:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(255, 184, 28, 0.15);
-        }
+    .sidebar-link.active {
+      color: var(--black);
+      font-weight: 600;
+      background: var(--primary-light);
+      border-left-color: var(--primary);
+    }
 
-        .component-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--black);
-            margin-bottom: 12px;
-            font-family: 'Roboto', sans-serif;
-        }
+    /* ═══════════════════════════════════════════════
+       MAIN CONTENT
+    ═══════════════════════════════════════════════ */
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      min-width: 0;
+    }
 
-        .component-description {
-            font-size: 14px;
-            color: var(--gray-600);
-            margin-bottom: 24px;
-        }
+    /* ═══════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, var(--gray-900) 0%, var(--black) 100%);
+      padding: 100px 80px;
+    }
 
-        .component-preview {
-            background: var(--gray-50);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+    .hero-kicker {
+      font-family: var(--font-primary);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 24px;
+      display: block;
+    }
 
-        .component-code {
-            background: var(--gray-900);
-            color: #fff;
-            padding: 16px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            overflow-x: auto;
-            margin-top: 12px;
-        }
+    .hero h1 {
+      font-family: var(--font-primary);
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
 
-        /* ═══ BUTTONS ═══ */
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 200ms ease;
-            font-family: 'Roboto', sans-serif;
-        }
+    .hero h1 span {
+      color: var(--primary);
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            color: var(--black);
-        }
+    .hero-desc {
+      font-family: var(--font-secondary);
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
 
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 184, 28, 0.3);
-        }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
 
-        .btn-secondary {
-            background: var(--black);
-            color: var(--white);
-        }
+    .hero-stat-num {
+      font-family: var(--font-primary);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
 
-        .btn-secondary:hover {
-            background: var(--gray-800);
-        }
+    .hero-stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-500);
+    }
 
-        /* ═══ RESPONSIVE ═══ */
-        @media (max-width: 1024px) {
-            .container { grid-template-columns: 1fr; }
-            .sidebar { display: none; }
-            .main-content { margin-left: 0; padding: 40px 20px; }
-        }
-    </style>
+    .hero-actions { display: flex; gap: 16px; }
+
+    .btn-hero-primary {
+      font-family: var(--font-primary);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--primary);
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+    }
+
+    .btn-hero-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,184,28,0.35);
+    }
+
+    .btn-hero-secondary {
+      font-family: var(--font-primary);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      background: transparent;
+      border: 2px solid var(--gray-700);
+      padding: 14px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: all 200ms ease;
+    }
+
+    .btn-hero-secondary:hover {
+      border-color: var(--gray-500);
+      color: var(--gray-200);
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTIONS
+    ═══════════════════════════════════════════════ */
+    .section {
+      padding: 80px;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .section:nth-child(even) { background: var(--gray-50); }
+
+    .section-kicker {
+      font-family: var(--font-primary);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-primary);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .subsection {
+      margin-bottom: 56px;
+    }
+
+    .subsection-title {
+      font-family: var(--font-primary);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .subsection-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CODE BLOCKS
+    ═══════════════════════════════════════════════ */
+    .code-block {
+      background: var(--gray-900);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 16px;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .code-block code .c-yellow { color: #FFB81C; }
+    .code-block code .c-green  { color: #86efac; }
+    .code-block code .c-gray   { color: #94a3b8; }
+
+    /* ═══════════════════════════════════════════════
+       COLOR SWATCHES
+    ═══════════════════════════════════════════════ */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .color-swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+
+    .color-swatch-preview {
+      height: 96px;
+    }
+
+    .color-swatch-info {
+      background: var(--white);
+      padding: 12px 14px;
+    }
+
+    .color-swatch-name {
+      font-family: var(--font-primary);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .color-swatch-hex {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+
+    .color-swatch-use {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* TOKEN TABLE */
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .token-table th {
+      background: var(--gray-100);
+      padding: 10px 16px;
+      text-align: left;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .token-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: middle;
+    }
+
+    .token-table tr:last-child td { border-bottom: none; }
+    .token-table tr:hover td { background: var(--gray-50); }
+
+    .token-name {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .color-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       TYPOGRAPHY SAMPLES
+    ═══════════════════════════════════════════════ */
+    .type-sample {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .type-sample:last-child { border-bottom: none; }
+
+    .type-meta { padding-top: 4px; }
+
+    .type-meta-label {
+      font-family: var(--font-primary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .type-meta-item {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 2px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SPACING DISPLAY
+    ═══════════════════════════════════════════════ */
+    .spacing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spacing-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .spacing-bar-wrap {
+      flex-shrink: 0;
+      width: 200px;
+      display: flex;
+      align-items: center;
+    }
+
+    .spacing-bar {
+      background: var(--primary);
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .spacing-info { flex: 1; }
+
+    .spacing-token {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .spacing-value {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-left: 8px;
+    }
+
+    .spacing-use {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SHADOW DISPLAY
+    ═══════════════════════════════════════════════ */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .shadow-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .shadow-label {
+      font-family: var(--font-primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .shadow-code {
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+
+    /* ═══════════════════════════════════════════════
+       BUTTONS
+    ═══════════════════════════════════════════════ */
+    .btn-demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      padding: 32px;
+      background: var(--gray-50);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .btn { display: inline-block; text-decoration: none; cursor: pointer; font-family: var(--font-primary); font-weight: 700; border-radius: 6px; border: none; transition: all var(--transition); letter-spacing: 0.3px; }
+
+    .btn-sm  { font-size: 12px; padding: 8px 16px; }
+    .btn-md  { font-size: 14px; padding: 12px 24px; }
+    .btn-lg  { font-size: 16px; padding: 16px 32px; }
+
+    .btn-primary { background: var(--primary); color: var(--black); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,184,28,0.35); }
+
+    .btn-secondary { background: var(--black); color: var(--white); }
+    .btn-secondary:hover { background: var(--gray-800); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: var(--black); transform: translateY(-2px); }
+
+    .btn-ghost { background: transparent; color: var(--text-secondary); border: 2px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--gray-400); color: var(--text-primary); }
+
+    .btn:disabled, .btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+    /* ═══════════════════════════════════════════════
+       CARDS
+    ═══════════════════════════════════════════════ */
+    .card-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-mid));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms ease;
+    }
+
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .card-icon svg { width: 24px; height: 24px; }
+
+    .card-title {
+      font-family: var(--font-primary);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .card-stat {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .card-stat-num {
+      font-family: var(--font-primary);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .card-stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* PRODUCT CARD (linked) */
+    .product-card {
+      display: block;
+      text-decoration: none;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-mid));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--gray-200);
+    }
+
+    .product-card:hover::before { transform: scaleX(1); }
+
+    .product-card-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--primary-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .product-card-icon svg { width: 26px; height: 26px; }
+
+    .product-card-title {
+      font-family: var(--font-primary);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .product-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .product-card-link {
+      font-family: var(--font-primary);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .product-card-link svg { width: 14px; height: 14px; transition: transform 200ms ease; }
+    .product-card:hover .product-card-link svg { transform: translateX(4px); }
+
+    /* ═══════════════════════════════════════════════
+       FORMS
+    ═══════════════════════════════════════════════ */
+    .form-group { margin-bottom: 24px; }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-primary);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 11px 16px;
+      font-family: var(--font-secondary);
+      font-size: 14px;
+      color: var(--text-primary);
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 6px;
+      transition: all 150ms ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255,184,28,0.15);
+    }
+
+    .form-input:disabled { background: var(--gray-100); color: var(--gray-400); cursor: not-allowed; }
+
+    .form-input.is-error { border-color: var(--error); box-shadow: 0 0 0 3px rgba(220,38,38,0.1); }
+
+    .form-hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .form-error { font-size: 12px; color: var(--error); margin-top: 4px; font-weight: 500; }
+
+    .form-demo { max-width: 500px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+
+    /* ═══════════════════════════════════════════════
+       TABLES
+    ═══════════════════════════════════════════════ */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .spec-table thead th {
+      background: var(--gray-900);
+      color: var(--gray-300);
+      padding: 14px 20px;
+      text-align: left;
+      font-family: var(--font-primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .spec-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .spec-table thead th:last-child  { border-radius: 0 8px 0 0; }
+
+    .spec-table tbody td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .spec-table tbody tr:hover td { background: var(--gray-50); }
+    .spec-table tbody tr:last-child td { border-bottom: none; }
+
+    .spec-table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* ═══════════════════════════════════════════════
+       BADGES
+    ═══════════════════════════════════════════════ */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-primary);
+      letter-spacing: 0.3px;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+
+    .badge-primary   { background: var(--primary-light); color: #92620A; }
+    .badge-primary .badge-dot { background: var(--primary); }
+    .badge-success   { background: var(--success-light); color: #15803D; }
+    .badge-success .badge-dot { background: var(--success); }
+    .badge-error     { background: var(--error-light); color: #B91C1C; }
+    .badge-error .badge-dot { background: var(--error); }
+    .badge-warning   { background: var(--warning-light); color: #C2410C; }
+    .badge-warning .badge-dot { background: var(--warning); }
+    .badge-info      { background: var(--info-light); color: #0369A1; }
+    .badge-info .badge-dot { background: var(--info); }
+    .badge-outline   { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); }
+    .badge-dark      { background: var(--gray-900); color: var(--gray-100); }
+
+    /* ═══════════════════════════════════════════════
+       ALERTS
+    ═══════════════════════════════════════════════ */
+    .alert {
+      display: flex;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid transparent;
+    }
+
+    .alert-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-title { font-family: var(--font-primary); font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .alert-desc { font-size: 13px; line-height: 1.5; }
+
+    .alert-success  { background: var(--success-light); border-color: #86efac; border-left: 4px solid var(--success); }
+    .alert-success .alert-title { color: #15803D; }
+    .alert-success .alert-desc  { color: #166534; }
+
+    .alert-error    { background: var(--error-light); border-color: #fca5a5; border-left: 4px solid var(--error); }
+    .alert-error .alert-title { color: #B91C1C; }
+    .alert-error .alert-desc  { color: #991B1B; }
+
+    .alert-warning  { background: var(--warning-light); border-color: #fdba74; border-left: 4px solid var(--warning); }
+    .alert-warning .alert-title { color: #C2410C; }
+    .alert-warning .alert-desc  { color: #9A3412; }
+
+    .alert-info     { background: var(--info-light); border-color: #93c5fd; border-left: 4px solid var(--info); }
+    .alert-info .alert-title { color: #0369A1; }
+    .alert-info .alert-desc  { color: #075985; }
+
+    /* ═══════════════════════════════════════════════
+       ICONS
+    ═══════════════════════════════════════════════ */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .icon-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 16px;
+      text-align: center;
+      transition: all 150ms ease;
+    }
+
+    .icon-item:hover { border-color: var(--primary); background: var(--primary-light); }
+
+    .icon-preview {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 12px;
+      color: var(--primary-dark);
+    }
+
+    .icon-name {
+      font-family: var(--font-primary);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       ECOSYSTEM CARDS
+    ═══════════════════════════════════════════════ */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .ecosystem-card {
+      display: block;
+      text-decoration: none;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ecosystem-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-mid) 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms ease;
+    }
+
+    .ecosystem-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gray-200); }
+    .ecosystem-card:hover::after { transform: scaleX(1); }
+
+    .ecosystem-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .ecosystem-card-title {
+      font-family: var(--font-primary);
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .ecosystem-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .ecosystem-card-url {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .ecosystem-card-url svg { width: 12px; height: 12px; color: var(--primary); }
+
+    /* ═══════════════════════════════════════════════
+       ACCESSIBILITY
+    ═══════════════════════════════════════════════ */
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .contrast-item {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .contrast-preview {
+      padding: 20px;
+      font-family: var(--font-primary);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .contrast-meta {
+      background: var(--white);
+      padding: 12px 14px;
+    }
+
+    .contrast-ratio {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .contrast-level {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .level-aa   { background: var(--success-light); color: var(--success); }
+    .level-aaa  { background: #dcfce7; color: #15803d; }
+    .level-fail { background: var(--error-light); color: var(--error); }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--gray-900);
+      padding: 64px 80px 40px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--gray-700);
+      margin-bottom: 40px;
+    }
+
+    .footer-brand-logo {
+      font-family: var(--font-primary);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 20px;
+    }
+
+    .footer-links { list-style: none; }
+
+    .footer-links li { margin-bottom: 10px; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .footer-contact-icon { color: var(--primary); flex-shrink: 0; width: 16px; height: 16px; margin-top: 2px; }
+
+    .footer-contact-text {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .footer-version {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--gray-600);
+      background: var(--gray-800);
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .hero { padding: 60px 40px; }
+      .section { padding: 60px 40px; }
+      .hero h1 { font-size: 38px; }
+      .site-footer { padding: 48px 40px 32px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .header-inner { padding: 0 24px; gap: 20px; }
+      .header-nav a:not(.nav-cta) { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 48px 24px; }
+      .section { padding: 48px 24px; }
+      .hero h1 { font-size: 28px; }
+      .hero-stats { gap: 24px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .site-footer { padding: 40px 24px 28px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <div class="header">
-        <div class="header-content">
-            <div class="logo">KOLFF</div>
-            <div class="header-meta">Design System v<span class="version">2.0</span> • Professional Documentation</div>
-        </div>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">KOLFF</a>
+    <div class="header-divider"></div>
+    <span class="header-tag">Design System v3.0</span>
+    <nav class="header-nav">
+      <a href="index.html">Dashboard</a>
+      <a href="kolff-landing.html">Landing Page</a>
+      <a href="productos-ups.html">UPS</a>
+      <a href="productos-iluminacion.html">Iluminacion</a>
+      <a href="productos-datacenter.html">Data Center</a>
+      <a href="productos-sala-electrica.html">Sala Electrica</a>
+      <a href="productos-renovables.html">Renovables</a>
+      <a href="kolff-landing.html" class="nav-cta">Ver Sitio</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     LAYOUT
+═══════════════════════════════════════════════════════ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-group">
+      <span class="sidebar-label">Fundamentos</span>
+      <a href="#colores" class="sidebar-link active">Colores</a>
+      <a href="#tipografia" class="sidebar-link">Tipografia</a>
+      <a href="#espaciado" class="sidebar-link">Espaciado</a>
+      <a href="#sombras" class="sidebar-link">Sombras</a>
     </div>
-
-    <div class="container">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="sidebar-section">
-                <div class="sidebar-title">Fundamentos</div>
-                <a href="#colors" class="sidebar-link active">Colores</a>
-                <a href="#typography" class="sidebar-link">Tipografía</a>
-                <a href="#spacing" class="sidebar-link">Espaciado</a>
-                <a href="#shadows" class="sidebar-link">Sombras</a>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Componentes</div>
-                <a href="#buttons" class="sidebar-link">Botones</a>
-                <a href="#cards" class="sidebar-link">Tarjetas</a>
-                <a href="#forms" class="sidebar-link">Formularios</a>
-                <a href="#tables" class="sidebar-link">Tablas</a>
-                <a href="#badges" class="sidebar-link">Badges</a>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Patrones</div>
-                <a href="#hero" class="sidebar-link">Hero Section</a>
-                <a href="#grid" class="sidebar-link">Product Grid</a>
-                <a href="#footer" class="sidebar-link">Footer</a>
-                <a href="#navigation" class="sidebar-link">Navegación</a>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Directrices</div>
-                <a href="#accessibility" class="sidebar-link">Accesibilidad</a>
-                <a href="#bestpractices" class="sidebar-link">Best Practices</a>
-            </div>
-        </div>
-
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <!-- COLORS -->
-            <section class="section" id="colors">
-                <h2 class="section-title">Paleta de Colores</h2>
-                <p class="section-description">Sistema de colores KOLFF basado en la identidad de marca oficial</p>
-
-                <h3 class="component-title" style="margin-top: 32px; margin-bottom: 20px;">Colores Principales</h3>
-                <div class="color-grid">
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #FFB81C;"></div>
-                        <div class="color-code">#FFB81C</div>
-                        <div class="color-name">Primary Yellow</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #000000;"></div>
-                        <div class="color-code">#000000</div>
-                        <div class="color-name">Black</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #FFFFFF; border: 2px solid #E5E7EB;"></div>
-                        <div class="color-code">#FFFFFF</div>
-                        <div class="color-name">White</div>
-                    </div>
-                </div>
-
-                <h3 class="component-title" style="margin-top: 32px; margin-bottom: 20px;">Paleta Neutral</h3>
-                <div class="color-grid">
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #F9FAFB;"></div>
-                        <div class="color-code">Gray-50</div>
-                        <div class="color-name">#F9FAFB</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #F3F4F6;"></div>
-                        <div class="color-code">Gray-100</div>
-                        <div class="color-name">#F3F4F6</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #6B7280;"></div>
-                        <div class="color-code">Gray-500</div>
-                        <div class="color-name">#6B7280</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #111827;"></div>
-                        <div class="color-code">Gray-900</div>
-                        <div class="color-name">#111827</div>
-                    </div>
-                </div>
-
-                <h3 class="component-title" style="margin-top: 32px; margin-bottom: 20px;">Colores Funcionales</h3>
-                <div class="color-grid">
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #10B981;"></div>
-                        <div class="color-code">Success</div>
-                        <div class="color-name">#10B981</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #EF4444;"></div>
-                        <div class="color-code">Error</div>
-                        <div class="color-name">#EF4444</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #F59E0B;"></div>
-                        <div class="color-code">Warning</div>
-                        <div class="color-name">#F59E0B</div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="swatch" style="background: #3B82F6;"></div>
-                        <div class="color-code">Info</div>
-                        <div class="color-name">#3B82F6</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TYPOGRAPHY -->
-            <section class="section" id="typography">
-                <h2 class="section-title">Tipografía</h2>
-                <p class="section-description">Jerarquía tipográfica profesional basada en Helvetica y Inter</p>
-
-                <div class="typography-scale">
-                    <div class="type-sample">
-                        <div class="type-label">H1 - Heading 1</div>
-                        <h1 style="font-size: 48px; font-weight: 700; font-family: 'Roboto', sans-serif; color: #000;">Soluciones de Infraestructura Energética</h1>
-                        <div class="color-code" style="margin-top: 12px;">48px • Weight 700 • Font: Roboto (Headings)</div>
-                    </div>
-
-                    <div class="type-sample">
-                        <div class="type-label">H2 - Heading 2</div>
-                        <h2 style="font-size: 36px; font-weight: 700; font-family: 'Roboto', sans-serif; color: #000;">Características Principales</h2>
-                        <div class="color-code" style="margin-top: 12px;">36px • Weight 700 • Font: Roboto</div>
-                    </div>
-
-                    <div class="type-sample">
-                        <div class="type-label">H3 - Heading 3</div>
-                        <h3 style="font-size: 24px; font-weight: 700; font-family: 'Roboto', sans-serif; color: #000;">Beneficios Operacionales</h3>
-                        <div class="color-code" style="margin-top: 12px;">24px • Weight 700 • Font: Roboto</div>
-                    </div>
-
-                    <div class="type-sample">
-                        <div class="type-label">Body - Regular Text</div>
-                        <p style="font-size: 16px; font-weight: 400; font-family: 'Inter', sans-serif; line-height: 1.6;">Este es el texto de cuerpo principal. Se usa en descripciones, párrafos y contenido largo. La familia tipográfica es Inter para excelente legibilidad en pantalla.</p>
-                        <div class="color-code" style="margin-top: 12px;">16px • Weight 400 • Font: Inter</div>
-                    </div>
-
-                    <div class="type-sample">
-                        <div class="type-label">Caption - Small Text</div>
-                        <small style="font-size: 12px; color: #6B7280;">Texto pequeño usado en captions, notas al pie y metadatos adicionales</small>
-                        <div class="color-code" style="margin-top: 12px;">12px • Weight 400 • Font: Inter</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- BUTTONS -->
-            <section class="section" id="buttons">
-                <h2 class="section-title">Botones</h2>
-                <p class="section-description">Sistema de botones para diferentes contextos y estados</p>
-
-                <div class="component-showcase">
-                    <h3 class="component-title">Primary Button</h3>
-                    <div class="component-preview">
-                        <button class="btn btn-primary">Botón Primario</button>
-                    </div>
-                    <div class="component-code">
-&lt;button class="btn btn-primary"&gt;Botón Primario&lt;/button&gt;
-                    </div>
-                </div>
-
-                <div class="component-showcase">
-                    <h3 class="component-title">Secondary Button</h3>
-                    <div class="component-preview">
-                        <button class="btn btn-secondary">Botón Secundario</button>
-                    </div>
-                    <div class="component-code">
-&lt;button class="btn btn-secondary"&gt;Botón Secundario&lt;/button&gt;
-                    </div>
-                </div>
-
-                <div class="component-showcase">
-                    <h3 class="component-title">Button Sizes</h3>
-                    <div class="component-preview" style="justify-content: flex-start;">
-                        <button class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Small</button>
-                        <button class="btn btn-primary">Medium</button>
-                        <button class="btn btn-primary" style="padding: 16px 32px; font-size: 16px;">Large</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SPACING -->
-            <section class="section" id="spacing">
-                <h2 class="section-title">Espaciado</h2>
-                <p class="section-description">Sistema de espaciado consistente basado en múltiplos de 4px</p>
-
-                <div class="component-showcase">
-                    <h3 class="component-title">Escala de Espaciado</h3>
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 24px;">
-                        <tr style="border-bottom: 1px solid #E5E7EB;">
-                            <th style="padding: 12px; text-align: left; font-weight: 600;">Token</th>
-                            <th style="padding: 12px; text-align: left; font-weight: 600;">Valor</th>
-                            <th style="padding: 12px; text-align: left; font-weight: 600;">Uso</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #E5E7EB;">
-                            <td style="padding: 12px;">xs</td>
-                            <td style="padding: 12px;">4px</td>
-                            <td style="padding: 12px;">Espacios mínimos</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #E5E7EB;">
-                            <td style="padding: 12px;">sm</td>
-                            <td style="padding: 12px;">8px</td>
-                            <td style="padding: 12px;">Padding pequeño</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #E5E7EB;">
-                            <td style="padding: 12px;">md</td>
-                            <td style="padding: 12px;">16px</td>
-                            <td style="padding: 12px;">Padding estándar</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #E5E7EB;">
-                            <td style="padding: 12px;">lg</td>
-                            <td style="padding: 12px;">32px</td>
-                            <td style="padding: 12px;">Espacios entre secciones</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px;">xl</td>
-                            <td style="padding: 12px;">64px</td>
-                            <td style="padding: 12px;">Espacios principales</td>
-                        </tr>
-                    </table>
-                </div>
-            </section>
-
-            <!-- FOOTER -->
-            <footer style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); text-align: center; color: var(--gray-600); font-size: 14px;">
-                <p>KOLFF Design System v2.0 • Professional Documentation</p>
-                <p style="margin-top: 12px; font-size: 12px;">© 2026 KOLFF. All rights reserved. 40+ años de experiencia en soluciones energéticas.</p>
-            </footer>
-        </div>
+    <div class="sidebar-group">
+      <span class="sidebar-label">Componentes</span>
+      <a href="#botones" class="sidebar-link">Botones</a>
+      <a href="#cards" class="sidebar-link">Cards</a>
+      <a href="#formularios" class="sidebar-link">Formularios</a>
+      <a href="#tablas" class="sidebar-link">Tablas</a>
+      <a href="#badges" class="sidebar-link">Badges</a>
+      <a href="#alertas" class="sidebar-link">Alertas</a>
     </div>
+    <div class="sidebar-group">
+      <span class="sidebar-label">Iconografia</span>
+      <a href="#iconos" class="sidebar-link">Iconos SVG</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-label">Ecosistema</span>
+      <a href="#ecosistema" class="sidebar-link">Paginas del Proyecto</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-label">Directrices</span>
+      <a href="#accesibilidad" class="sidebar-link">Accesibilidad</a>
+      <a href="#marca" class="sidebar-link">Uso de Marca</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <span class="hero-kicker">KOLFF Design System — v3.0 Professional</span>
+      <h1>Sistema de Diseno para <span>Infraestructura Energetica</span></h1>
+      <p class="hero-desc">
+        Biblioteca completa de componentes, tokens de diseno y directrices visuales para construir productos digitales coherentes con la identidad de marca KOLFF.
+      </p>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-num">15+</span>
+          <span class="hero-stat-label">Componentes</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">7</span>
+          <span class="hero-stat-label">Paginas</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">WCAG</span>
+          <span class="hero-stat-label">AA Compliant</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">v3.0</span>
+          <span class="hero-stat-label">Edicion Actual</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#ecosistema" class="btn-hero-primary">Ver Ecosistema</a>
+        <a href="kolff-landing.html" class="btn-hero-secondary">Ir a Landing Page</a>
+      </div>
+    </section>
+
+    <!-- ─── COLORES ─── -->
+    <section class="section" id="colores">
+      <span class="section-kicker">Fundamentos</span>
+      <h2 class="section-title">Paleta de Colores</h2>
+      <p class="section-desc">Sistema de color KOLFF basado en identidad de marca oficial. El amarillo primario <strong>#FFB81C</strong> equivale a Pantone 1235 C.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Colores de Marca</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background:#FFB81C;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Primary Yellow</div>
+              <div class="color-swatch-hex">#FFB81C — Pantone 1235 C</div>
+              <div class="color-swatch-use">Botones, accents, logo</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background:#000000;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Black</div>
+              <div class="color-swatch-hex">#000000 — Pantone Black C</div>
+              <div class="color-swatch-use">Header, texto principal</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background:#FFFFFF; outline:1px solid #E5E7EB;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">White</div>
+              <div class="color-swatch-hex">#FFFFFF</div>
+              <div class="color-swatch-use">Fondos, texto sobre negro</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background:linear-gradient(135deg,#FFB81C,#FFC947);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Gradient Primary</div>
+              <div class="color-swatch-hex">135deg #FFB81C → #FFC947</div>
+              <div class="color-swatch-use">Logo, hero, elementos destacados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Escala Neutral</h3>
+        <div class="color-grid">
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#F9FAFB; outline:1px solid #E5E7EB;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-50</div><div class="color-swatch-hex">#F9FAFB</div><div class="color-swatch-use">Fondos alternos</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#F3F4F6;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-100</div><div class="color-swatch-hex">#F3F4F6</div><div class="color-swatch-use">Th tablas, hover sutil</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#E5E7EB;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-200</div><div class="color-swatch-hex">#E5E7EB</div><div class="color-swatch-use">Bordes estandar</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#D1D5DB;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-300</div><div class="color-swatch-hex">#D1D5DB</div><div class="color-swatch-use">Inputs, bordes</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#9CA3AF;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-400</div><div class="color-swatch-hex">#9CA3AF</div><div class="color-swatch-use">Placeholders</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#6B7280;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-500</div><div class="color-swatch-hex">#6B7280</div><div class="color-swatch-use">Texto secundario</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#374151;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-700</div><div class="color-swatch-hex">#374151</div><div class="color-swatch-use">Texto cuerpo</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#111827;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gray-900</div><div class="color-swatch-hex">#111827</div><div class="color-swatch-use">Fondos oscuros, footer</div></div></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Colores Funcionales</h3>
+        <div class="color-grid">
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#16A34A;"></div><div class="color-swatch-info"><div class="color-swatch-name">Success</div><div class="color-swatch-hex">#16A34A</div><div class="color-swatch-use">Confirmaciones, activo</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#DC2626;"></div><div class="color-swatch-info"><div class="color-swatch-name">Error</div><div class="color-swatch-hex">#DC2626</div><div class="color-swatch-use">Errores, alertas criticas</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#EA580C;"></div><div class="color-swatch-info"><div class="color-swatch-name">Warning</div><div class="color-swatch-hex">#EA580C</div><div class="color-swatch-use">Advertencias</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-preview" style="background:#0284C7;"></div><div class="color-swatch-info"><div class="color-swatch-name">Info</div><div class="color-swatch-hex">#0284C7</div><div class="color-swatch-use">Informacion neutral</div></div></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Tokens CSS</h3>
+        <div class="code-block"><code><span class="c-gray">/* Variables de color — pegar en :root */</span>
+<span class="c-yellow">--primary</span>:        #FFB81C;
+<span class="c-yellow">--primary-dark</span>:   #E6A41A;
+<span class="c-yellow">--primary-light</span>:  #FFF8E1;
+<span class="c-yellow">--primary-mid</span>:    #FFC947;
+<span class="c-yellow">--black</span>:          #000000;
+<span class="c-yellow">--white</span>:          #FFFFFF;
+<span class="c-yellow">--text-primary</span>:   #0F172A;
+<span class="c-yellow">--text-secondary</span>: #475569;
+<span class="c-yellow">--success</span>:        #16A34A;
+<span class="c-yellow">--error</span>:          #DC2626;
+<span class="c-yellow">--warning</span>:        #EA580C;
+<span class="c-yellow">--info</span>:           #0284C7;</code></div>
+      </div>
+    </section>
+
+    <!-- ─── TIPOGRAFIA ─── -->
+    <section class="section" id="tipografia">
+      <span class="section-kicker">Fundamentos</span>
+      <h2 class="section-title">Tipografia</h2>
+      <p class="section-desc">La fuente primaria es <strong>Helvetica Neue</strong> para todos los titulos y elementos de marca. Inter se usa exclusivamente para cuerpo de texto de lectura.</p>
+
+      <div class="type-sample">
+        <div class="type-meta">
+          <div class="type-meta-label">H1 — Hero</div>
+          <div class="type-meta-item">52px / 800</div>
+          <div class="type-meta-item">line-height: 1.05</div>
+          <div class="type-meta-item">Helvetica Neue</div>
+        </div>
+        <div>
+          <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:52px; font-weight:800; line-height:1.05; color:var(--text-primary);">Infraestructura Energetica</div>
+        </div>
+      </div>
+
+      <div class="type-sample">
+        <div class="type-meta">
+          <div class="type-meta-label">H2 — Seccion</div>
+          <div class="type-meta-item">36px / 800</div>
+          <div class="type-meta-item">line-height: 1.1</div>
+          <div class="type-meta-item">Helvetica Neue</div>
+        </div>
+        <div>
+          <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:36px; font-weight:800; line-height:1.1; color:var(--text-primary);">Soluciones UPS Industriales</div>
+        </div>
+      </div>
+
+      <div class="type-sample">
+        <div class="type-meta">
+          <div class="type-meta-label">H3 — Subseccion</div>
+          <div class="type-meta-item">24px / 700</div>
+          <div class="type-meta-item">line-height: 1.2</div>
+          <div class="type-meta-item">Helvetica Neue</div>
+        </div>
+        <div>
+          <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:24px; font-weight:700; color:var(--text-primary);">Sistemas de Respaldo Electrico</div>
+        </div>
+      </div>
+
+      <div class="type-sample">
+        <div class="type-meta">
+          <div class="type-meta-label">Body — Parrafo</div>
+          <div class="type-meta-item">16px / 400</div>
+          <div class="type-meta-item">line-height: 1.7</div>
+          <div class="type-meta-item">Inter / Helvetica</div>
+        </div>
+        <div>
+          <p style="font-size:16px; line-height:1.7; color:var(--text-secondary); max-width:560px;">Mas de 40 anos de experiencia en sistemas de energia, respaldo electrico e iluminacion profesional. Distribuidor oficial de ABB en Chile y Peru con presencia en 6 paises de Latinoamerica.</p>
+        </div>
+      </div>
+
+      <div class="type-sample">
+        <div class="type-meta">
+          <div class="type-meta-label">Small</div>
+          <div class="type-meta-item">14px / 400</div>
+          <div class="type-meta-item">line-height: 1.6</div>
+          <div class="type-meta-item">Inter</div>
+        </div>
+        <div>
+          <p style="font-size:14px; line-height:1.6; color:var(--text-secondary);">Texto secundario para descripciones complementarias, labels de tabla, hints de formulario y contenido de apoyo visual.</p>
+        </div>
+      </div>
+
+      <div class="type-sample">
+        <div class="type-meta">
+          <div class="type-meta-label">Caption</div>
+          <div class="type-meta-item">12px / 500</div>
+          <div class="type-meta-item">letter-spacing: 1px</div>
+          <div class="type-meta-item">Helvetica Neue</div>
+        </div>
+        <div>
+          <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--primary);">Energia Confiable Para Tu Negocio</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ESPACIADO ─── -->
+    <section class="section" id="espaciado">
+      <span class="section-kicker">Fundamentos</span>
+      <h2 class="section-title">Espaciado</h2>
+      <p class="section-desc">Sistema de espaciado basado en multiples de 4px. Garantiza consistencia vertical y horizontal en todo el ecosistema de paginas.</p>
+      <div class="spacing-list">
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-xs</span><span class="spacing-value">4px</span><div class="spacing-use">Micro: gap entre icono y texto</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-sm</span><span class="spacing-value">8px</span><div class="spacing-use">Pequeno: padding de badge, gap de botones</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-md</span><span class="spacing-value">16px</span><div class="spacing-use">Estandar: padding horizontal de componentes</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-lg</span><span class="spacing-value">24px</span><div class="spacing-use">Grande: padding de card, gap de grid</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-xl</span><span class="spacing-value">32px</span><div class="spacing-use">Extra: margin entre secciones internas</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-2xl</span><span class="spacing-value">48px</span><div class="spacing-use">2x Extra: separacion de grupos de contenido</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-3xl</span><span class="spacing-value">64px</span><div class="spacing-use">3x Extra: padding de secciones</div></div></div>
+        <div class="spacing-item"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div><div class="spacing-info"><span class="spacing-token">--space-4xl</span><span class="spacing-value">96px</span><div class="spacing-use">4x Extra: padding de hero sections</div></div></div>
+      </div>
+    </section>
+
+    <!-- ─── SOMBRAS ─── -->
+    <section class="section" id="sombras">
+      <span class="section-kicker">Fundamentos</span>
+      <h2 class="section-title">Sombras y Elevacion</h2>
+      <p class="section-desc">Escala de 6 niveles de elevacion. Cada nivel corresponde a un contexto especifico de uso dentro del sistema.</p>
+      <div class="shadow-grid">
+        <div class="shadow-card" style="box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+          <div class="shadow-label">XS</div>
+          <div class="shadow-code">0 1px 2px rgba(0,0,0,0.05)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Bordes sutiles</div>
+        </div>
+        <div class="shadow-card" style="box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+          <div class="shadow-label">SM</div>
+          <div class="shadow-code">0 2px 8px rgba(0,0,0,0.08)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Hover states</div>
+        </div>
+        <div class="shadow-card" style="box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+          <div class="shadow-label">MD</div>
+          <div class="shadow-code">0 4px 16px rgba(0,0,0,0.12)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Cards default</div>
+        </div>
+        <div class="shadow-card" style="box-shadow:0 8px 32px rgba(0,0,0,0.16);">
+          <div class="shadow-label">LG</div>
+          <div class="shadow-code">0 8px 32px rgba(0,0,0,0.16)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Cards elevados</div>
+        </div>
+        <div class="shadow-card" style="box-shadow:0 12px 48px rgba(0,0,0,0.20);">
+          <div class="shadow-label">XL</div>
+          <div class="shadow-code">0 12px 48px rgba(0,0,0,0.20)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Modals, drawers</div>
+        </div>
+        <div class="shadow-card" style="box-shadow:0 16px 40px rgba(0,0,0,0.24);">
+          <div class="shadow-label">Hover</div>
+          <div class="shadow-code">0 16px 40px rgba(0,0,0,0.24)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Interaccion maxima</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── BOTONES ─── -->
+    <section class="section" id="botones">
+      <span class="section-kicker">Componentes</span>
+      <h2 class="section-title">Botones</h2>
+      <p class="section-desc">4 variantes de boton con 3 tamanos cada una. El boton Primary es el CTA principal en todo el ecosistema KOLFF.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Variantes</h3>
+        <div class="btn-demo-row">
+          <button class="btn btn-primary btn-md">Solicitar Demo</button>
+          <button class="btn btn-secondary btn-md">Ver Productos</button>
+          <button class="btn btn-outline btn-md">Mas Informacion</button>
+          <button class="btn btn-ghost btn-md">Cancelar</button>
+          <button class="btn btn-primary btn-md btn-disabled" disabled>Deshabilitado</button>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Tamanos</h3>
+        <div class="btn-demo-row" style="align-items:center;">
+          <button class="btn btn-primary btn-sm">Pequeno SM</button>
+          <button class="btn btn-primary btn-md">Mediano MD</button>
+          <button class="btn btn-primary btn-lg">Grande LG</button>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Codigo</h3>
+        <div class="code-block"><code><span class="c-gray">/* Boton Primary */</span>
+<span class="c-yellow">.btn-primary</span> {
+  background: <span class="c-green">#FFB81C</span>;
+  color: <span class="c-green">#000000</span>;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: <span class="c-green">700</span>;
+  padding: <span class="c-green">12px 24px</span>;
+  border-radius: <span class="c-green">6px</span>;
+  border: none;
+  transition: all 200ms ease;
+}
+<span class="c-yellow">.btn-primary</span>:hover {
+  background: <span class="c-green">#E6A41A</span>;
+  transform: translateY(<span class="c-green">-2px</span>);
+  box-shadow: 0 8px 24px rgba(255,184,28,0.35);
+}</code></div>
+      </div>
+    </section>
+
+    <!-- ─── CARDS ─── -->
+    <section class="section" id="cards">
+      <span class="section-kicker">Componentes</span>
+      <h2 class="section-title">Cards</h2>
+      <p class="section-desc">Patron de card con accent bar animada en hover. Usado en landing page de productos y ecosistema del design system.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Feature Cards</h3>
+        <div class="card-demo-grid">
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E6A41A" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="card-title">Respaldo de Energia</div>
+            <div class="card-desc">Sistemas UPS de doble conversion para operaciones criticas con autonomia configurable.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E6A41A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div class="card-title">Disponibilidad 24/7</div>
+            <div class="card-desc">Monitoreo continuo con alertas automaticas y soporte tecnico especializado disponible.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E6A41A" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="card-title">Monitoreo Inteligente</div>
+            <div class="card-desc">Dashboard en tiempo real con metricas de consumo, eficiencia y estado del sistema.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Stats Cards</h3>
+        <div class="card-demo-grid">
+          <div class="card-stat"><span class="card-stat-num">99.9%</span><span class="card-stat-label">Disponibilidad garantizada</span></div>
+          <div class="card-stat"><span class="card-stat-num">40+</span><span class="card-stat-label">Anos de experiencia</span></div>
+          <div class="card-stat"><span class="card-stat-num">6</span><span class="card-stat-label">Paises de presencia</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FORMULARIOS ─── -->
+    <section class="section" id="formularios">
+      <span class="section-kicker">Componentes</span>
+      <h2 class="section-title">Formularios</h2>
+      <p class="section-desc">Inputs con focus ring amarillo KOLFF (#FFB81C). Estado de error con borde rojo y mensaje descriptivo.</p>
+
+      <div class="form-demo">
+        <div class="form-group">
+          <label class="form-label">Nombre de empresa</label>
+          <input class="form-input" type="text" placeholder="Ej. Minera Los Pelambres">
+          <div class="form-hint">Ingrese la razon social completa</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email corporativo</label>
+          <input class="form-input" type="email" placeholder="nombre@empresa.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tipo de proyecto</label>
+          <select class="form-input" style="cursor:pointer;">
+            <option value="">Seleccionar</option>
+            <option>UPS & Respaldo Electrico</option>
+            <option>Iluminacion Industrial</option>
+            <option>Infraestructura Data Center</option>
+            <option>Sala Electrica</option>
+            <option>Energias Renovables</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Campo con error</label>
+          <input class="form-input is-error" type="text" placeholder="Valor invalido">
+          <div class="form-error">Este campo es obligatorio</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Campo deshabilitado</label>
+          <input class="form-input" type="text" placeholder="No editable" disabled>
+        </div>
+        <button class="btn btn-primary btn-md" style="width:100%;">Enviar Consulta</button>
+      </div>
+    </section>
+
+    <!-- ─── TABLAS ─── -->
+    <section class="section" id="tablas">
+      <span class="section-kicker">Componentes</span>
+      <h2 class="section-title">Tablas</h2>
+      <p class="section-desc">Tablas de especificaciones tecnicas usadas en las paginas de productos. Header oscuro, filas con hover gris.</p>
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Sistema</th>
+              <th>Potencia</th>
+              <th>Autonomia</th>
+              <th>Certificacion</th>
+              <th>Aplicacion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>UPS Monofasico</strong></td>
+              <td>1 – 10 kVA</td>
+              <td>10 – 120 min</td>
+              <td>IEC 62040</td>
+              <td>Oficinas, comercio</td>
+            </tr>
+            <tr>
+              <td><strong>UPS Trifasico</strong></td>
+              <td>10 – 500 kVA</td>
+              <td>Configurable</td>
+              <td>IEC 62040-3</td>
+              <td>Industria, data center</td>
+            </tr>
+            <tr>
+              <td><strong>UPS Modular</strong></td>
+              <td>25 – 2000 kVA</td>
+              <td>N+1 redundancia</td>
+              <td>IEC / UL / CE</td>
+              <td>Infraestructura critica</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── BADGES ─── -->
+    <section class="section" id="badges">
+      <span class="section-kicker">Componentes</span>
+      <h2 class="section-title">Badges</h2>
+      <p class="section-desc">Indicadores de estado con punto de color. Sin emojis: el punto SVG/CSS comunica el estado visualmente.</p>
+      <div class="badge-row">
+        <span class="badge badge-primary"><span class="badge-dot"></span>En Progreso</span>
+        <span class="badge badge-success"><span class="badge-dot"></span>Completado</span>
+        <span class="badge badge-error"><span class="badge-dot"></span>Error</span>
+        <span class="badge badge-warning"><span class="badge-dot"></span>Advertencia</span>
+        <span class="badge badge-info"><span class="badge-dot"></span>Informacion</span>
+        <span class="badge badge-outline">Borrador</span>
+        <span class="badge badge-dark">Certificado</span>
+      </div>
+    </section>
+
+    <!-- ─── ALERTAS ─── -->
+    <section class="section" id="alertas">
+      <span class="section-kicker">Componentes</span>
+      <h2 class="section-title">Alertas</h2>
+      <p class="section-desc">4 niveles de severidad con borde izquierdo de color. Iconos SVG inline, sin dependencias externas.</p>
+      <div class="alert alert-success">
+        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div>
+          <div class="alert-title">Sistema Activo</div>
+          <div class="alert-desc">El UPS se encuentra operando en modo normal. Carga: 78%. Autonomia estimada: 45 min.</div>
+        </div>
+      </div>
+      <div class="alert alert-error">
+        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <div>
+          <div class="alert-title">Falla de Comunicacion</div>
+          <div class="alert-desc">No se puede establecer conexion con el controlador. Verificar cable de red y configuracion SNMP.</div>
+        </div>
+      </div>
+      <div class="alert alert-warning">
+        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <div class="alert-title">Bateria en Nivel Bajo</div>
+          <div class="alert-desc">La capacidad de bateria esta al 15%. Programar mantenimiento preventivo en los proximos 30 dias.</div>
+        </div>
+      </div>
+      <div class="alert alert-info">
+        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <div class="alert-title">Actualizacion Disponible</div>
+          <div class="alert-desc">Firmware v3.2.1 disponible para descarga. Programar actualizacion en ventana de mantenimiento.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ICONOS ─── -->
+    <section class="section" id="iconos">
+      <span class="section-kicker">Iconografia</span>
+      <h2 class="section-title">Iconos SVG</h2>
+      <p class="section-desc">Biblioteca de iconos SVG inline especificos del negocio energetico. Sin dependencias de fuentes de iconos externas.</p>
+      <div class="icon-grid">
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="icon-name">UPS / Energia</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+          </div>
+          <div class="icon-name">Iluminacion</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="icon-name">Data Center</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <div class="icon-name">Sala Electrica</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </div>
+          <div class="icon-name">Solar</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="icon-name">Presencia Global</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="icon-name">Seguridad</div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="icon-name">Monitoreo</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ECOSISTEMA ─── -->
+    <section class="section" id="ecosistema">
+      <span class="section-kicker">Ecosistema</span>
+      <h2 class="section-title">Paginas del Proyecto</h2>
+      <p class="section-desc">Todas las paginas que conforman el ecosistema digital KOLFF. Haz clic en cualquier card para navegar directamente.</p>
+      <div class="ecosystem-grid">
+
+        <a href="index.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Panel Interno</span>
+          <div class="ecosystem-card-title">Dashboard Operativo</div>
+          <div class="ecosystem-card-desc">Panel de control con gestion de flujo de trabajo, proyectos, galeria, entregas y timeline. Design System embebido en navegacion lateral.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            index.html
+          </div>
+        </a>
+
+        <a href="kolff-landing.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Sitio Comercial</span>
+          <div class="ecosystem-card-title">Landing Page KOLFF</div>
+          <div class="ecosystem-card-desc">Pagina de presentacion B2B con hero, valor diferencial, productos, servicios, casos de exito y footer completo con informacion de contacto.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            kolff-landing.html
+          </div>
+        </a>
+
+        <a href="productos-ups.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Producto</span>
+          <div class="ecosystem-card-title">UPS & Respaldo Electrico</div>
+          <div class="ecosystem-card-desc">Sistemas ininterrumpibles de potencia mono y trifasicos con doble conversion. Autonomia configurable para operaciones criticas.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            productos-ups.html
+          </div>
+        </a>
+
+        <a href="productos-iluminacion.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Producto</span>
+          <div class="ecosystem-card-title">Iluminacion Profesional</div>
+          <div class="ecosystem-card-desc">Soluciones LED de alta eficiencia y sistemas de emergencia para mineria, industria y espacios criticos. Certificacion ATEX disponible.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            productos-iluminacion.html
+          </div>
+        </a>
+
+        <a href="productos-datacenter.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Producto</span>
+          <div class="ecosystem-card-title">Infraestructura Data Center</div>
+          <div class="ecosystem-card-desc">Soluciones modulares y escalables para centros de datos con disponibilidad 99.99%. Eficiencia PUE menor a 1.5 y cumplimiento Tier III/IV.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            productos-datacenter.html
+          </div>
+        </a>
+
+        <a href="productos-sala-electrica.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Producto</span>
+          <div class="ecosystem-card-title">Sala Electrica Profesional</div>
+          <div class="ecosystem-card-desc">Equipos de distribucion y control electrico de alta confiabilidad. Tableros hasta 1000A con monitoreo SCADA y certificacion IEC/UL.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            productos-sala-electrica.html
+          </div>
+        </a>
+
+        <a href="productos-renovables.html" class="ecosystem-card">
+          <span class="ecosystem-card-tag">Producto</span>
+          <div class="ecosystem-card-title">Energias Renovables</div>
+          <div class="ecosystem-card-desc">Sistemas fotovoltaicos profesionales con paneles de eficiencia superior al 22%. ROI en 5-8 anos con garantia de 25 anos en paneles.</div>
+          <div class="ecosystem-card-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            productos-renovables.html
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ─── ACCESIBILIDAD ─── -->
+    <section class="section" id="accesibilidad">
+      <span class="section-kicker">Directrices</span>
+      <h2 class="section-title">Accesibilidad</h2>
+      <p class="section-desc">Todos los componentes cumplen WCAG 2.1 Nivel AA. Los ratios de contraste se calculan con el algoritmo relativo de luminancia.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Ratios de Contraste</h3>
+        <div class="contrast-grid">
+          <div class="contrast-item">
+            <div class="contrast-preview" style="background:#FFB81C; color:#000000;">Texto Negro</div>
+            <div class="contrast-meta">
+              <div class="contrast-ratio">7.6:1</div>
+              <span class="contrast-level level-aaa">AAA</span>
+            </div>
+          </div>
+          <div class="contrast-item">
+            <div class="contrast-preview" style="background:#000000; color:#FFFFFF;">Texto Blanco</div>
+            <div class="contrast-meta">
+              <div class="contrast-ratio">21:1</div>
+              <span class="contrast-level level-aaa">AAA</span>
+            </div>
+          </div>
+          <div class="contrast-item">
+            <div class="contrast-preview" style="background:#FFFFFF; color:#0F172A;">Texto Oscuro</div>
+            <div class="contrast-meta">
+              <div class="contrast-ratio">18.3:1</div>
+              <span class="contrast-level level-aaa">AAA</span>
+            </div>
+          </div>
+          <div class="contrast-item">
+            <div class="contrast-preview" style="background:#F9FAFB; color:#475569;">Texto Gris</div>
+            <div class="contrast-meta">
+              <div class="contrast-ratio">5.1:1</div>
+              <span class="contrast-level level-aa">AA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Focus States</h3>
+        <p class="subsection-desc">Todos los elementos interactivos deben tener un estado focus visible. Usar <code style="font-size:12px; background:var(--gray-100); padding:2px 6px; border-radius:4px;">outline: 2px solid #FFB81C; outline-offset: 2px;</code> como estandar.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <button class="btn btn-primary btn-md" style="outline: 2px solid #FFB81C; outline-offset: 2px;">Boton con Focus</button>
+          <input class="form-input" style="max-width:280px; box-shadow:0 0 0 3px rgba(255,184,28,0.25); border-color:#FFB81C;" placeholder="Input con Focus">
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MARCA ─── -->
+    <section class="section" id="marca">
+      <span class="section-kicker">Directrices</span>
+      <h2 class="section-title">Uso de Marca</h2>
+      <p class="section-desc">Reglas de aplicacion del logotipo y elementos de identidad KOLFF en medios digitales.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Logotipo — Variantes Aprobadas</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:20px;">
+          <div style="background:#000; border-radius:12px; padding:32px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:32px; font-weight:800; letter-spacing:4px; background:linear-gradient(135deg,#FFB81C,#FFC947); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">KOLFF</span>
+          </div>
+          <div style="background:#FFB81C; border-radius:12px; padding:32px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:32px; font-weight:800; letter-spacing:4px; color:#000;">KOLFF</span>
+          </div>
+          <div style="background:#F9FAFB; border:1px solid #E5E7EB; border-radius:12px; padding:32px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:32px; font-weight:800; letter-spacing:4px; color:#000;">KOLFF</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Proporciones de Color</h3>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="width:80px; height:80px; background:#FFB81C; border-radius:50%; margin:0 auto 8px;"></div>
+            <div style="font-size:13px; font-weight:700;">30%</div>
+            <div style="font-size:11px; color:var(--text-muted);">Amarillo</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:55px; height:55px; background:#000; border-radius:50%; margin:0 auto 8px; margin-top:12px;"></div>
+            <div style="font-size:13px; font-weight:700;">20%</div>
+            <div style="font-size:11px; color:var(--text-muted);">Negro</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:120px; height:120px; background:var(--gray-100); border-radius:50%; margin:0 auto 8px; border:1px solid var(--border);"></div>
+            <div style="font-size:13px; font-weight:700;">50%</div>
+            <div style="font-size:11px; color:var(--text-muted);">Neutros</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Especificaciones de Tipografia</h3>
+        <div class="spec-table-wrap">
+          <table class="spec-table">
+            <thead><tr><th>Elemento</th><th>Familia</th><th>Tamano</th><th>Peso</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>H1</td><td>Helvetica Neue</td><td>52px</td><td>800</td><td>Titulos hero</td></tr>
+              <tr><td>H2</td><td>Helvetica Neue</td><td>36px</td><td>800</td><td>Titulos de seccion</td></tr>
+              <tr><td>H3</td><td>Helvetica Neue</td><td>24px</td><td>700</td><td>Subtitulos</td></tr>
+              <tr><td>Body</td><td>Inter / Helvetica</td><td>16px</td><td>400</td><td>Texto de lectura</td></tr>
+              <tr><td>Small</td><td>Inter</td><td>14px</td><td>400</td><td>Descripciones</td></tr>
+              <tr><td>Caption</td><td>Helvetica Neue</td><td>12px</td><td>700</td><td>Labels, kickers</td></tr>
+              <tr><td>Monospace</td><td>Courier New</td><td>13px</td><td>400</td><td>Codigo, tokens</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div>
+          <span class="footer-brand-logo">KOLFF</span>
+          <p class="footer-brand-desc">Mas de 40 anos de experiencia en sistemas de energia, respaldo electrico e iluminacion profesional. Distribuidor oficial de ABB en Chile y Peru.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Ecosistema Digital</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Dashboard Operativo</a></li>
+            <li><a href="kolff-landing.html">Landing Page Comercial</a></li>
+            <li><a href="productos-ups.html">UPS & Respaldo</a></li>
+            <li><a href="productos-iluminacion.html">Iluminacion Profesional</a></li>
+            <li><a href="productos-datacenter.html">Data Center</a></li>
+            <li><a href="productos-sala-electrica.html">Sala Electrica</a></li>
+            <li><a href="productos-renovables.html">Energias Renovables</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contacto</div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div class="footer-contact-text">+56 2 2570 6300</div>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div class="footer-contact-text">info@kolff.cl</div>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div class="footer-contact-text">Av. Andres Bello 2661<br>Las Condes, Santiago, Chile</div>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <div class="footer-contact-text">www.kolff.cl<br>Chile — Peru — Argentina — Brasil — Espana — Mexico</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">Copyright &copy; 2026 KOLFF. Todos los derechos reservados. | Manual de Marca v1.0</div>
+        <div class="footer-version">Design System v3.0</div>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Sidebar scroll spy
+  const sections = document.querySelectorAll('section[id], footer');
+  const links    = document.querySelectorAll('.sidebar-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar-link[href="#${id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-64px 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
 </body>
 </html>
